@@ -1,4 +1,4 @@
-package game.ui;
+package guiCluedo.ui;
 
 import javax.swing.JFrame;
 

@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game.ui;
+package guiCluedo.ui;
+
+import java.util.Scanner;
 
 /**
  *
@@ -187,4 +189,10 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JMenuItem newGame;
     private javax.swing.JButton rollDice;
     // End of variables declaration//GEN-END:variables
+    
+    
+    public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		createGame(scan);
+	}
 }
