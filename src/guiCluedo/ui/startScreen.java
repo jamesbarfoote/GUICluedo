@@ -267,7 +267,30 @@ public int numberOPlayers = 0;
     }// </editor-fold>//GEN-END:initComponents
 
     private void okNumPlayersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okNumPlayersActionPerformed
-      setPlayers.setVisible(false);
+    	String p = (String)numPLayers.getSelectedItem();
+    	if(p.equals("2"))
+    	{
+    		numberOPlayers = 2;
+    	}
+    	else if(p.equals("3"))
+    	{
+    		numberOPlayers = 3;
+    	}
+    	else if(p.equals("4"))
+    	{
+    		numberOPlayers = 4;
+    	}
+    	else if(p.equals("5"))
+    	{
+    		numberOPlayers = 5;
+    	}
+    	else if(p.equals("6"))
+    	{
+    		numberOPlayers = 6;
+    	}
+    	
+    	System.out.println(numberOPlayers);
+    	setPlayers.setVisible(false);
     }
 
     private void donePlayerSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donePlayerSetupActionPerformed
@@ -287,12 +310,12 @@ public int numberOPlayers = 0;
     }//GEN-LAST:event_colourYellowActionPerformed
 
     private void numPLayersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numPLayersActionPerformed
-        //numberOPlayers = numPLayers.getSelectedItem().toString();
-        System.out.println(numPLayers.getSelectedItem());
+        
     }//GEN-LAST:event_numPLayersActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         setPlayers.setVisible(true);
+    	
+    	setPlayers.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
