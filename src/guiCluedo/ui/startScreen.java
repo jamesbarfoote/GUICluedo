@@ -11,6 +11,7 @@ package guiCluedo.ui;
  */
 public class startScreen extends javax.swing.JFrame {
 public int numberOPlayers = 0;
+public int counter;
     /**
      * Creates new form startScreen
      */
@@ -294,8 +295,17 @@ public int numberOPlayers = 0;
     }
 
     private void donePlayerSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donePlayerSetupActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_donePlayerSetupActionPerformed
+        if(counter >= numberOPlayers )
+        {
+        	System.out.println("Go to main game screen");
+        	//Launch UI
+        	UI u = new UI();
+        	//Hide startScreen
+        }
+        //add to array
+        
+        counter++;
+    }
 
     private void missScarlettActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_missScarlettActionPerformed
         // TODO add your handling code here:
