@@ -11,11 +11,15 @@ public class Player {
 	private String name;
 	private Location location;
 	private int playerNum;
+	private String character;
+	private String colour;
 
-	public Player (String name, Location location, int playerNum){
+	public Player (String name, String character, String colour){
 		this.name = name;
-		this.location = location;
-		this.playerNum = playerNum;	
+		this.character = character;
+		this.colour = colour;
+		
+		//Set location based on what character they chose (each character has a specified starting location)
 	}
 
 	/**
