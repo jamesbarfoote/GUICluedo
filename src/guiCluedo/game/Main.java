@@ -21,7 +21,7 @@ public class Main {
 		
 		numPlayers = isCorrectNumber(scan, 2, 6, numP);
 		
-		Board b = new Board(numPlayers);
+		Board b = new Board();
 
 		int playerNum = 0;
 

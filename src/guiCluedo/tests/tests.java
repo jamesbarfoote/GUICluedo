@@ -18,28 +18,28 @@ public class tests {
 	@Test
 	public void correctNumPlayers()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		assertEquals(b.getPlayers().size(), 6);		
 	}
 
 	@Test
 	public void allRoomsCreated()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		assertEquals(b.getRooms().size(), 9);	
 	}
 
 	@Test
 	public void allWeaponsCreated()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		assertEquals(b.getWeapons().size(), 6);
 	}
 
 	@Test
 	public void allCharactersCreated()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		assertEquals(b.getCharacters().size(), 6);
 	}
 
@@ -70,7 +70,7 @@ public class tests {
 	@Test
 	public void checkValidAccusation()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		ArrayList<Card> ans = b.answer;
 		Player p = b.getPlayers().get(0);
 		Guess g = new Guess(false, ans, p, b);
@@ -81,7 +81,7 @@ public class tests {
 	@Test
 	public void checkValidAccusation2() //Check that the player isn't eliminated after getting it right
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		int playersB = b.getPlayers().size();
 		ArrayList<Card> ans = b.answer;
 		Player p = b.getPlayers().get(0);
@@ -94,7 +94,7 @@ public class tests {
 	@Test
 	public void checkInvalidAccusation()
 	{
-		Board b = new Board(3);
+		Board b = new Board();
 		Room r = null;
 		Weapon w = null;
 		Character c = null;
@@ -132,7 +132,7 @@ public class tests {
 	@Test
 	public void checkInvalidAccusation2()//Check player is eliminated
 	{
-		Board b = new Board(3);
+		Board b = new Board();
 		Room r = null;
 		Weapon w = null;
 		Character c = null;
@@ -172,7 +172,7 @@ public class tests {
 	@Test
 	public void testPlayerMoves()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		Player p = b.getPlayers().get(0);
 		int loc = p.getLocation().getX() + p.getLocation().getY();
 		ArrayList<Card> ans = b.answer;
@@ -188,7 +188,7 @@ public class tests {
 	@Test
 	public void testPlayerHasLocation()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		Player p = b.getPlayers().get(0);
 		assertTrue(p.getLocation() != null);
 	}
@@ -196,7 +196,7 @@ public class tests {
 	@Test
 	public void testAddToHand()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		Player p = b.getPlayers().get(0);
 		Weapon w = new Weapon("Spanner");
 		int handSize = p.getHand().size();
@@ -208,7 +208,7 @@ public class tests {
 	@Test
 	public void testAddDiscoveredHand()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		Player p = b.getPlayers().get(0);
 		Weapon w = new Weapon("Spanner");
 		int handSize = p.getDiscoveredCards().size();
@@ -220,7 +220,7 @@ public class tests {
 	@Test
 	public void playerHasNumber()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		Player p = b.getPlayers().get(0);
 		assert(p.getNum() != -1);
 	}
@@ -228,7 +228,7 @@ public class tests {
 	@Test
 	public void playerHasUniqueNumber()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		Player p = b.getPlayers().get(0);
 		ArrayList<Player> players = b.getPlayers();
 		int dup = 0;
@@ -249,7 +249,7 @@ public class tests {
 	@Test 
 	public void ValidSuggestion()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		ArrayList<Card> ans = b.answer;
 		Player p = b.getPlayers().get(0);
 		Player p2 = b.getPlayers().get(1);
@@ -269,7 +269,7 @@ public class tests {
 	@Test 
 	public void InvalidSuggestion()
 	{
-		Board b = new Board(6);
+		Board b = new Board();
 		ArrayList<Card> ans = b.answer;
 		Player p = b.getPlayers().get(0);
 		Room ar = (Room) ans.get(2);
