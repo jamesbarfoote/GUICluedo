@@ -175,7 +175,7 @@ public class UI extends javax.swing.JFrame {
         });
         
         //Create the board
-        Board b = new Board(6);//Change to number of players that user selected
+        Board b = new Board();//Change to number of players that user selected
         //call the canvas
         UICanvas canvas = new UICanvas(b);
     }

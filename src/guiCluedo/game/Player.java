@@ -14,11 +14,29 @@ public class Player {
 	private String character;
 	private String colour;
 
-	public Player (String name, String character, String colour){
+	public Player (String name, String character, String colour, int playerNum){
 		this.name = name;
 		this.character = character;
 		this.colour = colour;
-		
+		this.playerNum = playerNum;	
+		if(character.equals("Miss Scarlett")){
+			this.location = new Location(9,0);
+		}
+		if(character.equals("Colonel Mustard")){
+			this.location = new Location(17,0);
+		}
+		if(character.equals("Mrs. White")){
+			this.location = new Location(24,4);
+		}
+		if(character.equals("The Reverend Green")){
+			this.location = new Location(15,24);
+		}
+		if(character.equals("Mrs. Peacock")){
+			this.location = new Location(6,24);
+		}
+		if(character.equals("Professor Plum")){
+			this.location = new Location(0,15);
+		}
 		//Set location based on what character they chose (each character has a specified starting location)
 	}
 

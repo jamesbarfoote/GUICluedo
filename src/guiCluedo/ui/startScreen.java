@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.swing.ButtonGroup;
 
+import guiCluedo.game.Board;
 import guiCluedo.game.Player;
 
 /**
@@ -21,7 +22,7 @@ import guiCluedo.game.Player;
 public class startScreen extends javax.swing.JFrame {
 	public int numberOPlayers = 2;
 	private int counter;
-	public ArrayList<Player> players = new ArrayList<Player>();
+	public static ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<String> chars = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
 	private ArrayList<String> iColours = new ArrayList<>(Arrays.asList("Red", "Green", "Blue", "White", "Yellow", "Purple"));
 	private ButtonGroup characterRadios = new ButtonGroup();
@@ -387,6 +388,7 @@ public class startScreen extends javax.swing.JFrame {
 			UI u = new UI();
 			u.setVisible(true);//Show the game screen
 			this.setVisible(false);//Hide the player setup screen
+			return;
 
 		}
 		String pName = "";
@@ -422,7 +424,7 @@ public class startScreen extends javax.swing.JFrame {
 			cColour = getColour();
 		}
 		System.out.println(cColour);
-		Player p = new Player(pName, cCharacter, cColour);
+		Player p = new Player(pName, cCharacter, cColour, counter);
 		System.out.println("Player created!");
 		players.add(p);
 		System.out.println("Player added");
