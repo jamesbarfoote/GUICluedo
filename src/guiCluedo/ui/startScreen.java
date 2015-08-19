@@ -402,34 +402,36 @@ public class startScreen extends javax.swing.JFrame {
 		}
 		String cCharacter = "";
 		System.out.println(pName);
-		if(getCharacter() != ("")){
-		 cCharacter = getCharacter();
-		 System.out.println("Character wasn't null is was: " + cCharacter);
+		
+		cCharacter = getCharacter();
+		if(!cCharacter.equals("")){
+		 System.out.println("Character was: " + cCharacter);
 		}
-		else if(getCharacter().equals(""))
+		else
 		{
-			System.out.println("Character = nothing");
+			System.out.println("Please select a character");
 			warning.setVisible(true);
 			cCharacter = getCharacter();
+			return;
 		}
-		System.out.println(cCharacter);
-		String cColour = "";
-		if(!getColour().equals(null))
+		String cColour = getColour();
+		if(!cColour.equals(""))
 		{
-			cColour = getColour();
+			System.err.println("Colour was: " + cColour);
 		}
-		else if(getColour().equals(null))
+		else
 		{
+			System.out.println("Please select a colour");
 			warning.setVisible(true);
 			cColour = getColour();
+			return;
 		}
-		System.out.println(cColour);
 		Player p = new Player(pName, cCharacter, cColour, counter);
 		System.out.println("Player created!");
 		players.add(p);
 		System.out.println("Player added");
-		colourRadios.clearSelection();
-		characterRadios.clearSelection();
+		//colourRadios.clearSelection();
+		//characterRadios.clearSelection();
 		playerName.setText("");
 		//Remove character and colour from their respective arraylists
 
