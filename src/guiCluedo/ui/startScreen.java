@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.ButtonGroup;
+
 import guiCluedo.game.Player;
 
 /**
@@ -19,14 +21,31 @@ import guiCluedo.game.Player;
 public class startScreen extends javax.swing.JFrame {
 	public int numberOPlayers = 2;
 	private int counter;
-	public ArrayList<Player> players;
+	public ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<String> chars = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
 	private ArrayList<String> iColours = new ArrayList<>(Arrays.asList("Red", "Green", "Blue", "White", "Yellow", "Purple"));
+	private ButtonGroup characterRadios = new ButtonGroup();
+	private ButtonGroup colourRadios = new ButtonGroup();
 	/**
 	 * Creates new form startScreen
 	 */
 	public startScreen() {
 		initComponents();
+		
+		//Create button groups
+		characterRadios.add(missScarlett);
+		characterRadios.add(mrsPeacock);
+		characterRadios.add(profPlum);
+		characterRadios.add(mrsWhite);
+		characterRadios.add(revGreen);
+		characterRadios.add(colonelMustard);
+		
+		colourRadios.add(colourBlue);
+		colourRadios.add(colourGreen);
+		colourRadios.add(colourPurple);
+		colourRadios.add(colourRed);
+		colourRadios.add(colourWhite);
+		colourRadios.add(colourYellow);
 	}
 
 	/**
@@ -327,12 +346,18 @@ public class startScreen extends javax.swing.JFrame {
 		{
 			//Display error message!!
 		}
+		System.out.println(pName);
 		String cCharacter = getCharacter();
 		System.out.println(cCharacter);
 		String cColour = getColour();
 		System.out.println(cColour);
 		Player p = new Player(pName, cCharacter, cColour);
+		System.out.println("Player created!");
 		players.add(p);
+		System.out.println("Player added");
+		colourRadios.clearSelection();
+		characterRadios.clearSelection();
+		playerName.setText("");
 		//Remove character and colour from their respective arraylists
 
 
@@ -343,10 +368,11 @@ public class startScreen extends javax.swing.JFrame {
 		if(colourRed.isSelected())
 		{
 			if(iColours.contains("Red")){
+				
 				iColours.remove("Red");
 				return "Red";
 			}
-			//Display error message	
+			//Display error message, ask user to choose something else as this has already been chosen	
 		}
 		else if(colourGreen.isSelected())
 		{
