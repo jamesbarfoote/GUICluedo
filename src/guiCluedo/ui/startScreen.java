@@ -381,60 +381,63 @@ public class startScreen extends javax.swing.JFrame {
 	}
 
 	private void donePlayerSetupActionPerformed(java.awt.event.ActionEvent evt) {                                                
-		String pName = "";
-		if(playerName.getText() != "")
-		{
-			pName = playerName.getText();
-		}
-		else
-		{
-			warning.setVisible(true);
-		}
-		String cCharacter = "";
-		System.out.println(pName);
-		
-		cCharacter = getCharacter();
-		if(!cCharacter.equals("")){
-		 System.out.println("Character was: " + cCharacter);
-		}
-		else
-		{
-			System.out.println("Please select a character");
-			warning.setVisible(true);
-			cCharacter = getCharacter();
-			return;
-		}
-		String cColour = getColour();
-		if(!cColour.equals(""))
-		{
-			System.err.println("Colour was: " + cColour);
-		}
-		else
-		{
-			System.out.println("Please select a colour");
-			warning.setVisible(true);
-			cColour = getColour();
-			return;
-		}
-		Player p = new Player(pName, cCharacter, cColour, counter);
-		iColours.remove(cColour);
-		chars.remove(cCharacter);
-		System.out.println("Player created!");
-		players.add(p);
-		System.out.println("Player added");
-		colourRadios.clearSelection();
-		characterRadios.clearSelection();
-		playerName.setText("");
-		//Remove character and colour from their respective arraylists
+//		String pName = "";
+//		if(playerName.getText() != "")
+//		{
+//			pName = playerName.getText();
+//		}
+//		else
+//		{
+//			warning.setVisible(true);
+//		}
+//		String cCharacter = "";
+//		System.out.println(pName);
+//		
+//		cCharacter = getCharacter();
+//		if(!cCharacter.equals("")){
+//		 System.out.println("Character was: " + cCharacter);
+//		}
+//		else
+//		{
+//			System.out.println("Please select a character");
+//			warning.setVisible(true);
+//			cCharacter = getCharacter();
+//			return;
+//		}
+//		String cColour = getColour();
+//		if(!cColour.equals(""))
+//		{
+//			System.err.println("Colour was: " + cColour);
+//		}
+//		else
+//		{
+//			System.out.println("Please select a colour");
+//			warning.setVisible(true);
+//			cColour = getColour();
+//			return;
+//		}
+//		Player p = new Player(pName, cCharacter, cColour, counter);
+//		iColours.remove(cColour);
+//		chars.remove(cCharacter);
+//		System.out.println("Player created!");
+//		players.add(p);
+//		System.out.println("PlayerF added");
+//		colourRadios.clearSelection();
+//		characterRadios.clearSelection();
+//		playerName.setText("");
 
+		Player p = new Player("Cam", "Cool guy", "Red", 1);
+		players.add(p);
+		Player p1 = new Player("James", "Lame guy", "Blue", 2);
+		players.add(p1);
+		
 
 		counter++;
 		if(counter >= numberOPlayers )
 		{
 			System.out.println("Go to main game screen");
 			//Launch UI
-			UI u = new UI();
-			u.setVisible(true);//Show the game screen
+			new UI().setVisible(true);
 			this.setVisible(false);//Hide the player setup screen
 			return;
 

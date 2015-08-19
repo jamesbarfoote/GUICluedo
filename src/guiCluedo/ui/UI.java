@@ -5,7 +5,11 @@
  */
 package guiCluedo.ui;
 
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.util.Scanner;
+
+import javax.swing.JPanel;
 
 import guiCluedo.game.Board;
 
@@ -14,12 +18,26 @@ import guiCluedo.game.Board;
  * @author James
  */
 public class UI extends javax.swing.JFrame {
+	
+	private static Container controlPanel;
+	//private static JPanel controlPanel2;
 
     /**
      * Creates new form UI
      */
     public UI() {
         initComponents();
+        Board b = new Board();//Change to number of players that user selected
+        //call the canvas
+        controlPanel = jFrame1.getContentPane();
+        jFrame1.setVisible(true);
+        UICanvas canvas = new UICanvas(b);
+        System.out.println("Reached 1");
+        controlPanel.add(canvas);
+        jFrame1.setVisible(true);
+//        controlPanel2 = new JPanel();
+//        jFrame1.add(controlPanel2);
+//        jFrame1.setVisible(true);
     }
 
     /**
@@ -41,6 +59,7 @@ public class UI extends javax.swing.JFrame {
         newGame = new javax.swing.JMenuItem();
         GameMenu = new javax.swing.JMenu();
 
+        jFrame1.setSize(400,400);
         jFrame1.setAlwaysOnTop(true);
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -144,47 +163,51 @@ public class UI extends javax.swing.JFrame {
     private void GameMenuMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_GameMenuMenuSelected
         // TODO add your handling code here:
     }//GEN-LAST:event_GameMenuMenuSelected
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UI().setVisible(true);
-            }
-        });
-        
-        //Create the board
-        Board b = new Board();//Change to number of players that user selected
-        //call the canvas
-        UICanvas canvas = new UICanvas(b);
-    }
+    
+//    public static void main(String args[]) {
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new UI().setVisible(true);
+//            }
+//        });
+//        
+//        //Create the board
+//        Board b = new Board();//Change to number of players that user selected
+//        //call the canvas
+//        controlPanel = new JPanel();
+//        controlPanel.setLayout(new FlowLayout());
+//        jFrame1.add(controlPanel);
+//        jFrame1.setVisible(true);
+//        UICanvas canvas = new UICanvas(b);
+//        System.out.println("Reached1");
+//        controlPanel.add(canvas);
+//        jFrame1.setVisible(true);
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu GameMenu;
     private javax.swing.JTextField diceRolled;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JFrame jFrame1;
+    private static javax.swing.JFrame jFrame1;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField2;
