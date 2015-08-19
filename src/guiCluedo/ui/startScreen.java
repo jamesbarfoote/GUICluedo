@@ -381,16 +381,6 @@ public class startScreen extends javax.swing.JFrame {
 	}
 
 	private void donePlayerSetupActionPerformed(java.awt.event.ActionEvent evt) {                                                
-		if(counter >= numberOPlayers-1 )
-		{
-			System.out.println("Go to main game screen");
-			//Launch UI
-			UI u = new UI();
-			u.setVisible(true);//Show the game screen
-			this.setVisible(false);//Hide the player setup screen
-			return;
-
-		}
 		String pName = "";
 		if(playerName.getText() != "")
 		{
@@ -427,32 +417,41 @@ public class startScreen extends javax.swing.JFrame {
 			return;
 		}
 		Player p = new Player(pName, cCharacter, cColour, counter);
+		iColours.remove(cColour);
+		chars.remove(cCharacter);
 		System.out.println("Player created!");
 		players.add(p);
 		System.out.println("Player added");
-		//colourRadios.clearSelection();
-		//characterRadios.clearSelection();
+		colourRadios.clearSelection();
+		characterRadios.clearSelection();
 		playerName.setText("");
 		//Remove character and colour from their respective arraylists
 
 
 		counter++;
+		if(counter >= numberOPlayers )
+		{
+			System.out.println("Go to main game screen");
+			//Launch UI
+			UI u = new UI();
+			u.setVisible(true);//Show the game screen
+			this.setVisible(false);//Hide the player setup screen
+			return;
+
+		}
 	}
 
 	private String getColour() {
 		if(colourRed.isSelected())
 		{
 			if(iColours.contains("Red")){
-				
-				iColours.remove("Red");
 				return "Red";
 			}
 			//Display error message, ask user to choose something else as this has already been chosen	
 		}
 		else if(colourGreen.isSelected())
 		{
-			if(iColours.contains("Green")){
-				iColours.remove("Green");
+			if(iColours.contains("Green")){;
 				return "Green";
 			}
 			//Display error message	
@@ -460,7 +459,6 @@ public class startScreen extends javax.swing.JFrame {
 		else if(colourBlue.isSelected())
 		{
 			if(iColours.contains("Blue")){
-				iColours.remove("Blue");
 				return "Blue";
 			}
 			//Display error message		
@@ -468,7 +466,6 @@ public class startScreen extends javax.swing.JFrame {
 		else if(colourYellow.isSelected())
 		{
 			if(iColours.contains("Yellow")){
-				iColours.remove("Yellow");
 				return "Yellow";
 			}
 			//Display error message		
@@ -476,7 +473,6 @@ public class startScreen extends javax.swing.JFrame {
 		else if(colourWhite.isSelected())
 		{
 			if(iColours.contains("White")){
-				iColours.remove("White");
 				return "White";
 			}
 			//Display error message		
@@ -484,7 +480,6 @@ public class startScreen extends javax.swing.JFrame {
 		else if(colourPurple.isSelected())
 		{
 			if(iColours.contains("Purple")){
-				iColours.remove("Purple");
 				return "Purple";
 			}
 			//Display error message		
@@ -497,7 +492,6 @@ public class startScreen extends javax.swing.JFrame {
 		{
 			String character = "Colonel Mustard";
 			if(chars.contains(character)){
-				chars.remove(character);
 				return character;
 			}
 			//Display error message	
@@ -506,7 +500,6 @@ public class startScreen extends javax.swing.JFrame {
 		{
 			String character = "Miss Scarlett";
 			if(chars.contains(character)){
-				chars.remove(character);
 				return character;
 			}
 			//Display error message	
@@ -515,7 +508,6 @@ public class startScreen extends javax.swing.JFrame {
 		{
 			String character = "Mrs. Peacock";
 			if(chars.contains(character)){
-				chars.remove(character);
 				return character;
 			}
 			//Display error message	
@@ -524,7 +516,6 @@ public class startScreen extends javax.swing.JFrame {
 		{
 			String character = "Mrs. White";
 			if(chars.contains(character)){
-				chars.remove(character);
 				return character;
 			}
 			//Display error message	
@@ -533,7 +524,6 @@ public class startScreen extends javax.swing.JFrame {
 		{
 			String character = "Professor Plum";
 			if(chars.contains(character)){
-				chars.remove(character);
 				return character;
 			}
 			//Display error message	
@@ -542,7 +532,6 @@ public class startScreen extends javax.swing.JFrame {
 		{
 			String character = "The Reverend Green";
 			if(chars.contains(character)){
-				chars.remove(character);
 				return character;
 			}
 			//Display error message	
