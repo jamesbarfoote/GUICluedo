@@ -16,7 +16,7 @@ public class UI extends javax.swing.JFrame {
      */
     public UI() {
         initComponents();
-        Board b = new Board();
+        final Board b = new Board();
         BoardCanvas canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
         boardArea.add(canvas);
         
