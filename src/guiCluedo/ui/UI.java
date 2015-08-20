@@ -25,8 +25,8 @@ public class UI extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jSeparator1 = new javax.swing.JSeparator();
         rollDice = new javax.swing.JButton();
-        diceRolled = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        diceRolled = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newGame = new javax.swing.JMenuItem();
@@ -56,17 +56,11 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
-        diceRolled.setEditable(false);
+       // diceRolled.setEditable(false);
         diceRolled.setText("You rolled: ");
 
-        jTextField2.setEditable(false);
+        //jTextField2.setEditable(false);
         jTextField2.setText("Your hand:");
-        jTextField2.setName(""); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
 
         fileMenu.setText("File");
 
@@ -139,12 +133,12 @@ public class UI extends javax.swing.JFrame {
     
 
     private javax.swing.JMenu GameMenu;
-    private javax.swing.JTextField diceRolled;
+    private javax.swing.JLabel diceRolled;
     private javax.swing.JMenu fileMenu;
     private static javax.swing.JFrame jFrame1;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jTextField2;
     private javax.swing.JMenuItem newGame;
     private javax.swing.JButton rollDice;    
 }
