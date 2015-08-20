@@ -1,12 +1,16 @@
 package guiCluedo.game;
 
+import java.awt.Polygon;
+
 public class Room extends Card{
 	private String name;
 	private Location location;
+	private Polygon boundingBox;
 	
-	public Room(String name, Location location){
+	public Room(String name, Location location, Polygon polygon){
 		this.name = name;
 		this.location = location;
+		this.boundingBox = polygon;
 	}
 	
 	/**
@@ -23,5 +27,13 @@ public class Room extends Card{
 	 */
 	public String getName(){
 		return name;
+	}
+	
+	/**
+	 * Returns the polygon of the room
+	 * @return Polygon
+	 */
+	public Polygon getBoundingBox(){
+		return boundingBox;
 	}
 }

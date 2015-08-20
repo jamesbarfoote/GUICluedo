@@ -2,36 +2,189 @@
 package guiCluedo.ui;
 
 import java.awt.Component;
+import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Scanner;
 import guiCluedo.game.Board;
+import guiCluedo.game.Card;
+import guiCluedo.game.Character;
+import guiCluedo.game.Player;
+import guiCluedo.game.Room;
+import guiCluedo.game.Weapon;
 
-public class UI extends javax.swing.JFrame {
+public class UI extends javax.swing.JFrame implements KeyListener{
 	
 	private static final long serialVersionUID = 1L;
+	private static boolean finished = false;
+	private Player currentPlayer;
+	private Board b;
+	private BoardCanvas canvas;
 
     /**
      * Creates new form UI
      */
     public UI() {
         initComponents();
-        Board b = new Board();
-        BoardCanvas canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
+        b = new Board();
+        this.canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
         boardArea.add(canvas);
+        this.addKeyListener(this);
+        setFocusable(true);
+        playGame(b, 0);
         
-        this.addComponentListener(new ComponentAdapter() 
-        {  
-                public void componentResized(ComponentEvent evt) {
-                    Component c = (Component)evt.getSource();
-                    System.out.println("Redrawn");
-                    System.out.println("Width = " + boardArea.getWidth());
-                    System.out.println("Height = " + boardArea.getHeight());
-                    BoardCanvas canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
-                }
-        });
+//        this.addComponentListener(new ComponentAdapter() 
+//        {  
+//                public void componentResized(ComponentEvent evt) {
+//                    Component c = (Component)evt.getSource();
+//                    System.out.println("Redrawn");
+//                    System.out.println("Width = " + boardArea.getWidth());
+//                    System.out.println("Height = " + boardArea.getHeight());
+//                    BoardCanvas canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
+//                }
+//        });
     }
+    
+    @Override
+	public void keyPressed(KeyEvent e) {
+		
+	}
 
+	@Override
+	public void keyReleased(KeyEvent e) {
+		Point location = currentPlayer.getLocation();
+		if (e.getKeyCode() == KeyEvent.VK_LEFT){
+			location.setLocation(location.getX()-1, location.getY());
+			currentPlayer.setLocation(location);
+			this.canvas.repaint();
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_UP){
+			location.setLocation(location.getX(), location.getY()-1);
+			currentPlayer.setLocation(location);
+			this.canvas.repaint();
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+			location.setLocation(location.getX()+1, location.getY());
+			currentPlayer.setLocation(location);
+			this.canvas.repaint();
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+			location.setLocation(location.getX(), location.getY()+1);
+			currentPlayer.setLocation(location);
+			this.canvas.repaint();
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+	}
+	
+	/**
+	 * Loop through all the players while the game hasn't been won. If a player
+	 * gets eliminated, break the loop then remove the player and start the loop
+	 * again from where it left off.
+	 * 
+	 * @param scan - the scanner used for accessing user input
+	 * @param b - The current board
+	 * @param playerNum - the prior players number
+	 */
+	public void playGame(Board b, int playerNum) {
+
+		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
+		currentPlayer = b.getPlayers().get(playerNum - 1);
+		Player eliminatedPlayer = null;
+		playerNum = (playerNum % b.getPlayers().size()) + 1;	//go to the next player
+		currentPlayer = b.getPlayers().get(playerNum - 1);
+//		while (finished == false) {	//While the game has not been won (or lost)
+//			Room room = null;
+//			for(Room r : b.getRooms()){
+//				if(r.getBoundingBox().contains(currentPlayer.getLocation())){
+//					room = r; 
+//				}
+//			}
+//			if (room == null) {	//If the player is not within a room.
+//
+//				if (true) {	//If player chose to make an accusation				
+//					ArrayList<Card> guessHand = createGuess(scan, b);//Create the guess hand
+//					while (guessHand == null) {
+//						guessHand = createGuess(scan, b);
+//					}
+//					boolean opt = false;//Accusation
+//
+//					Guess guess = new Guess(opt, guessHand, currentPlayer, b);
+//
+//					if (guess.getEliminatedPlayer() != null) {
+//						eliminatedPlayer = guess.getEliminatedPlayer(); //Set the player to be eliminated 
+//						System.out.println("You guessed wrong");
+//						System.out.println("You have been eliminated!");
+//						
+//						if(b.getPlayers().size() == 2)//If there is no one left in the game then exit
+//						{
+//							System.out.println("");
+//							System.out.println("Game over! No one guessed correctly");
+//						}
+//						
+//						break;//Break out
+//					} else if (guess.hasWon()) {
+//						finished = true;
+//						System.out.println("Congratulations " + currentPlayer.getName() + " you have won!");
+//						return;
+//					}
+//
+//				}
+//
+//			} else {	//If the player made it to the room they wanted
+//
+//				if () {	//If they chose to make either an accusation of a suggestion
+//
+//					Guess guess = null;
+//					do{	//Select the 3 cards that make up the guess					
+//						ArrayList<Card> guessHand = createGuess(scan, b);
+//						while (guessHand == null) {
+//							guessHand = createGuess(scan, b);
+//						}
+//
+//						// create a guess hand
+//						boolean opt = false;
+//						if () {	//if accusation
+//							opt = true;
+//						}
+//
+//						guess = new Guess(opt, guessHand, currentPlayer, b);
+//					}while(guess.getFailed() == true);	//if not all 3 were selected
+//
+//					if (guess.getEliminatedPlayer() != null) {
+//						eliminatedPlayer = guess.getEliminatedPlayer();
+//						System.out.println("You guessed wrong");
+//						System.out.println("You have been eliminated!");
+//						
+//						if(b.getPlayers().size() == 2)//If there is no one left in the game exit
+//						{
+//							System.out.println("Game over! No one guessed correctly");
+//						}
+//						
+//						break;
+//					} else if (guess.hasWon()) {
+//						finished = true;
+//						System.out.println("Congratulations " + currentPlayer.getName() + " you have won!");
+//						return;
+//					}
+//
+//				}
+//			}
+//		}
+
+//		playerNum = (playerNum % b.players.size()) - 1;
+//		b.players.remove(eliminatedPlayer);
+//		while (b.getPlayers().size() > 1) {	//While there is more than 1 player left keep playing
+//			playGame(scan, b, playerNum);
+//		}
+	}
+    
     /**
      * 
      */
@@ -165,9 +318,10 @@ public class UI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rollDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollDiceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rollDiceActionPerformed
+    private void rollDiceActionPerformed(java.awt.event.ActionEvent evt) {
+    	int roll = ((int) Math.ceil(Math.random()*11)) + 1; // generate a random number between 2 and 12 inclusive
+		currentPlayer.setRoll(roll);
+    }
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -189,4 +343,89 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton rollDice; 
     private javax.swing.JLayeredPane boardArea;
     private javax.swing.JLayeredPane handArea;
+
+
+	/**
+	 * Creates a guess for the specified board. A guess consists of 3 cards used for
+	 * either a suggestion or an accusation
+	 * @param scan - The scanner used for accessing user input
+	 * @param b - The current board
+	 * @return The list of 3 cards to be used in the suggestion/accusation.
+	 */
+	private static ArrayList<Card> createGuess(Scanner scan, Board b) {
+		String roomName = scan.next();
+		int index = b.getRoomNames().indexOf(roomName);
+		Room guessRoom = null;
+		if (index != -1) {
+			guessRoom = b.getRooms().get(index);
+		} else {
+			System.out.println("Room name was incorrect, please type the 3 cards again");
+			return null;
+		}
+
+		int indexW = b.getWeaponNames().indexOf(scan.next());
+		Weapon guessWeapon = null;
+		if (indexW != -1) {
+			guessWeapon = b.getWeapons().get(indexW);
+		} else {
+			System.out.println("Weapon name was incorrect, please type the 3 cards again");
+			return null;
+		}
+
+		String characterN = scan.next();
+		int indexC = b.getCharacterNames().indexOf(characterN);
+		Character guessCharacter = null;
+		if (indexC != -1) {
+			guessCharacter = b.getCharacters().get(indexC);
+		} else {
+			System.out.println("Character name was incorrect, please type the 3 cards again");
+			return null;
+		}
+
+		ArrayList<Card> guessHand = new ArrayList<Card>();
+		guessHand.add(guessRoom);
+		guessHand.add(guessWeapon);
+		guessHand.add(guessCharacter);
+
+		return guessHand;
+
+	}
+	
+	/**
+	 * Checks if the given string can be parsed to an integer.
+	 * @param s - The string to be parsed
+	 * @return boolean of whether it is or not
+	 */
+	private static boolean isInteger(String s) {
+		  try { 
+		      Integer.parseInt(s); 
+		   } catch(NumberFormatException e) { 
+		      return false; 
+		   }
+		   // only got here if we didn't return false
+		   return true;
+		}
+	/**
+	 * Returns a number the user specifies given it's valid.
+	 * 
+	 * @param scan - The scanner used for accessing user input
+	 * @param minNum - The minimum possible value
+	 * @param maxNum - The maximum possible number
+	 * @param num - The number to be checked.
+	 * @return the integer the player gave
+	 */
+	private static int isCorrectNumber(Scanner scan, int minNum, int maxNum, String num){
+		int numPlayers = 0;
+		while(true){
+			if(isInteger(num)){
+				numPlayers = Integer.parseInt(num); 
+				if((numPlayers >= minNum) && (numPlayers<=maxNum)){
+					break;
+				}
+			}
+			System.out.println("Input must be between " +  minNum + " and " + maxNum);
+			num = scan.next();
+		}
+		return numPlayers;
+	}
 }

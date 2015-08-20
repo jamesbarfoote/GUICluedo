@@ -169,118 +169,118 @@ public class tests {
 		assertTrue(g.getEliminatedPlayer() == player);
 	}
 
-	@Test
-	public void testPlayerMoves()
-	{
-		Board b = new Board();
-		Player p = b.getPlayers().get(0);
-		int loc = p.getLocation().getX() + p.getLocation().getY();
-		ArrayList<Card> ans = b.answer;
-		Room ar = (Room) b.getRooms().get(0);
-		p.rollDice();
-		p.calculateDistances(b);
-		p.updateLocation(ar);
-		int locAfter = p.getLocation().getX() + p.getLocation().getY();
-
-		assertFalse(loc == (locAfter));
-	}
-
-	@Test
-	public void testPlayerHasLocation()
-	{
-		Board b = new Board();
-		Player p = b.getPlayers().get(0);
-		assertTrue(p.getLocation() != null);
-	}
-	
-	@Test
-	public void testAddToHand()
-	{
-		Board b = new Board();
-		Player p = b.getPlayers().get(0);
-		Weapon w = new Weapon("Spanner");
-		int handSize = p.getHand().size();
-		p.addToHand(w);
-		
-		assertTrue((p.getHand().size() == (handSize + 1)));
-	}
-	
-	@Test
-	public void testAddDiscoveredHand()
-	{
-		Board b = new Board();
-		Player p = b.getPlayers().get(0);
-		Weapon w = new Weapon("Spanner");
-		int handSize = p.getDiscoveredCards().size();
-		p.addToHand2(w);
-		
-		assertTrue((p.getDiscoveredCards().size() == (handSize + 1)));
-	}
-	
-	@Test
-	public void playerHasNumber()
-	{
-		Board b = new Board();
-		Player p = b.getPlayers().get(0);
-		assert(p.getNum() != -1);
-	}
-	
-	@Test
-	public void playerHasUniqueNumber()
-	{
-		Board b = new Board();
-		Player p = b.getPlayers().get(0);
-		ArrayList<Player> players = b.getPlayers();
-		int dup = 0;
-		for(int i = 0; i < players.size(); i++){
-			for(int j = i + 1; j < players.size(); j++)
-			{
-				if((players.get(j).getNum()) == (players.get(i).getNum()))
-				{
-					dup = 1;
-				}
-			}
-		}
-		assertTrue(dup == 0);
-	}
-	
-	
-
-	@Test 
-	public void ValidSuggestion()
-	{
-		Board b = new Board();
-		ArrayList<Card> ans = b.answer;
-		Player p = b.getPlayers().get(0);
-		Player p2 = b.getPlayers().get(1);
-		p2.addToHand(ans.get(0));
-		Room ar = (Room) ans.get(2);
-		p.getLocation().setX(ar.getLocation().getX());
-		p.getLocation().setY(ar.getLocation().getY());
-		//	
-		int sizeB = p.getDiscoveredCards().size();
-		System.out.println(sizeB);
-		Guess g = new Guess(true, ans, p, b);
-		int sizeA = p.getDiscoveredCards().size();
-		System.out.println(sizeB);
-		assertTrue(sizeA > sizeB);
-	}
-
-	@Test 
-	public void InvalidSuggestion()
-	{
-		Board b = new Board();
-		ArrayList<Card> ans = b.answer;
-		Player p = b.getPlayers().get(0);
-		Room ar = (Room) ans.get(2);
-		p.getLocation().setX(12);
-		p.getLocation().setY(12);
-
-		int sizeB = p.getDiscoveredCards().size();
-		Guess g = new Guess(true, ans, p, b);
-
-		assertTrue(g.getFailed());
-	}
-
-
+//	@Test
+//	public void testPlayerMoves()
+//	{
+//		Board b = new Board();
+//		Player p = b.getPlayers().get(0);
+//		int loc = p.getLocation().getX() + p.getLocation().getY();
+//		ArrayList<Card> ans = b.answer;
+//		Room ar = (Room) b.getRooms().get(0);
+//		p.rollDice();
+//		p.calculateDistances(b);
+//		p.updateLocation(ar);
+//		int locAfter = p.getLocation().getX() + p.getLocation().getY();
+//
+//		assertFalse(loc == (locAfter));
+//	}
+//
+//	@Test
+//	public void testPlayerHasLocation()
+//	{
+//		Board b = new Board();
+//		Player p = b.getPlayers().get(0);
+//		assertTrue(p.getLocation() != null);
+//	}
+//	
+//	@Test
+//	public void testAddToHand()
+//	{
+//		Board b = new Board();
+//		Player p = b.getPlayers().get(0);
+//		Weapon w = new Weapon("Spanner");
+//		int handSize = p.getHand().size();
+//		p.addToHand(w);
+//		
+//		assertTrue((p.getHand().size() == (handSize + 1)));
+//	}
+//	
+//	@Test
+//	public void testAddDiscoveredHand()
+//	{
+//		Board b = new Board();
+//		Player p = b.getPlayers().get(0);
+//		Weapon w = new Weapon("Spanner");
+//		int handSize = p.getDiscoveredCards().size();
+//		p.addToHand2(w);
+//		
+//		assertTrue((p.getDiscoveredCards().size() == (handSize + 1)));
+//	}
+//	
+//	@Test
+//	public void playerHasNumber()
+//	{
+//		Board b = new Board();
+//		Player p = b.getPlayers().get(0);
+//		assert(p.getNum() != -1);
+//	}
+//	
+//	@Test
+//	public void playerHasUniqueNumber()
+//	{
+//		Board b = new Board();
+//		Player p = b.getPlayers().get(0);
+//		ArrayList<Player> players = b.getPlayers();
+//		int dup = 0;
+//		for(int i = 0; i < players.size(); i++){
+//			for(int j = i + 1; j < players.size(); j++)
+//			{
+//				if((players.get(j).getNum()) == (players.get(i).getNum()))
+//				{
+//					dup = 1;
+//				}
+//			}
+//		}
+//		assertTrue(dup == 0);
+//	}
+//	
+//	
+//
+//	@Test 
+//	public void ValidSuggestion()
+//	{
+//		Board b = new Board();
+//		ArrayList<Card> ans = b.answer;
+//		Player p = b.getPlayers().get(0);
+//		Player p2 = b.getPlayers().get(1);
+//		p2.addToHand(ans.get(0));
+//		Room ar = (Room) ans.get(2);
+//		p.getLocation().setX(ar.getLocation().getX());
+//		p.getLocation().setY(ar.getLocation().getY());
+//		//	
+//		int sizeB = p.getDiscoveredCards().size();
+//		System.out.println(sizeB);
+//		Guess g = new Guess(true, ans, p, b);
+//		int sizeA = p.getDiscoveredCards().size();
+//		System.out.println(sizeB);
+//		assertTrue(sizeA > sizeB);
+//	}
+//
+//	@Test 
+//	public void InvalidSuggestion()
+//	{
+//		Board b = new Board();
+//		ArrayList<Card> ans = b.answer;
+//		Player p = b.getPlayers().get(0);
+//		Room ar = (Room) ans.get(2);
+//		p.getLocation().setX(12);
+//		p.getLocation().setY(12);
+//
+//		int sizeB = p.getDiscoveredCards().size();
+//		Guess g = new Guess(true, ans, p, b);
+//
+//		assertTrue(g.getFailed());
+//	}
+//
+//
 }

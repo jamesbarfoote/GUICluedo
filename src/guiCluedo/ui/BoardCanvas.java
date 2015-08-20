@@ -19,8 +19,7 @@ public class BoardCanvas extends Canvas{
 	private ArrayList<Player> players;
 	int width, height;
 	
-	public BoardCanvas(Board b, int width, int height)
-	{
+	public BoardCanvas(Board b, int width, int height){
 		this.gameBoard = b;
 		board = b.getBoard();
 		this.players = b.getPlayers();
@@ -35,7 +34,6 @@ public class BoardCanvas extends Canvas{
         	}
         	System.out.println();
         }
-        repaint();
 	}
 	
 	public void paint(Graphics g) {
@@ -106,7 +104,7 @@ public class BoardCanvas extends Canvas{
 			System.out.println(p.getLocation().getX());
 			System.out.println(p.getLocation().getY());
 
-			g.fillOval(p.getLocation().getX()*(width/23), p.getLocation().getY()*(height/21), width/23, height/21);
+			g.fillOval((int) p.getLocation().getX()*(width/23), (int) p.getLocation().getY()*(height/21), width/23, height/21);
 		}
 	}
 }
