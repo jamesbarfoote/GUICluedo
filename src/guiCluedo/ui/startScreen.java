@@ -5,6 +5,7 @@
  */
 package guiCluedo.ui;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ButtonGroup;
@@ -399,8 +400,8 @@ public class startScreen extends javax.swing.JFrame {
 //			cCharacter = getCharacter();
 //			return;
 //		}
-//		String cColour = getColour();
-//		if(!cColour.equals(""))
+//		Color cColour = getColour();
+//		if(!cColour.equals(null))
 //		{
 //			System.err.println("Colour was: " + cColour);
 //		}
@@ -421,9 +422,9 @@ public class startScreen extends javax.swing.JFrame {
 //		characterRadios.clearSelection();
 //		playerName.setText("");
 
-		Player p = new Player("Cam", "Cool guy", "Red", 1);
+		Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
 		players.add(p);
-		Player p1 = new Player("James", "Lame guy", "Blue", 2);
+		Player p1 = new Player("James", "Miss Scarlett", Color.BLUE, 2);
 		players.add(p1);
 		
 
@@ -439,50 +440,50 @@ public class startScreen extends javax.swing.JFrame {
 		}
 	}
 
-	private String getColour() {
+	private Color getColour() {
 		if(colourRed.isSelected())
 		{
 			if(iColours.contains("Red")){
-				return "Red";
+				return Color.RED;
 			}
 			//Display error message, ask user to choose something else as this has already been chosen	
 		}
 		else if(colourGreen.isSelected())
 		{
 			if(iColours.contains("Green")){;
-				return "Green";
+				return Color.GREEN;
 			}
 			//Display error message	
 		}
 		else if(colourBlue.isSelected())
 		{
 			if(iColours.contains("Blue")){
-				return "Blue";
+				return Color.BLUE;
 			}
 			//Display error message		
 		}
 		else if(colourYellow.isSelected())
 		{
 			if(iColours.contains("Yellow")){
-				return "Yellow";
+				return Color.YELLOW;
 			}
 			//Display error message		
 		}
 		else if(colourWhite.isSelected())
 		{
 			if(iColours.contains("White")){
-				return "White";
+				return Color.WHITE;
 			}
 			//Display error message		
 		}
 		else if(colourPurple.isSelected())
 		{
 			if(iColours.contains("Purple")){
-				return "Purple";
+				return Color.PINK;
 			}
 			//Display error message		
 		}
-		return "";
+		return null;
 	}
 
 	private String getCharacter() {

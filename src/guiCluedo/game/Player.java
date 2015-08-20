@@ -1,4 +1,5 @@
 package guiCluedo.game;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,31 +13,52 @@ public class Player {
 	private Location location;
 	private int playerNum;
 	private String character;
-	private String colour;
+	private Color colour;
 
-	public Player (String name, String character, String colour, int playerNum){
+	public Player (String name, String character, Color colour, int playerNum){
 		this.name = name;
 		this.character = character;
 		this.colour = colour;
 		this.playerNum = playerNum;	
+//		if(character.equals("Miss Scarlett")){
+//			this.location = new Location(9,0);
+//		}
+//		if(character.equals("Colonel Mustard")){
+//			this.location = new Location(17,0);
+//		}
+//		if(character.equals("Mrs. White")){
+//			this.location = new Location(24,4);
+//		}
+//		if(character.equals("The Reverend Green")){
+//			this.location = new Location(15,24);
+//		}
+//		if(character.equals("Mrs. Peacock")){
+//			this.location = new Location(6,24);
+//		}
+//		if(character.equals("Professor Plum")){
+//			this.location = new Location(0,15);
+//		}
+		
 		if(character.equals("Miss Scarlett")){
-			this.location = new Location(9,0);
+			this.location = new Location(21, 12);
 		}
 		if(character.equals("Colonel Mustard")){
-			this.location = new Location(17,0);
+			this.location = new Location(15,21);
 		}
 		if(character.equals("Mrs. White")){
-			this.location = new Location(24,4);
+			this.location = new Location(0, 12);
 		}
 		if(character.equals("The Reverend Green")){
-			this.location = new Location(15,24);
+			this.location = new Location(0, 8);
 		}
 		if(character.equals("Mrs. Peacock")){
-			this.location = new Location(6,24);
+			this.location = new Location(3, 0);
 		}
 		if(character.equals("Professor Plum")){
-			this.location = new Location(0,15);
+			this.location = new Location(18, 0);
 		}
+		
+		System.out.println(character);
 		//Set location based on what character they chose (each character has a specified starting location)
 	}
 
@@ -166,5 +188,9 @@ public class Player {
 	
 	public String getName(){
 		return name;
+	}
+	
+	public Color getColor(){
+		return colour;
 	}
 }

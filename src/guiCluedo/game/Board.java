@@ -19,6 +19,8 @@ public class Board {
 	private ArrayList<Room> rooms = new ArrayList<Room>();
 	private ArrayList<Room> stairwells = new ArrayList<Room>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
+	
+	private String[][] board = new String[21][23];
 
 	public Board() {
 		createCards();
@@ -197,5 +199,9 @@ public class Board {
 	
 	public ArrayList<Room> getStairwells(){
 		return stairwells;
+	}
+	
+	public String[][] getBoard(){
+		return board;
 	}
 }

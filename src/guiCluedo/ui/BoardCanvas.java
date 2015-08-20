@@ -4,22 +4,26 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import guiCluedo.game.Board;
+import guiCluedo.game.Player;
 
 public class BoardCanvas extends Canvas{
 	
 	private static final long serialVersionUID = 1L;
 	Board gameBoard;
-	private String[][] board = new String[21][23];
+	private String[][] board;
+	private ArrayList<Player> players;
 	int width, height;
 	
 	public BoardCanvas(Board b, int width, int height)
 	{
 		this.gameBoard = b;
+		board = b.getBoard();
+		this.players = b.getPlayers();
 		this.width = width;
 		this.height = height;
 		setBackground (Color.YELLOW);
@@ -38,6 +42,7 @@ public class BoardCanvas extends Canvas{
 		Graphics2D g2;
         g2 = (Graphics2D) g;
         drawBoard(g2);
+        drawIcons(g2);
         
 	}
 
@@ -77,10 +82,8 @@ public class BoardCanvas extends Canvas{
 	}
 	
 	/**
-	 * Draws a row of the board. There are 21 rows 
-	 * equal to the height of the board.
-	 * @param row - The current row to draw
-	 * @param g - The graphics object
+	 *Draws the board, for every square it draws the corresponding colour.
+	 *@param g - The graphics object
 	 */
 	private void drawBoard(Graphics2D g){
 		for(int i = 0; i < board.length; i++){
@@ -95,5 +98,15 @@ public class BoardCanvas extends Canvas{
         		}
         	}
         }
+	}
+	
+	private void drawIcons(Graphics2D g){
+		for(Player p : players){
+			g.setColor(p.getColor());
+			System.out.println(p.getLocation().getX());
+			System.out.println(p.getLocation().getY());
+
+			g.fillOval(p.getLocation().getX()*(width/23), p.getLocation().getY()*(height/21), width/23, height/21);
+		}
 	}
 }
