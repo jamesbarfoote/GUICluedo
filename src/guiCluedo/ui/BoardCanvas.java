@@ -4,12 +4,12 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import guiCluedo.game.Board;
 
-public class UICanvas extends Canvas{
+public class BoardCanvas extends Canvas{
+	private static final long serialVersionUID = 1L;
 	Board gameBoard;
-	public UICanvas(Board b)
+	public BoardCanvas(Board b)
 	{
 		this.gameBoard = b;
 		System.out.println("Reached");
@@ -27,4 +27,7 @@ public class UICanvas extends Canvas{
         g2.fillRect(50, 50, 50, 50);
 	}
 
+	private void readFile(){
+		
+	}
 }

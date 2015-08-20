@@ -13,7 +13,7 @@ public class UI extends javax.swing.JFrame {
     public UI() {
         initComponents();
         Board b = new Board();
-        UICanvas canvas = new UICanvas(b);
+        BoardCanvas canvas = new BoardCanvas(b);
         this.add(canvas);
     }
 
