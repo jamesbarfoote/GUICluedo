@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -64,6 +65,23 @@ public class BoardCanvas extends Canvas{
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Draws a row of the board. There are 21 rows 
+	 * equal to the height of the board.
+	 * @param - The current row to draw
+	 */
+	private void drawRow(int row, Graphics g){
+		int roomCount = 0;
+		for(int i = 0; i < board[row].length; i++){
+			if(board[row][i].equals("R")){
+				roomCount++;
+			}
+			else if(roomCount > 0){
+				
+			}
 		}
 	}
 }
