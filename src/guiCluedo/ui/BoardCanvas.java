@@ -37,9 +37,7 @@ public class BoardCanvas extends Canvas{
 	public void paint(Graphics g) {
 		Graphics2D g2;
         g2 = (Graphics2D) g;
-        for(int i = 0; i < board.length; i++){
-        	drawRow(i, g2);
-        }
+        drawBoard(g2);
         
 	}
 
@@ -84,39 +82,18 @@ public class BoardCanvas extends Canvas{
 	 * @param row - The current row to draw
 	 * @param g - The graphics object
 	 */
-	private void drawRow(int row, Graphics2D g){
-		int roomFrom = 0;
-		int roomTo = 0;
-		int centreFrom = 0;
-		int centreTo = 0;
-		String location = "Hallway";
-		for(int i = 0; i < board[row].length; i++){
-			if(board[row][i].equals("R") && location.equals("Hallway")){
-				roomFrom = roomTo;
-				roomTo++;
-				location = "Rooom";
-			}
-			else if(board[row][i].equals("R")){
-				roomTo++;
-			}
-			else if(board[row][i].equals("C") && location.equals("Hallway")){
-				centreFrom = centreTo;
-				centreTo++;
-				location = "Centre";
-			}
-			else if(board[row][i].equals("C")){
-				centreTo++;
-			}
-			else if(roomTo - roomFrom > 0){
-				g.setColor(Color.GRAY);
-				g.fillRect(roomFrom*(width/23), row*(height/21), (roomTo - roomFrom)*(width/23), row*(height/21));
-				location = "Hallway";
-			}
-			else if(centreTo - centreFrom > 0){
-				g.setColor(Color.RED);
-				g.fillRect(centreFrom*(width/23), row*(height/21), (centreTo - centreFrom)*(width/23), row*(height/21));
-				location = "Hallway";
-			}
-		}
+	private void drawBoard(Graphics2D g){
+		for(int i = 0; i < board.length; i++){
+        	for(int j = 0; j < board[i].length; j++){
+        		if(board[i][j].equals("R")){
+        			g.setColor(Color.GRAY);
+        			g.fillRect(j*(width/23), i*(height/21), width/23, height/21);
+        		}
+        		else if(board[i][j].equals("C")){
+        			g.setColor(Color.RED);
+        			g.fillRect(j*(width/23), i*(height/21), width/23, height/21);
+        		}
+        	}
+        }
 	}
 }
