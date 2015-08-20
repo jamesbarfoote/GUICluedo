@@ -1,6 +1,10 @@
 
 package guiCluedo.ui;
 
+import java.awt.Component;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
 import guiCluedo.game.Board;
 
 public class UI extends javax.swing.JFrame {
@@ -15,6 +19,17 @@ public class UI extends javax.swing.JFrame {
         Board b = new Board();
         BoardCanvas canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
         boardArea.add(canvas);
+        
+        this.addComponentListener(new ComponentAdapter() 
+        {  
+                public void componentResized(ComponentEvent evt) {
+                    Component c = (Component)evt.getSource();
+                    System.out.println("Redrawn");
+                    System.out.println("Width = " + boardArea.getWidth());
+                    System.out.println("Height = " + boardArea.getHeight());
+                    BoardCanvas canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
+                }
+        });
     }
 
     /**
@@ -79,14 +94,11 @@ public class UI extends javax.swing.JFrame {
         );
         boardAreaLayout.setVerticalGroup(
             boardAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
         
 
-       // diceRolled.setEditable(false);
         diceRolled.setText("You rolled: ");
-
-        //yourHandText.setEditable(false);
         yourHandText.setText("Your hand:");
 
         fileMenu.setText("File");

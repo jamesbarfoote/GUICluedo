@@ -40,10 +40,10 @@ public class Player {
 //		}
 		
 		if(character.equals("Miss Scarlett")){
-			this.location = new Location(21, 12);
+			this.location = new Location(22, 12);
 		}
 		if(character.equals("Colonel Mustard")){
-			this.location = new Location(15,21);
+			this.location = new Location(15,22);
 		}
 		if(character.equals("Mrs. White")){
 			this.location = new Location(0, 12);
