@@ -29,12 +29,13 @@ public class UI extends javax.swing.JFrame {
         initComponents();
         Board b = new Board();//Change to number of players that user selected
         //call the canvas
-        controlPanel = jFrame1.getContentPane();
-        jFrame1.setVisible(true);
+//        controlPanel = jFrame1.getContentPane();
+//        jFrame1.setVisible(true);
         UICanvas canvas = new UICanvas(b);
-        System.out.println("Reached 1");
-        controlPanel.add(canvas);
-        jFrame1.setVisible(true);
+        this.add(canvas);
+//        System.out.println("Reached 1");
+//        controlPanel.add(canvas);
+//        jFrame1.setVisible(true);
 //        controlPanel2 = new JPanel();
 //        jFrame1.add(controlPanel2);
 //        jFrame1.setVisible(true);
