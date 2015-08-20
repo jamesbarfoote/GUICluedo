@@ -14,7 +14,7 @@ public class UI extends javax.swing.JFrame {
         initComponents();
         Board b = new Board();
         BoardCanvas canvas = new BoardCanvas(b);
-        this.add(canvas);
+        boardArea.add(canvas);
     }
 
     /**
@@ -26,11 +26,13 @@ public class UI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         rollDice = new javax.swing.JButton();
         diceRolled = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JLabel();
+        yourHandText = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newGame = new javax.swing.JMenuItem();
         GameMenu = new javax.swing.JMenu();
+        boardArea = new javax.swing.JLayeredPane();
+        handArea = new javax.swing.JLayeredPane();
 
         jFrame1.setSize(400,400);
         jFrame1.setAlwaysOnTop(true);
@@ -55,12 +57,37 @@ public class UI extends javax.swing.JFrame {
                 rollDiceActionPerformed(evt);
             }
         });
+        
+        handArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        javax.swing.GroupLayout handAreaLayout = new javax.swing.GroupLayout(handArea);
+        handArea.setLayout(handAreaLayout);
+        handAreaLayout.setHorizontalGroup(
+            handAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 281, Short.MAX_VALUE)
+        );
+        handAreaLayout.setVerticalGroup(
+            handAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout boardAreaLayout = new javax.swing.GroupLayout(boardArea);
+        boardArea.setLayout(boardAreaLayout);
+        boardAreaLayout.setHorizontalGroup(
+            boardAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        boardAreaLayout.setVerticalGroup(
+            boardAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 274, Short.MAX_VALUE)
+        );
+        
 
        // diceRolled.setEditable(false);
         diceRolled.setText("You rolled: ");
 
-        //jTextField2.setEditable(false);
-        jTextField2.setText("Your hand:");
+        //yourHandText.setEditable(false);
+        yourHandText.setText("Your hand:");
 
         fileMenu.setText("File");
 
@@ -90,28 +117,35 @@ public class UI extends javax.swing.JFrame {
             .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(rollDice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(diceRolled))
-                .addGap(64, 64, 64)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rollDice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(diceRolled, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(73, 73, 73)
+                        .addComponent(yourHandText)))
+                .addGap(35, 35, 35)
+                .addComponent(handArea)
+                .addContainerGap())
+            .addComponent(boardArea)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(311, Short.MAX_VALUE)
+                .addComponent(boardArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rollDice)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(diceRolled, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(diceRolled)
+                            .addComponent(yourHandText))
+                        .addGap(18, 18, 18))
+                    .addComponent(handArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         rollDice.getAccessibleContext().setAccessibleName("rollDice");
@@ -138,7 +172,9 @@ public class UI extends javax.swing.JFrame {
     private static javax.swing.JFrame jFrame1;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel jTextField2;
+    private javax.swing.JLabel yourHandText;
     private javax.swing.JMenuItem newGame;
-    private javax.swing.JButton rollDice;    
+    private javax.swing.JButton rollDice; 
+    private javax.swing.JLayeredPane boardArea;
+    private javax.swing.JLayeredPane handArea;
 }
