@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -14,12 +15,15 @@ public class BoardCanvas extends Canvas{
 	private static final long serialVersionUID = 1L;
 	Board gameBoard;
 	private String[][] board = new String[21][23];
+	int width, height;
 	
-	public BoardCanvas(Board b)
+	public BoardCanvas(Board b, int width, int height)
 	{
 		this.gameBoard = b;
-		setBackground (Color.BLUE);
-        setSize(300, 300);
+		this.width = width;
+		this.height = height;
+		setBackground (Color.YELLOW);
+        setSize(width, height);
         readFile();
         for(int i = 0; i < board.length; i++){
         	for(int j = 0; j < board[i].length; j++){
@@ -105,12 +109,12 @@ public class BoardCanvas extends Canvas{
 			}
 			else if(roomTo - roomFrom > 0){
 				g.setColor(Color.GRAY);
-				g.fillRect(roomFrom*10, row*10, (roomTo - roomFrom)*10, row*10);
+				g.fillRect(roomFrom*(width/23), row*(height/21), (roomTo - roomFrom)*(width/23), row*(height/21));
 				location = "Hallway";
 			}
 			else if(centreTo - centreFrom > 0){
 				g.setColor(Color.RED);
-				g.fillRect(centreFrom*10, row*10, (centreTo - centreFrom)*10, row*10);
+				g.fillRect(centreFrom*(width/23), row*(height/21), (centreTo - centreFrom)*(width/23), row*(height/21));
 				location = "Hallway";
 			}
 		}
