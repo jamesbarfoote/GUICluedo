@@ -422,22 +422,34 @@ public class startScreen extends javax.swing.JFrame {
 //		characterRadios.clearSelection();
 //		playerName.setText("");
 		
+		Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
+		players.add(p);
+		Player p1 = new Player("James", "Miss Scarlett", Color.BLUE, 2);
+		players.add(p1);
+		
+		System.out.println("Go to main game screen");
+		//Launch UI
+		UI u = new UI();
+		System.out.println("UI created");
+		u.setVisible(true);
+		this.setVisible(false);//Hide the player setup screen
 
-		counter++;
-		if(counter >= numberOPlayers )
-		{
-			Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
-			players.add(p);
-			Player p1 = new Player("James", "Miss Scarlett", Color.BLUE, 2);
-			players.add(p1);
-			
-			System.out.println("Go to main game screen");
-			//Launch UI
-			new UI().setVisible(true);
-			this.setVisible(false);//Hide the player setup screen
-			return;
-
-		}
+//		counter++;
+//		if(counter >= numberOPlayers )
+//		{
+//			Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
+//			players.add(p);
+//			Player p1 = new Player("James", "Miss Scarlett", Color.BLUE, 2);
+//			players.add(p1);
+//			
+//			System.out.println("Go to main game screen");
+//			//Launch UI
+//			UI u = new UI();
+//			u.setVisible(true);
+//			this.setVisible(false);//Hide the player setup screen
+//			return;
+//
+//		}
 	}
 
 	private Color getColour() {

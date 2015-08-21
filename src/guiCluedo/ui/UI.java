@@ -1,14 +1,21 @@
 
 package guiCluedo.ui;
 
+import java.awt.*;
 import java.awt.Component;
+import java.awt.event.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.*;
+import javax.swing.GroupLayout;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.KeyStroke;
+import javax.swing.LayoutStyle;
+import javax.swing.border.*;
+import javax.swing.event.*;
 import guiCluedo.game.Board;
 import guiCluedo.game.Card;
 import guiCluedo.game.Character;
@@ -36,10 +43,14 @@ public class UI extends javax.swing.JFrame {
     public UI() {
         initComponents();
         b = new Board();
-        this.canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
+        System.out.println("Board created");
+        System.out.println("boardArea.getWidth() = " + boardArea.getWidth());
+        canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
+        System.out.println("Canvas created");
         boardArea.add(canvas);
+        System.out.println("canvas added");
         playGame(b, 0);
-        
+        System.out.println("Game played");
         obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("UP"), MOVE_UP);
         obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("RIGHT"), MOVE_RIGHT);
         obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("DOWN"), MOVE_DOWN);
@@ -66,6 +77,18 @@ public class UI extends javax.swing.JFrame {
                 }
         });
     }
+
+	private void accusButtonActionPerformed(ActionEvent e) {
+		// TODO add your code here
+	}
+
+	private void guessButtonActionPerformed(ActionEvent e) {
+		// TODO add your code here
+	}
+
+	private void endTurnActionPerformed(ActionEvent e) {
+		// TODO add your code here
+	}
 	
 	/**
 	 * Loop through all the players while the game hasn't been won. If a player
@@ -172,134 +195,181 @@ public class UI extends javax.swing.JFrame {
     /**
      * 
      */
-    private void initComponents() {
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+	// Generated using JFormDesigner Evaluation license - James Barfoote
+	private void initComponents() {
+		jMenuBar = new JMenuBar();
+		fileMenu = new JMenu();
+		newGame = new JMenuItem();
+		GameMenu = new JMenu();
+		jSeparator1 = new JSeparator();
+		rollDice = new JButton();
+		endTurn = new JButton();
+		guessButton = new JButton();
+		accusButton = new JButton();
+		boardArea = new JLayeredPane();
+		handArea = new JLayeredPane();
+		yourhandText = new JLabel();
+		youRolledText = new JLabel();
+		jFrame1 = new JFrame();
 
-        jFrame1 = new javax.swing.JFrame();
-        jSeparator1 = new javax.swing.JSeparator();
-        rollDice = new javax.swing.JButton();
-        diceRolled = new javax.swing.JLabel();
-        yourHandText = new javax.swing.JLabel();
-        jMenuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        newGame = new javax.swing.JMenuItem();
-        GameMenu = new javax.swing.JMenu();
-        boardArea = new javax.swing.JLayeredPane();
-        handArea = new javax.swing.JLayeredPane();
+		//======== this ========
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		Container contentPane = getContentPane();
 
-        jFrame1.setSize(400,400);
-        jFrame1.setAlwaysOnTop(true);
+		//======== jMenuBar ========
+		{
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+			//======== fileMenu ========
+			{
+				fileMenu.setText("File");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+				//---- newGame ----
+				newGame.setText("New Game");
+				fileMenu.add(newGame);
+			}
+			jMenuBar.add(fileMenu);
 
-        rollDice.setText("Roll Dice");
-        rollDice.setName("rollDice"); // NOI18N
-        rollDice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rollDiceActionPerformed(evt);
-            }
-        });
-        
-        handArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+			//======== GameMenu ========
+			{
+				GameMenu.setText("Game");
+				GameMenu.addMenuListener(new MenuListener() {
+					@Override
+					public void menuCanceled(MenuEvent e) {}
+					@Override
+					public void menuDeselected(MenuEvent e) {}
+					@Override
+					public void menuSelected(MenuEvent e) {
+						GameMenuMenuSelected(e);
+					}
+				});
+			}
+			jMenuBar.add(GameMenu);
+		}
+		setJMenuBar(jMenuBar);
 
-        javax.swing.GroupLayout handAreaLayout = new javax.swing.GroupLayout(handArea);
-        handArea.setLayout(handAreaLayout);
-        handAreaLayout.setHorizontalGroup(
-            handAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 281, Short.MAX_VALUE)
-        );
-        handAreaLayout.setVerticalGroup(
-            handAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+		//---- rollDice ----
+		rollDice.setText("Roll Dice");
+		rollDice.setName("rollDice");
+		rollDice.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rollDiceActionPerformed(e);
+			}
+		});
 
-        javax.swing.GroupLayout boardAreaLayout = new javax.swing.GroupLayout(boardArea);
-        boardArea.setLayout(boardAreaLayout);
-        boardAreaLayout.setHorizontalGroup(
-            boardAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        boardAreaLayout.setVerticalGroup(
-            boardAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 235, Short.MAX_VALUE)
-        );
-        
+		//---- endTurn ----
+		endTurn.setText("End Turn");
+		endTurn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				endTurnActionPerformed(e);
+			}
+		});
 
-        diceRolled.setText("You rolled: ");
-        yourHandText.setText("Your hand:");
+		//---- guessButton ----
+		guessButton.setText("Guess");
+		guessButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guessButtonActionPerformed(e);
+			}
+		});
 
-        fileMenu.setText("File");
+		//---- accusButton ----
+		accusButton.setText("Accusation");
+		accusButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				accusButtonActionPerformed(e);
+			}
+		});
 
-        newGame.setText("New Game");
-        fileMenu.add(newGame);
+		//======== handArea ========
+		{
+			handArea.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
+		}
 
-        jMenuBar.add(fileMenu);
+		//---- yourhandText ----
+		yourhandText.setText("Your Hand:");
 
-        GameMenu.setText("Game");
-        GameMenu.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                GameMenuMenuSelected(evt);
-            }
-        });
-        jMenuBar.add(GameMenu);
+		//---- youRolledText ----
+		youRolledText.setText("You rolled a ");
 
-        setJMenuBar(jMenuBar);
+		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
+		contentPane.setLayout(contentPaneLayout);
+		contentPaneLayout.setHorizontalGroup(
+			contentPaneLayout.createParallelGroup()
+				.addComponent(jSeparator1)
+				.addGroup(contentPaneLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(contentPaneLayout.createParallelGroup()
+						.addComponent(rollDice)
+						.addComponent(youRolledText))
+					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+						.addGroup(contentPaneLayout.createSequentialGroup()
+							.addComponent(accusButton)
+							.addGap(96, 96, 96))
+						.addGroup(contentPaneLayout.createSequentialGroup()
+							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+								.addComponent(guessButton, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+								.addComponent(endTurn, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(yourhandText)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)))
+					.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+					.addContainerGap())
+				.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+		);
+		contentPaneLayout.setVerticalGroup(
+			contentPaneLayout.createParallelGroup()
+				.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
+					.addGroup(contentPaneLayout.createParallelGroup()
+						.addGroup(contentPaneLayout.createSequentialGroup()
+							.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(rollDice)
+								.addComponent(endTurn))
+							.addGroup(contentPaneLayout.createParallelGroup()
+								.addGroup(contentPaneLayout.createSequentialGroup()
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+										.addComponent(guessButton)
+										.addComponent(yourhandText))
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+									.addComponent(accusButton))
+								.addGroup(contentPaneLayout.createSequentialGroup()
+									.addGap(18, 18, 18)
+									.addComponent(youRolledText))))
+						.addGroup(contentPaneLayout.createSequentialGroup()
+							.addGap(11, 11, 11)
+							.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+							.addGap(16, 16, 16)))
+					.addContainerGap())
+		);
+		pack();
+		setLocationRelativeTo(getOwner());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(rollDice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(diceRolled, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(73, 73, 73)
-                        .addComponent(yourHandText)))
-                .addGap(35, 35, 35)
-                .addComponent(handArea)
-                .addContainerGap())
-            .addComponent(boardArea)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(boardArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rollDice)
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(diceRolled)
-                            .addComponent(yourHandText))
-                        .addGap(18, 18, 18))
-                    .addComponent(handArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+		//======== jFrame1 ========
+		{
+			jFrame1.setAlwaysOnTop(true);
+			Container jFrame1ContentPane = jFrame1.getContentPane();
 
-        rollDice.getAccessibleContext().setAccessibleName("rollDice");
-
-        pack();
+			GroupLayout jFrame1ContentPaneLayout = new GroupLayout(jFrame1ContentPane);
+			jFrame1ContentPane.setLayout(jFrame1ContentPaneLayout);
+			jFrame1ContentPaneLayout.setHorizontalGroup(
+				jFrame1ContentPaneLayout.createParallelGroup()
+					.addGap(0, 400, Short.MAX_VALUE)
+			);
+			jFrame1ContentPaneLayout.setVerticalGroup(
+				jFrame1ContentPaneLayout.createParallelGroup()
+					.addGap(0, 300, Short.MAX_VALUE)
+			);
+		}
     }// </editor-fold>//GEN-END:initComponents
 
     private void rollDiceActionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,17 +387,17 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_GameMenuMenuSelected
     
 
-    private javax.swing.JMenu GameMenu;
-    private javax.swing.JLabel diceRolled;
-    private javax.swing.JMenu fileMenu;
-    private static javax.swing.JFrame jFrame1;
-    private javax.swing.JMenuBar jMenuBar;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel yourHandText;
-    private javax.swing.JMenuItem newGame;
-    private javax.swing.JButton rollDice; 
-    private javax.swing.JLayeredPane boardArea;
-    private javax.swing.JLayeredPane handArea;
+//    private javax.swing.JMenu GameMenu;
+//    private javax.swing.JLabel diceRolled;
+//    private javax.swing.JMenu fileMenu;
+//    private static javax.swing.JFrame jFrame1;
+//    private javax.swing.JMenuBar jMenuBar;
+//    private javax.swing.JSeparator jSeparator1;
+//    private javax.swing.JLabel yourHandText;
+//    private javax.swing.JMenuItem newGame;
+//    private javax.swing.JButton rollDice; 
+   // private javax.swing.JLayeredPane boardArea;
+    //private javax.swing.JLayeredPane handArea;
 
 
 	/**
@@ -413,4 +483,22 @@ public class UI extends javax.swing.JFrame {
 		}
 		return numPlayers;
 	}
+
+	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+	// Generated using JFormDesigner Evaluation license - James Barfoote
+	private JMenuBar jMenuBar;
+	private JMenu fileMenu;
+	private JMenuItem newGame;
+	private JMenu GameMenu;
+	private JSeparator jSeparator1;
+	private JButton rollDice;
+	private JButton endTurn;
+	private JButton guessButton;
+	private JButton accusButton;
+	private JLayeredPane boardArea;
+	private JLayeredPane handArea;
+	private JLabel yourhandText;
+	private JLabel youRolledText;
+	private JFrame jFrame1;
+	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

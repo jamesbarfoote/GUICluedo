@@ -1,0 +1,81 @@
+JFDML JFormDesigner: "5.2.2.0.199" Java: "1.8.0_51" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp jSeparator1::l:::x, seq l {space :::p, par l {comp rollDice:::p::p, comp youRolledText::l:p::p}, space u:::p, par l:::p {seq l {comp accusButton:::p::p, space :p:96:p}, seq l {par l:::p {comp guessButton::::85:x, comp endTurn::::85:x}, space :::x, comp yourhandText:::p::p, space u:::p}}, comp handArea::::115:x, space :::p}, comp boardArea::l::399:x}"
+			"$verticalGroup": "par l {seq t {comp boardArea::::126:x, space :p::p, comp jSeparator1:::p:10:p, par l {seq {space u:::p, par b {comp rollDice::b:p::p, comp endTurn::b:p::p}, par l {seq {space :::p, par b {comp guessButton::b:p::p, comp yourhandText::b:p::p}, space :::p, comp accusButton:::p::p}, seq l {space :p:18:p, comp youRolledText:::p::p}}}, seq {space :p:11:p, comp handArea::::71:x, space :16:16:p}}, space :p::p}}"
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 3
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "jSeparator1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "rollDice"
+				"text": "Roll Dice"
+				"name": "rollDice"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "rollDiceActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "endTurn"
+				"text": "End Turn"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "endTurnActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "guessButton"
+				"text": "Guess"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "guessButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "accusButton"
+				"text": "Accusation"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "accusButtonActionPerformed", true ) )
+			} )
+			add( new FormContainer( "javax.swing.JLayeredPane", new FormLayoutManager( class javax.swing.JLayeredPane ) ) {
+				name: "boardArea"
+			} )
+			add( new FormContainer( "javax.swing.JLayeredPane", new FormLayoutManager( class javax.swing.JLayeredPane ) ) {
+				name: "handArea"
+				"border": new javax.swing.border.SoftBevelBorder( 1, null, null, null, null )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "yourhandText"
+				"text": "Your Hand:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "youRolledText"
+				"text": "You rolled a "
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "jMenuBar"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "fileMenu"
+					"text": "File"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "newGame"
+						"text": "New Game"
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "GameMenu"
+					"text": "Game"
+					addEvent( new FormEvent( "javax.swing.event.MenuListener", "menuSelected", "GameMenuMenuSelected", true ) )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 415, 300 )
+			"location": new java.awt.Point( 0, 0 )
+		} )
+		add( new FormContainer( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {space :0:400:x}"
+			"$verticalGroup": "par l {space :0:300:x}"
+		} ) {
+			name: "jFrame1"
+			"alwaysOnTop": true
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 310 )
+		} )
+	}
+}
