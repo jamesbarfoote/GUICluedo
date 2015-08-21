@@ -79,15 +79,19 @@ public class UI extends javax.swing.JFrame {
     }
 
 	private void accusButtonActionPerformed(ActionEvent e) {
-		// TODO add your code here
+		guessDialoge.setVisible(true);
 	}
 
 	private void guessButtonActionPerformed(ActionEvent e) {
-		// TODO add your code here
+		guessDialoge.setVisible(true);
 	}
 
 	private void endTurnActionPerformed(ActionEvent e) {
 		// TODO add your code here
+	}
+
+	private void guessOKButtonActionPerformed(ActionEvent e) {
+		guessDialoge.setVisible(false);
 	}
 	
 	/**
@@ -211,10 +215,15 @@ public class UI extends javax.swing.JFrame {
 		handArea = new JLayeredPane();
 		yourhandText = new JLabel();
 		youRolledText = new JLabel();
-		jFrame1 = new JFrame();
+		guessDialoge = new Dialog(this);
+		guessOKButton = new JButton();
+		guessWeapon = new JComboBox();
+		guessCharacter = new JComboBox();
+		guessRoom = new JComboBox();
 
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setTitle("Cluedo");
 		Container contentPane = getContentPane();
 
 		//======== jMenuBar ========
@@ -318,14 +327,14 @@ public class UI extends javax.swing.JFrame {
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(yourhandText)
 							.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)))
-					.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+					.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
 					.addContainerGap())
-				.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+				.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
 		);
 		contentPaneLayout.setVerticalGroup(
 			contentPaneLayout.createParallelGroup()
 				.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
 					.addGroup(contentPaneLayout.createParallelGroup()
@@ -347,28 +356,59 @@ public class UI extends javax.swing.JFrame {
 									.addComponent(youRolledText))))
 						.addGroup(contentPaneLayout.createSequentialGroup()
 							.addGap(11, 11, 11)
-							.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+							.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
 							.addGap(16, 16, 16)))
 					.addContainerGap())
 		);
 		pack();
 		setLocationRelativeTo(getOwner());
 
-		//======== jFrame1 ========
+		//======== guessDialoge ========
 		{
-			jFrame1.setAlwaysOnTop(true);
-			Container jFrame1ContentPane = jFrame1.getContentPane();
+			guessDialoge.setTitle("Guess / Accusation");
 
-			GroupLayout jFrame1ContentPaneLayout = new GroupLayout(jFrame1ContentPane);
-			jFrame1ContentPane.setLayout(jFrame1ContentPaneLayout);
-			jFrame1ContentPaneLayout.setHorizontalGroup(
-				jFrame1ContentPaneLayout.createParallelGroup()
-					.addGap(0, 400, Short.MAX_VALUE)
+			//---- guessOKButton ----
+			guessOKButton.setText("OK");
+			guessOKButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					guessOKButtonActionPerformed(e);
+				}
+			});
+
+			GroupLayout guessDialogeLayout = new GroupLayout(guessDialoge);
+			guessDialoge.setLayout(guessDialogeLayout);
+			guessDialogeLayout.setHorizontalGroup(
+				guessDialogeLayout.createParallelGroup()
+					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+						.addGap(27, 27, 27)
+						.addGroup(guessDialogeLayout.createParallelGroup()
+							.addGroup(guessDialogeLayout.createSequentialGroup()
+								.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+								.addGap(18, 18, 18)
+								.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+								.addContainerGap())
+							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+								.addGap(15, 15, 15)
+								.addComponent(guessOKButton, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+								.addGap(146, 146, 146))))
 			);
-			jFrame1ContentPaneLayout.setVerticalGroup(
-				jFrame1ContentPaneLayout.createParallelGroup()
-					.addGap(0, 300, Short.MAX_VALUE)
+			guessDialogeLayout.setVerticalGroup(
+				guessDialogeLayout.createParallelGroup()
+					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+						.addGap(42, 42, 42)
+						.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+							.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+							.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+						.addGap(57, 57, 57)
+						.addComponent(guessOKButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addContainerGap())
 			);
+			guessDialoge.pack();
+			guessDialoge.setLocationRelativeTo(guessDialoge.getOwner());
 		}
     }// </editor-fold>//GEN-END:initComponents
 
@@ -376,6 +416,7 @@ public class UI extends javax.swing.JFrame {
     	int roll = ((int) Math.ceil(Math.random()*11)) + 1; // generate a random number between 2 and 12 inclusive
 		currentPlayer.setRoll(roll);
 		System.out.println(roll);
+		youRolledText.setText("You rolled a " + roll);
     }
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -499,6 +540,10 @@ public class UI extends javax.swing.JFrame {
 	private JLayeredPane handArea;
 	private JLabel yourhandText;
 	private JLabel youRolledText;
-	private JFrame jFrame1;
+	private Dialog guessDialoge;
+	private JButton guessOKButton;
+	private JComboBox guessWeapon;
+	private JComboBox guessCharacter;
+	private JComboBox guessRoom;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

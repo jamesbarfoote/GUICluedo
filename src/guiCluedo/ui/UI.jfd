@@ -4,11 +4,12 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp jSeparator1::l:::x, seq l {space :::p, par l {comp rollDice:::p::p, comp youRolledText::l:p::p}, space u:::p, par l:::p {seq l {comp accusButton:::p::p, space :p:96:p}, seq l {par l:::p {comp guessButton::::85:x, comp endTurn::::85:x}, space :::x, comp yourhandText:::p::p, space u:::p}}, comp handArea::::115:x, space :::p}, comp boardArea::l::399:x}"
-			"$verticalGroup": "par l {seq t {comp boardArea::::126:x, space :p::p, comp jSeparator1:::p:10:p, par l {seq {space u:::p, par b {comp rollDice::b:p::p, comp endTurn::b:p::p}, par l {seq {space :::p, par b {comp guessButton::b:p::p, comp yourhandText::b:p::p}, space :::p, comp accusButton:::p::p}, seq l {space :p:18:p, comp youRolledText:::p::p}}}, seq {space :p:11:p, comp handArea::::71:x, space :16:16:p}}, space :p::p}}"
+			"$horizontalGroup": "par l {comp jSeparator1::l:::x, seq l {space :::p, par l {comp rollDice:::p::p, comp youRolledText::l:p::p}, space u:::p, par l:::p {seq l {comp accusButton:::p::p, space :p:96:p}, seq l {par l:::p {comp guessButton::::85:x, comp endTurn::::85:x}, space :::x, comp yourhandText:::p::p, space u:::p}}, comp handArea::::160:x, space :::p}, comp boardArea::l::444:x}"
+			"$verticalGroup": "par l {seq t {comp boardArea::::148:x, space :p::p, comp jSeparator1:::p:10:p, par l {seq {space u:::p, par b {comp rollDice::b:p::p, comp endTurn::b:p::p}, par l {seq {space :::p, par b {comp guessButton::b:p::p, comp yourhandText::b:p::p}, space :::p, comp accusButton:::p::p}, seq l {space :p:18:p, comp youRolledText:::p::p}}}, seq {space :p:11:p, comp handArea::::94:x, space :16:16:p}}, space :p::p}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
+			"title": "Cluedo"
 			add( new FormComponent( "javax.swing.JSeparator" ) {
 				name: "jSeparator1"
 			} )
@@ -65,17 +66,32 @@ new FormModel {
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 415, 300 )
+			"size": new java.awt.Dimension( 460, 345 )
 			"location": new java.awt.Point( 0, 0 )
 		} )
-		add( new FormContainer( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {space :0:400:x}"
-			"$verticalGroup": "par l {space :0:300:x}"
+		add( new FormWindow( "java.awt.Dialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space :p::p, comp guessWeapon::::113:x, space :p:27:p, par l {seq l {comp guessCharacter::::126:x, space s:::p, comp guessRoom::::125:x, space :p::p}, seq t {space :15:15:p, comp guessOKButton::::118:x, space :p:146:p}}}}"
+			"$verticalGroup": "par l {seq t {space :p:42:p, par b {comp guessRoom::b::28:x, comp guessWeapon::b::28:x, comp guessCharacter::b::28:x}, space :p:57:p, comp guessOKButton:::::x, space :p::p}}"
 		} ) {
-			name: "jFrame1"
-			"alwaysOnTop": true
+			name: "guessDialoge"
+			"title": "Guess / Accusation"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "guessOKButton"
+				"text": "OK"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "guessOKButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "guessWeapon"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "guessCharacter"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "guessRoom"
+			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 310 )
+			"location": new java.awt.Point( 485, 115 )
+			"size": new java.awt.Dimension( 445, 200 )
 		} )
 	}
 }
