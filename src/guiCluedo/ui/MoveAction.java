@@ -37,13 +37,13 @@ class MoveAction extends AbstractAction {
     			}
     		}
     		else if (direction.equals("Right")){
-    			if(location.getX() < 22){
+    			if(location.getX() < 21){
     				location.setLocation(location.getX()+1, location.getY());
         			player.setLocation(location);
     			}
     		}
     		else if (direction.equals("Down")){
-    			if(location.getY() < 20){
+    			if(location.getY() < 19){
     				player.setLocation(location);
     				location.setLocation(location.getX(), location.getY()+1);
     			}

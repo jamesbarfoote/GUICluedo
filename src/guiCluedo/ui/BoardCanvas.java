@@ -82,11 +82,11 @@ public class BoardCanvas extends Canvas{
         	for(int j = 0; j < board[i].length; j++){
         		if(board[i][j].equals("R")){
         			g.setColor(Color.GRAY);
-        			g.fillRect(j*(width/23), i*(height/21), width/23, height/21);
+        			g.fillRect(j*(width/22), i*(height/20), width/22, height/20);
         		}
         		else if(board[i][j].equals("C")){
         			g.setColor(Color.RED);
-        			g.fillRect(j*(width/23), i*(height/21), width/23, height/21);
+        			g.fillRect(j*(width/22), i*(height/20), width/22, height/20);
         		}
         	}
         }
@@ -95,7 +95,7 @@ public class BoardCanvas extends Canvas{
 	private void drawIcons(Graphics2D g){
 		for(Player p : players){
 			g.setColor(p.getColor());
-			g.fillOval((int) p.getLocation().getX()*(width/23), (int) p.getLocation().getY()*(height/21), width/23, height/21);
+			g.fillOval((int) p.getLocation().getX()*(width/22), (int) p.getLocation().getY()*(height/20), width/22, height/20);
 		}
 	}
 	

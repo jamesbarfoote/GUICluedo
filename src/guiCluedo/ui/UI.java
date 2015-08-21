@@ -231,7 +231,7 @@ public class UI extends javax.swing.JFrame {
         );
         boardAreaLayout.setVerticalGroup(
             boardAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 215, Short.MAX_VALUE)
+            .addGap(0, 235, Short.MAX_VALUE)
         );
         
 
