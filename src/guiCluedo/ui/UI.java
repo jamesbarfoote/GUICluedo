@@ -305,6 +305,7 @@ public class UI extends javax.swing.JFrame {
     private void rollDiceActionPerformed(java.awt.event.ActionEvent evt) {
     	int roll = ((int) Math.ceil(Math.random()*11)) + 1; // generate a random number between 2 and 12 inclusive
 		currentPlayer.setRoll(roll);
+		System.out.println(roll);
     }
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
