@@ -1,14 +1,11 @@
 
 package guiCluedo.ui;
 
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.KeyStroke;
 import guiCluedo.game.Board;
 import guiCluedo.game.Card;
 import guiCluedo.game.Character;
@@ -16,13 +13,19 @@ import guiCluedo.game.Player;
 import guiCluedo.game.Room;
 import guiCluedo.game.Weapon;
 
-public class UI extends javax.swing.JFrame implements KeyListener{
+public class UI extends javax.swing.JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	private static boolean finished = false;
+	private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 	private Player currentPlayer;
 	private Board b;
 	private BoardCanvas canvas;
+	private static final String MOVE_UP = "move up";
+	private static final String MOVE_RIGHT = "move right";
+	private static final String MOVE_DOWN = "move down";
+	private static final String MOVE_LEFT = "move left";
+	
+	static JLabel obj1 = new JLabel();
 
     /**
      * Creates new form UI
@@ -32,9 +35,18 @@ public class UI extends javax.swing.JFrame implements KeyListener{
         b = new Board();
         this.canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
         boardArea.add(canvas);
-        this.addKeyListener(this);
-        setFocusable(true);
         playGame(b, 0);
+        
+        obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("UP"), MOVE_UP);
+        obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("RIGHT"), MOVE_RIGHT);
+        obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("DOWN"), MOVE_DOWN);
+        obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("LEFT"), MOVE_LEFT);
+        
+        obj1.getActionMap().put(MOVE_UP, new MoveAction("Up", currentPlayer, this.canvas));
+        obj1.getActionMap().put(MOVE_RIGHT, new MoveAction("Right", currentPlayer, this.canvas));
+        obj1.getActionMap().put(MOVE_DOWN, new MoveAction("Down", currentPlayer, this.canvas));
+        obj1.getActionMap().put(MOVE_LEFT, new MoveAction("Left", currentPlayer, this.canvas));
+        add(obj1);
         
 //        this.addComponentListener(new ComponentAdapter() 
 //        {  
@@ -47,41 +59,6 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 //                }
 //        });
     }
-    
-    @Override
-	public void keyPressed(KeyEvent e) {
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		Point location = currentPlayer.getLocation();
-		if (e.getKeyCode() == KeyEvent.VK_LEFT){
-			location.setLocation(location.getX()-1, location.getY());
-			currentPlayer.setLocation(location);
-			this.canvas.repaint();
-		}
-		else if (e.getKeyCode() == KeyEvent.VK_UP){
-			location.setLocation(location.getX(), location.getY()-1);
-			currentPlayer.setLocation(location);
-			this.canvas.repaint();
-		}
-		else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-			location.setLocation(location.getX()+1, location.getY());
-			currentPlayer.setLocation(location);
-			this.canvas.repaint();
-		}
-		else if (e.getKeyCode() == KeyEvent.VK_DOWN){
-			location.setLocation(location.getX(), location.getY()+1);
-			currentPlayer.setLocation(location);
-			this.canvas.repaint();
-		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		
-	}
 	
 	/**
 	 * Loop through all the players while the game hasn't been won. If a player
