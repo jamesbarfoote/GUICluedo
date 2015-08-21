@@ -23,25 +23,30 @@ class MoveAction extends AbstractAction {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
-            // Same as the move method in the question code.
-            // Player can be detected by e.getSource() instead and call its own move method.
         	Point location = player.getLocation();
     		if (direction.equals("Left")){
-    			location.setLocation(location.getX()-1, location.getY());
-    			player.setLocation(location);
+    			if(location.getX() > 0){
+    				location.setLocation(location.getX()-1, location.getY());
+        			player.setLocation(location);
+    			}
     		}
     		else if (direction.equals("Up")){
-    			location.setLocation(location.getX(), location.getY()-1);
-    			player.setLocation(location);
+    			if(location.getY() > 0){
+    				location.setLocation(location.getX(), location.getY()-1);
+        			player.setLocation(location);
+    			}
     		}
     		else if (direction.equals("Right")){
-    			location.setLocation(location.getX()+1, location.getY());
-    			player.setLocation(location);
+    			if(location.getX() < 22){
+    				location.setLocation(location.getX()+1, location.getY());
+        			player.setLocation(location);
+    			}
     		}
     		else if (direction.equals("Down")){
-    			location.setLocation(location.getX(), location.getY()+1);
-    			player.setLocation(location);
+    			if(location.getY() < 20){
+    				player.setLocation(location);
+    				location.setLocation(location.getX(), location.getY()+1);
+    			}
     		}
     		this.canvas.repaint();
     		

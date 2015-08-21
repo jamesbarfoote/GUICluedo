@@ -1,6 +1,9 @@
 
 package guiCluedo.ui;
 
+import java.awt.Component;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JComponent;
@@ -48,16 +51,20 @@ public class UI extends javax.swing.JFrame {
         obj1.getActionMap().put(MOVE_LEFT, new MoveAction("Left", currentPlayer, this.canvas));
         add(obj1);
         
-//        this.addComponentListener(new ComponentAdapter() 
-//        {  
-//                public void componentResized(ComponentEvent evt) {
-//                    Component c = (Component)evt.getSource();
-//                    System.out.println("Redrawn");
-//                    System.out.println("Width = " + boardArea.getWidth());
-//                    System.out.println("Height = " + boardArea.getHeight());
-//                    BoardCanvas canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
-//                }
-//        });
+        this.addComponentListener(new ComponentAdapter() 
+        {  
+                public void componentResized(ComponentEvent evt) {
+                    Component c = (Component)evt.getSource();
+                    System.out.println("Redrawn");
+                    int height = (int) (boardArea.getWidth()*0.44);
+                    boardArea.setSize(boardArea.getWidth(), height);
+                    System.out.println("Width = " + boardArea.getWidth());
+                    System.out.println("Height = " + boardArea.getHeight());
+                    canvas.setWidth(boardArea.getWidth());
+                    canvas.setHeight(boardArea.getHeight());
+                    canvas.repaint();
+                }
+        });
     }
 	
 	/**
@@ -224,7 +231,7 @@ public class UI extends javax.swing.JFrame {
         );
         boardAreaLayout.setVerticalGroup(
             boardAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 215, Short.MAX_VALUE)
         );
         
 

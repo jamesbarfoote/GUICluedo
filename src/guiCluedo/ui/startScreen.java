@@ -421,16 +421,16 @@ public class startScreen extends javax.swing.JFrame {
 //		colourRadios.clearSelection();
 //		characterRadios.clearSelection();
 //		playerName.setText("");
-
-		Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
-		players.add(p);
-		Player p1 = new Player("James", "Miss Scarlett", Color.BLUE, 2);
-		players.add(p1);
 		
 
 		counter++;
 		if(counter >= numberOPlayers )
 		{
+			Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
+			players.add(p);
+			Player p1 = new Player("James", "Miss Scarlett", Color.BLUE, 2);
+			players.add(p1);
+			
 			System.out.println("Go to main game screen");
 			//Launch UI
 			new UI().setVisible(true);

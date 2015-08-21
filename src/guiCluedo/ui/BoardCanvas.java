@@ -26,22 +26,16 @@ public class BoardCanvas extends Canvas{
 		this.width = width;
 		this.height = height;
 		setBackground (Color.YELLOW);
-        setSize(width, height);
+        setSize(width-13, height-17);
         readFile();
-        for(int i = 0; i < board.length; i++){
-        	for(int j = 0; j < board[i].length; j++){
-        		System.out.printf(board[i][j]);
-        	}
-        	System.out.println();
-        }
 	}
 	
 	public void paint(Graphics g) {
 		Graphics2D g2;
         g2 = (Graphics2D) g;
+        setSize(width-13, height-17);
         drawBoard(g2);
         drawIcons(g2);
-        
 	}
 
 	@SuppressWarnings("resource")
@@ -101,10 +95,15 @@ public class BoardCanvas extends Canvas{
 	private void drawIcons(Graphics2D g){
 		for(Player p : players){
 			g.setColor(p.getColor());
-			System.out.println(p.getLocation().getX());
-			System.out.println(p.getLocation().getY());
-
 			g.fillOval((int) p.getLocation().getX()*(width/23), (int) p.getLocation().getY()*(height/21), width/23, height/21);
 		}
+	}
+	
+	public void setWidth(int width){
+		this.width = width;
+	}
+	
+	public void setHeight(int height){
+		this.height = height;
 	}
 }
