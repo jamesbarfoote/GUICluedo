@@ -70,8 +70,8 @@ new FormModel {
 			"location": new java.awt.Point( 0, 0 )
 		} )
 		add( new FormWindow( "java.awt.Dialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq t {space :p::p, comp guessWeapon::::113:x, space :p:27:p, par l {seq l {comp guessCharacter::::126:x, space s:::p, comp guessRoom::::125:x, space :p::p}, seq t {space :15:15:p, comp guessOKButton::::118:x, space :p:146:p}}}}"
-			"$verticalGroup": "par l {seq t {space :p:42:p, par b {comp guessRoom::b::28:x, comp guessWeapon::b::28:x, comp guessCharacter::b::28:x}, space :p:57:p, comp guessOKButton:::::x, space :p::p}}"
+			"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp guessWeapon::::113:x, space :p:27:p, comp guessCharacter::::126:x, space s:::p, comp guessRoom::::125:x, space :::p}, seq t {space :0:60:x, par l {seq t {comp guessOKButton:::p:145:p, space :p:143:p}, seq t {comp label2:::p::p, space :p:43:p}}}}}}"
+			"$verticalGroup": "par l {seq t {space :p:12:p, comp label2:::p::p, space s:::p, par b {comp guessRoom::b::28:x, comp guessWeapon::b::28:x, comp guessCharacter::b::28:x}, space :p:34:p, comp guessOKButton:::p:38:p, space :::p}}"
 		} ) {
 			name: "guessDialoge"
 			"title": "Guess / Accusation"
@@ -88,6 +88,10 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "guessRoom"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Make a Guess by selecting one from each of the drop down boxes"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 485, 115 )

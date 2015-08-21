@@ -220,6 +220,7 @@ public class UI extends javax.swing.JFrame {
 		guessWeapon = new JComboBox();
 		guessCharacter = new JComboBox();
 		guessRoom = new JComboBox();
+		label2 = new JLabel();
 
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -376,35 +377,42 @@ public class UI extends javax.swing.JFrame {
 				}
 			});
 
+			//---- label2 ----
+			label2.setText("Make a Guess by selecting one from each of the drop down boxes");
+
 			GroupLayout guessDialogeLayout = new GroupLayout(guessDialoge);
 			guessDialoge.setLayout(guessDialogeLayout);
 			guessDialogeLayout.setHorizontalGroup(
 				guessDialogeLayout.createParallelGroup()
-					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+					.addGroup(guessDialogeLayout.createSequentialGroup()
+						.addContainerGap(141, Short.MAX_VALUE)
+						.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+						.addGap(143, 143, 143))
+					.addGroup(guessDialogeLayout.createSequentialGroup()
 						.addContainerGap()
 						.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
 						.addGap(27, 27, 27)
-						.addGroup(guessDialogeLayout.createParallelGroup()
-							.addGroup(guessDialogeLayout.createSequentialGroup()
-								.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-								.addGap(18, 18, 18)
-								.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-								.addContainerGap())
-							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-								.addGap(15, 15, 15)
-								.addComponent(guessOKButton, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-								.addGap(146, 146, 146))))
+						.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+						.addGap(18, 18, 18)
+						.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+						.addContainerGap())
+					.addGroup(guessDialogeLayout.createSequentialGroup()
+						.addGap(52, 52, 52)
+						.addComponent(label2)
+						.addContainerGap(61, Short.MAX_VALUE))
 			);
 			guessDialogeLayout.setVerticalGroup(
 				guessDialogeLayout.createParallelGroup()
 					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-						.addGap(42, 42, 42)
+						.addGap(12, 12, 12)
+						.addComponent(label2)
+						.addGap(18, 18, 18)
 						.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 							.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
 							.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
 							.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-						.addGap(57, 57, 57)
-						.addComponent(guessOKButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGap(34, 34, 34)
+						.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap())
 			);
 			guessDialoge.pack();
@@ -416,7 +424,7 @@ public class UI extends javax.swing.JFrame {
     	int roll = ((int) Math.ceil(Math.random()*11)) + 1; // generate a random number between 2 and 12 inclusive
 		currentPlayer.setRoll(roll);
 		System.out.println(roll);
-		youRolledText.setText("You rolled a " + roll);
+		youRolledText.setText("You rolled " + roll);
     }
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -545,5 +553,6 @@ public class UI extends javax.swing.JFrame {
 	private JComboBox guessWeapon;
 	private JComboBox guessCharacter;
 	private JComboBox guessRoom;
+	private JLabel label2;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }
