@@ -320,6 +320,7 @@ public class UI extends javax.swing.JFrame {
 		handArea = new JLayeredPane();
 		yourhandText = new JLabel();
 		youRolledText = new JLabel();
+		label6 = new JLabel();
 		guessDialoge = new Dialog(this);
 		guessOKButton = new JButton();
 		guessWeapon = new JComboBox();
@@ -443,60 +444,60 @@ public class UI extends javax.swing.JFrame {
 		//---- youRolledText ----
 		youRolledText.setText("You rolled a ");
 
+		//---- label6 ----
+		label6.setText("You have 0 moves left");
+
 		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
 		contentPane.setLayout(contentPaneLayout);
 		contentPaneLayout.setHorizontalGroup(
 			contentPaneLayout.createParallelGroup()
-				.addComponent(jSeparator1)
 				.addGroup(contentPaneLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(contentPaneLayout.createParallelGroup()
 						.addComponent(rollDice)
-						.addComponent(youRolledText))
+						.addComponent(youRolledText)
+						.addComponent(label6))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addComponent(accusButton)
-							.addGap(96, 96, 96))
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-								.addComponent(guessButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(endTurn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(yourhandText)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)))
+						.addComponent(accusButton)
+						.addComponent(guessButton)
+						.addComponent(endTurn, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
+					.addGap(32, 32, 32)
+					.addComponent(yourhandText)
+					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 					.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
 					.addContainerGap())
+				.addComponent(jSeparator1, GroupLayout.Alignment.TRAILING)
 				.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
 		);
 		contentPaneLayout.setVerticalGroup(
 			contentPaneLayout.createParallelGroup()
 				.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
-					.addGroup(contentPaneLayout.createParallelGroup()
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+							.addComponent(handArea, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+							.addGap(16, 16, 16))
+						.addGroup(contentPaneLayout.createSequentialGroup()
 							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(rollDice)
 								.addComponent(endTurn))
 							.addGroup(contentPaneLayout.createParallelGroup()
+								.addGroup(contentPaneLayout.createSequentialGroup()
+									.addGap(18, 18, 18)
+									.addComponent(youRolledText)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(label6))
 								.addGroup(contentPaneLayout.createSequentialGroup()
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 									.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(guessButton)
 										.addComponent(yourhandText))
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(accusButton))
-								.addGroup(contentPaneLayout.createSequentialGroup()
-									.addGap(18, 18, 18)
-									.addComponent(youRolledText))))
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addGap(11, 11, 11)
-							.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-							.addGap(16, 16, 16)))
-					.addContainerGap())
+									.addComponent(accusButton))))))
 		);
 		pack();
 		setLocationRelativeTo(getOwner());
@@ -760,6 +761,7 @@ public class UI extends javax.swing.JFrame {
 	private JLayeredPane handArea;
 	private JLabel yourhandText;
 	private JLabel youRolledText;
+	private JLabel label6;
 	private Dialog guessDialoge;
 	private JButton guessOKButton;
 	private JComboBox guessWeapon;
