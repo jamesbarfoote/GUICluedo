@@ -86,7 +86,11 @@ public class UI extends javax.swing.JFrame {
 		obj1.getActionMap().put(MOVE_DOWN, new MoveAction("Down", currentPlayer, this.canvas, b));
 		obj1.getActionMap().put(MOVE_LEFT, new MoveAction("Left", currentPlayer, this.canvas, b));
 		add(obj1);
-
+	}
+	
+	void keyPressed(KeyEvent e)
+	{
+		movesLeftLabel.setText("You have " + currentPlayer.getRoll() + " moves left");
 	}
 
 	private void accusButtonActionPerformed(ActionEvent e) {
@@ -320,7 +324,7 @@ public class UI extends javax.swing.JFrame {
 		handArea = new JLayeredPane();
 		yourhandText = new JLabel();
 		youRolledText = new JLabel();
-		label6 = new JLabel();
+		movesLeftLabel = new JLabel();
 		guessDialoge = new Dialog(this);
 		guessOKButton = new JButton();
 		guessWeapon = new JComboBox();
@@ -334,7 +338,7 @@ public class UI extends javax.swing.JFrame {
 		label5 = new JLabel();
 		errorOK = new JButton();
 		errorText2 = new JLabel();
-
+		
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
 		guessWeapon.addItem("Pipe");
@@ -359,7 +363,7 @@ public class UI extends javax.swing.JFrame {
 		guessRoom.addItem("Lounge");
 		guessRoom.addItem("Study");
 
-		
+
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Cluedo");
@@ -444,8 +448,8 @@ public class UI extends javax.swing.JFrame {
 		//---- youRolledText ----
 		youRolledText.setText("You rolled a ");
 
-		//---- label6 ----
-		label6.setText("You have 0 moves left");
+		//---- movesLeftLabel ----
+		movesLeftLabel.setText("You have 0 moves left");
 
 		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
 		contentPane.setLayout(contentPaneLayout);
@@ -456,7 +460,7 @@ public class UI extends javax.swing.JFrame {
 					.addGroup(contentPaneLayout.createParallelGroup()
 						.addComponent(rollDice)
 						.addComponent(youRolledText)
-						.addComponent(label6))
+						.addComponent(movesLeftLabel))
 					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 						.addComponent(accusButton)
@@ -465,7 +469,7 @@ public class UI extends javax.swing.JFrame {
 					.addGap(32, 32, 32)
 					.addComponent(yourhandText)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-					.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+					.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
 					.addContainerGap())
 				.addComponent(jSeparator1, GroupLayout.Alignment.TRAILING)
 				.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
@@ -490,7 +494,7 @@ public class UI extends javax.swing.JFrame {
 									.addGap(18, 18, 18)
 									.addComponent(youRolledText)
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(label6))
+									.addComponent(movesLeftLabel))
 								.addGroup(contentPaneLayout.createSequentialGroup()
 									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 									.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -761,7 +765,7 @@ public class UI extends javax.swing.JFrame {
 	private JLayeredPane handArea;
 	private JLabel yourhandText;
 	private JLabel youRolledText;
-	private JLabel label6;
+	private JLabel movesLeftLabel;
 	private Dialog guessDialoge;
 	private JButton guessOKButton;
 	private JComboBox guessWeapon;
