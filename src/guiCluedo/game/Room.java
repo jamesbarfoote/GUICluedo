@@ -7,9 +7,8 @@ public class Room extends Card{
 	private Location location;
 	private Polygon boundingBox;
 	
-	public Room(String name, Location location, Polygon polygon){
+	public Room(String name, Polygon polygon){
 		this.name = name;
-		this.location = location;
 		this.boundingBox = polygon;
 	}
 	

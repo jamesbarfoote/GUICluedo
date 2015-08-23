@@ -22,7 +22,7 @@ public class Board {
 	private ArrayList<Point> doors = new ArrayList<Point>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 	
-	private String[][] board = new String[21][23];
+	private String[][] board = new String[22][23];
 
 	public Board() {
 		createCards();
@@ -44,58 +44,58 @@ public class Board {
 		}
 		for(String room : roomNames){
 			if(room.equals("Kitchen")){
-				int[] xCords = {0, 3, 3, 4, 4, 3, 3, 0};
-				int[] yCords = {0, 0, 1, 1, 2, 2, 3, 3};
+				int[] xCords = {0, 4, 4, 5, 5, 4, 4, 0};
+				int[] yCords = {0, 0, 1, 1, 4, 4, 5, 5};
 				Polygon p = new Polygon(xCords, yCords, 8);
-				rooms.add(new Room(room, new Location(6,4), p));
+				rooms.add(new Room(room, p));
 			}
 			if(room.equals("Ballroom")){
-				int[] xCords = {7, 11, 11, 7};
+				int[] xCords = {7, 12, 12, 7};
 				int[] yCords = {0, 0, 5, 5};
 				Polygon p = new Polygon(xCords, yCords, 4);
-				rooms.add(new Room(room, new Location(13,4), p));
+				rooms.add(new Room(room, p));
 			}
 			if(room.equals("Conservatory")){
-				int[] xCords = {13, 17, 17, 16, 16, 14, 14, 13};
+				int[] xCords = {13, 18, 18, 17, 17, 14, 14, 13};
 				int[] yCords = {0, 0, 5, 5, 6, 6, 5, 5};
 				Polygon p = new Polygon(xCords, yCords, 8);
-				rooms.add(new Room(room, new Location(20,4), p));
+				rooms.add(new Room(room, p));
 			}
 			if(room.equals("Billiard Room")){
-				int[] xCords = {20, 22, 22, 20};
+				int[] xCords = {20, 23, 23, 20};
 				int[] yCords = {0, 0, 5, 5};
 				Polygon p = new Polygon(xCords, yCords, 4);
-				rooms.add(new Room(room, new Location(20,9), p));
+				rooms.add(new Room(room, p));
 			}
 			if(room.equals("Library")){
-				int[] xCords = {17, 22, 22, 17};
-				int[] yCords = {7, 7, 12, 12};
+				int[] xCords = {17, 23, 23, 17};
+				int[] yCords = {7, 7, 13, 13};
 				Polygon p = new Polygon(xCords, yCords, 4);
-				rooms.add(new Room(room, new Location(20,14), p));
+				rooms.add(new Room(room, p));
 			}
 			if(room.equals("Study")){
-				int[] xCords = {18, 22, 22, 18};
-				int[] yCords = {15, 15, 21, 21};
+				int[] xCords = {18, 23, 23, 18};
+				int[] yCords = {15, 15, 22, 22};
 				Polygon p = new Polygon(xCords, yCords, 4);
-				rooms.add(new Room(room, new Location(20,19), p));
+				rooms.add(new Room(room, p));
 			}
 			if(room.equals("Hall")){
-				int[] xCords = {9, 14, 14, 8, 8, 9};
-				int[] yCords = {15, 15, 21, 21, 18, 18};
+				int[] xCords = {9, 15, 15, 8, 8, 9};
+				int[] yCords = {14, 14, 22, 22, 17, 17};
 				Polygon p = new Polygon(xCords, yCords, 6);
-				rooms.add(new Room(room, new Location(13,19), p));
+				rooms.add(new Room(room, p));
 			}
 			if(room.equals("Lounge")){
-				int[] xCords = {0, 5, 5, 0};
-				int[] yCords = {17, 17, 22, 22};
+				int[] xCords = {0, 6, 6, 0};
+				int[] yCords = {16, 16, 22, 22};
 				Polygon p = new Polygon(xCords, yCords, 4);
-				rooms.add(new Room(room, new Location(6,19), p));
+				rooms.add(new Room(room, p));
 			}
 			if(room.equals("Dining Room")){
-				int[] xCords = {0, 1, 1, 6, 6, 1, 1, 0};
-				int[] yCords = {10, 10, 8, 8, 14, 14, 12, 12};
+				int[] xCords = {0, 1, 1, 7, 7, 1, 1, 0};
+				int[] yCords = {9, 9, 7, 7, 14, 14, 12, 12};
 				Polygon p = new Polygon(xCords, yCords, 8);
-				rooms.add(new Room(room, new Location(6,11), p));
+				rooms.add(new Room(room, p));
 			}
 		}
 		//Add to newly created cards to allCards, allCards temporarily holds all the cards not included in the answer

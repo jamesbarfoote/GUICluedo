@@ -53,7 +53,7 @@ class MoveAction extends AbstractAction {
     			}
     		}
     		else if (direction.equals("Right")){
-    			if(location.getX() < 21){
+    			if(location.getX() < 22){
     				Point newLocation = new Point((int) location.getX()+1, (int) location.getY());
     				if(isValidMove(newLocation)){
     					location.setLocation(newLocation);
@@ -63,7 +63,7 @@ class MoveAction extends AbstractAction {
     			}
     		}
     		else if (direction.equals("Down")){
-    			if(location.getY() < 19){
+    			if(location.getY() < 21){
     				Point newLocation = new Point((int) location.getX(), (int) location.getY()+1);
     				if(isValidMove(newLocation)){
     					location.setLocation(newLocation);
