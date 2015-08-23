@@ -53,16 +53,8 @@ public class UI extends javax.swing.JFrame {
 		System.out.println("canvas added");
 		playGame(b, 0);
 		System.out.println("Game played");
-		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("UP"), MOVE_UP);
-		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("RIGHT"), MOVE_RIGHT);
-		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("DOWN"), MOVE_DOWN);
-		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("LEFT"), MOVE_LEFT);
 
-		obj1.getActionMap().put(MOVE_UP, new MoveAction("Up", currentPlayer, this.canvas, b));
-		obj1.getActionMap().put(MOVE_RIGHT, new MoveAction("Right", currentPlayer, this.canvas, b));
-		obj1.getActionMap().put(MOVE_DOWN, new MoveAction("Down", currentPlayer, this.canvas, b));
-		obj1.getActionMap().put(MOVE_LEFT, new MoveAction("Left", currentPlayer, this.canvas, b));
-		add(obj1);
+		keyBindings();
 
 		this.addComponentListener(new ComponentAdapter() 
 		{  
@@ -78,6 +70,20 @@ public class UI extends javax.swing.JFrame {
 				canvas.repaint();
 			}
 		});
+	}
+
+	private void keyBindings() {
+		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("UP"), MOVE_UP);
+		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("RIGHT"), MOVE_RIGHT);
+		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("DOWN"), MOVE_DOWN);
+		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("LEFT"), MOVE_LEFT);
+
+		obj1.getActionMap().put(MOVE_UP, new MoveAction("Up", currentPlayer, this.canvas, b));
+		obj1.getActionMap().put(MOVE_RIGHT, new MoveAction("Right", currentPlayer, this.canvas, b));
+		obj1.getActionMap().put(MOVE_DOWN, new MoveAction("Down", currentPlayer, this.canvas, b));
+		obj1.getActionMap().put(MOVE_LEFT, new MoveAction("Left", currentPlayer, this.canvas, b));
+		add(obj1);
+
 	}
 
 	private void accusButtonActionPerformed(ActionEvent e) {
@@ -97,7 +103,8 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void endTurnActionPerformed(ActionEvent e) {
-		// TODO add your code here
+		playGame(b, currentPlayer.getNum());
+
 	}
 
 	private void guessOKButtonActionPerformed(ActionEvent e) {
@@ -134,7 +141,7 @@ public class UI extends javax.swing.JFrame {
 			guessDialoge.setVisible(false);
 		}
 
-		
+
 	}
 
 	public String findContainingRoom(Board b)
@@ -197,12 +204,13 @@ public class UI extends javax.swing.JFrame {
 	 * @param playerNum - the prior players number
 	 */
 	public void playGame(Board b, int playerNum) {
-
+		
 		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
+		System.out.println("Current player is: " + playerNum + " " );
 		currentPlayer = b.getPlayers().get(playerNum - 1);
+		System.out.println(currentPlayer.getName());
 		Player eliminatedPlayer = null;
-		playerNum = (playerNum % b.getPlayers().size()) + 1;	//go to the next player
-		currentPlayer = b.getPlayers().get(playerNum - 1);
+		keyBindings();
 		//		while (finished == false) {	//While the game has not been won (or lost)
 		//			Room room = null;
 		//			for(Room r : b.getRooms()){
@@ -326,7 +334,7 @@ public class UI extends javax.swing.JFrame {
 		guessWeapon.addItem("Revolver");
 		guessWeapon.addItem("Pipe");
 		guessWeapon.addItem("Rope");
-		guessWeapon.addItem("Candle Stick");
+		guessWeapon.addItem("Candlestick");
 		guessWeapon.addItem("Wrench");
 
 		guessCharacter.addItem("Colonel Mustard");
