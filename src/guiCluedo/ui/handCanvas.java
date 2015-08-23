@@ -4,29 +4,39 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import guiCluedo.game.Board;
 
-public class handCanvas extends Canvas{
+public class HandCanvas extends Canvas{
 	
 	private Board gameBoard;
+	private int width;
+	private int height;
 
-	public handCanvas(Board b)
+	public HandCanvas(Board b, int width, int height)
 	{
 		this.gameBoard = b;
-		System.out.println("Reached");
+		this.height = height;
+		this.width = width;
 		setBackground (Color.BLUE);
-        setSize(50, 100);
+        setSize(width, height);
         repaint();
 	}
 	
 	public void paint(Graphics g) {
-		System.out.println("Reached 2");
-		Graphics2D g2;
-        g2 = (Graphics2D) g;
-        g2.drawString ("It is a custom canvas area", 70, 70);
-        g.setColor(Color.BLACK);
-        g2.fillRect(50, 50, 50, 50);
+        try {
+			BufferedImage myPicture = ImageIO.read(new File("hall.jpg"));
+			g.drawImage(myPicture, 0,0, getParent());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
 	}
 
 }
