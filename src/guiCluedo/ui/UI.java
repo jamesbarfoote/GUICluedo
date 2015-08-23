@@ -107,6 +107,7 @@ public class UI extends javax.swing.JFrame {
 
 	private void endTurnActionPerformed(ActionEvent e) {
 		playGame(b, currentPlayer.getNum());
+		rollDice.setEnabled(true);
 
 	}
 
@@ -635,6 +636,7 @@ public class UI extends javax.swing.JFrame {
 		currentPlayer.setRoll(roll);
 		System.out.println(roll);
 		youRolledText.setText("You rolled " + roll);
+		rollDice.setEnabled(false);
 	}
 
 	private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
