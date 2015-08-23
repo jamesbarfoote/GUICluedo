@@ -26,14 +26,14 @@ public class BoardCanvas extends Canvas{
 		this.width = width;
 		this.height = height;
 		setBackground (Color.YELLOW);
-        setSize(width-13, height-17);
+        setSize(width, height);
         readFile();
 	}
 	
 	public void paint(Graphics g) {
 		Graphics2D g2;
         g2 = (Graphics2D) g;
-        setSize(width-13, height-17);
+        setSize(width, height);
         drawBoard(g2);
         drawIcons(g2);
 	}
