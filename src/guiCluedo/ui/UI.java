@@ -221,6 +221,31 @@ public class UI extends javax.swing.JFrame {
 		guessCharacter = new JComboBox();
 		guessRoom = new JComboBox();
 		label2 = new JLabel();
+		
+		guessWeapon.addItem("Knife");
+		guessWeapon.addItem("Revolver");
+		guessWeapon.addItem("Pipe");
+		guessWeapon.addItem("Rope");
+		guessWeapon.addItem("Candle Stick");
+		guessWeapon.addItem("Wrench");
+		
+		guessCharacter.addItem("Colonel Mustard");
+		guessCharacter.addItem("Miss Scarlet");
+		guessCharacter.addItem("Mrs. White");
+		guessCharacter.addItem("Mrs. Peacock");
+		guessCharacter.addItem("Mr. Green");
+		guessCharacter.addItem("Professor Plum");
+		
+		guessRoom.addItem("Ballroom");
+		guessRoom.addItem("Billard Room");
+		guessRoom.addItem("Conservatory");
+		guessRoom.addItem("Dining Room");
+		guessRoom.addItem("Hall");
+		guessRoom.addItem("Kitchen");
+		guessRoom.addItem("Library");
+		guessRoom.addItem("Lounge");
+		guessRoom.addItem("Study");
+		
 
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
