@@ -3,9 +3,9 @@ package guiCluedo.ui;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
 
 import javax.swing.AbstractAction;
-
 import guiCluedo.game.Board;
 import guiCluedo.game.Player;
 import guiCluedo.game.Room;
@@ -17,13 +17,19 @@ class MoveAction extends AbstractAction {
         Player player;
         BoardCanvas canvas;
         Board board;
-
+        Room currentRoom;
+        
         MoveAction(String direction, Player player, BoardCanvas canvas, Board board) {
 
             this.direction = direction;
             this.player = player;
             this.canvas = canvas;
             this.board = board;
+            try{
+            	this.currentRoom = player.getRoom();
+            } catch (NullPointerException e) {
+    			e.printStackTrace();
+    		}
         }
 
         @Override
@@ -83,13 +89,37 @@ class MoveAction extends AbstractAction {
          * @return boolean - whether the new location goes through a wall
          */
         private boolean isValidMove(Point newLocation){
-        	boolean isWall = false;
-        	for(Room room : this.board.getRooms()){
-        		Polygon boundingBox = room.getBoundingBox();
-        		if(boundingBox.contains(newLocation) && (!board.getDoors().contains(newLocation))){
-        			isWall = true;
-        		}
+        	if(currentRoom == null){
+        		System.out.println("Reached");
+        		boolean isWall = false;
+            	for(Room room : this.board.getRooms()){
+            		Polygon boundingBox = room.getBoundingBox();
+            		if(boundingBox.contains(newLocation)){
+            			if(!board.getDoors().contains(newLocation)){
+                			isWall = true;
+                		}
+            			else{
+            				player.setRoom(room);
+            				this.currentRoom = room;
+            				System.out.println("Setting room to be: " + room.getName());
+            			}
+            		}
+            	}
+            	return !isWall;
         	}
-        	return !isWall;
+        	else{
+        		Polygon boundingBox = currentRoom.getBoundingBox();
+        		System.out.println(currentRoom.getName());
+        		if(!boundingBox.contains(newLocation)){
+        			if(board.getDoors().contains(player.getLocation())){
+        				player.setRoom(null);
+        				this.currentRoom = null;
+        				System.out.println("Setting room to be null");
+        				return true;
+            		}
+        			return false;
+        		}
+        		return true;
+        	}
         }
     }

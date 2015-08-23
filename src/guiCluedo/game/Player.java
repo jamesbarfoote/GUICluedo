@@ -15,6 +15,7 @@ public class Player {
 	private int playerNum;
 	private String character;
 	private Color colour;
+	private Room currentRoom = null;
 
 	public Player (String name, String character, Color colour, int playerNum){
 		this.name = name;
@@ -101,5 +102,13 @@ public class Player {
 	
 	public void setLocation(Point p){
 		this.location = p;
+	}
+	
+	public Room getRoom(){
+		return currentRoom;
+	}
+	
+	public void setRoom(Room r){
+		this.currentRoom = r;
 	}
 }
