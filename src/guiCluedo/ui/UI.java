@@ -19,6 +19,7 @@ import javax.swing.event.*;
 import guiCluedo.game.Board;
 import guiCluedo.game.Card;
 import guiCluedo.game.Character;
+import guiCluedo.game.Guess;
 import guiCluedo.game.Player;
 import guiCluedo.game.Room;
 import guiCluedo.game.Weapon;
@@ -92,12 +93,31 @@ public class UI extends javax.swing.JFrame {
 		cards.add(character);
 		ArrayList<Card> guessHand = createGuess(cards, b);
 		//Pass Arraylist to the guess class
+		Guess g = new Guess(false, guessHand, currentPlayer, b);
 	}
 
 	private void guessButtonActionPerformed(ActionEvent e) {
-		//TODO check that they are in a room
-		guessRoom.setEnabled(false);
-		guessDialoge.setVisible(true);
+		if(findContainingRoom(b) != null){
+			guessRoom.setEnabled(false);
+			guessDialoge.setVisible(true);
+
+			String room = findContainingRoom(b);
+			String character = guessCharacter.getSelectedItem().toString();
+			String weapon = guessWeapon.getSelectedItem().toString();
+
+			//Make cards from these and add to arraylist
+			ArrayList<String> cards = new ArrayList<String>();
+			cards.add(room);
+			cards.add(weapon);
+			cards.add(character);
+			ArrayList<Card> guessHand = createGuess(cards, b);
+			//Pass Arraylist to the guess class
+			Guess g = new Guess(true, guessHand, currentPlayer, b);
+		}
+		else
+		{
+			//Display error box
+		}
 	}
 
 	private void endTurnActionPerformed(ActionEvent e) {
@@ -106,6 +126,23 @@ public class UI extends javax.swing.JFrame {
 
 	private void guessOKButtonActionPerformed(ActionEvent e) {
 		guessDialoge.setVisible(false);
+	}
+
+	public String findContainingRoom(Board b)
+	{
+		double x = currentPlayer.getLocation().getX();
+		double y = currentPlayer.getLocation().getY();
+
+		for(Room r: b.getRooms())
+		{
+			Polygon poly = r.getBoundingBox();
+			if(poly.contains(x, y))
+			{
+				return r.getName();
+			}
+		}
+
+		return null;
 	}
 
 	private static ArrayList<Card> createGuess(ArrayList<String> cards, Board b) {
