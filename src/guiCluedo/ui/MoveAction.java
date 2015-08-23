@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import guiCluedo.game.Board;
 import guiCluedo.game.Player;
 
 class MoveAction extends AbstractAction {
@@ -13,12 +14,14 @@ class MoveAction extends AbstractAction {
 		String direction;
         Player player;
         BoardCanvas canvas;
+        Board board;
 
-        MoveAction(String direction, Player player, BoardCanvas canvas) {
+        MoveAction(String direction, Player player, BoardCanvas canvas, Board board) {
 
             this.direction = direction;
             this.player = player;
             this.canvas = canvas;
+            this.board = board;
         }
 
         @Override
@@ -58,5 +61,13 @@ class MoveAction extends AbstractAction {
     		this.canvas.repaint();
     		
     		//If player location is contained within a room, then show the suggestion button on the UI
+        }
+        
+        private boolean isValidMove(Point newLocation){
+//        	for(Polygon room : this.board.getRooms()){
+//        		
+//        	}
+        	
+        	return true;
         }
     }
