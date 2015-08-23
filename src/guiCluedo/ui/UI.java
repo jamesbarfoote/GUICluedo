@@ -86,7 +86,6 @@ public class UI extends javax.swing.JFrame {
 		obj1.getActionMap().put(MOVE_DOWN, new MoveAction("Down", currentPlayer, this.canvas, b));
 		obj1.getActionMap().put(MOVE_LEFT, new MoveAction("Left", currentPlayer, this.canvas, b));
 		add(obj1);
-
 	}
 
 	private void accusButtonActionPerformed(ActionEvent e) {
