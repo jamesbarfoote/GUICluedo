@@ -1,12 +1,14 @@
 package guiCluedo.ui;
 
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
 import guiCluedo.game.Board;
 import guiCluedo.game.Player;
+import guiCluedo.game.Room;
 
 class MoveAction extends AbstractAction {
 	
@@ -32,30 +34,42 @@ class MoveAction extends AbstractAction {
         	Point location = player.getLocation();
     		if (direction.equals("Left")){
     			if(location.getX() > 0){
-    				location.setLocation(location.getX()-1, location.getY());
-        			player.setLocation(location);
-        			player.setRoll(player.getRoll()-1);
+    				Point newLocation = new Point((int) location.getX()-1, (int) location.getY());
+    				if(isValidMove(newLocation)){
+    					location.setLocation(newLocation);
+            			player.setLocation(location);
+            			player.setRoll(player.getRoll()-1);
+    				}
     			}
     		}
     		else if (direction.equals("Up")){
     			if(location.getY() > 0){
-    				location.setLocation(location.getX(), location.getY()-1);
-        			player.setLocation(location);
-        			player.setRoll(player.getRoll()-1);
+    				Point newLocation = new Point((int) location.getX(), (int) location.getY()-1);
+    				if(isValidMove(newLocation)){
+    					location.setLocation(newLocation);
+            			player.setLocation(location);
+            			player.setRoll(player.getRoll()-1);
+    				}
     			}
     		}
     		else if (direction.equals("Right")){
     			if(location.getX() < 21){
-    				location.setLocation(location.getX()+1, location.getY());
-        			player.setLocation(location);
-        			player.setRoll(player.getRoll()-1);
+    				Point newLocation = new Point((int) location.getX()+1, (int) location.getY());
+    				if(isValidMove(newLocation)){
+    					location.setLocation(newLocation);
+            			player.setLocation(location);
+            			player.setRoll(player.getRoll()-1);
+    				}
     			}
     		}
     		else if (direction.equals("Down")){
     			if(location.getY() < 19){
-    				player.setLocation(location);
-    				location.setLocation(location.getX(), location.getY()+1);
-    				player.setRoll(player.getRoll()-1);
+    				Point newLocation = new Point((int) location.getX(), (int) location.getY()+1);
+    				if(isValidMove(newLocation)){
+    					location.setLocation(newLocation);
+        				player.setLocation(location);
+        				player.setRoll(player.getRoll()-1);
+    				}
     			}
     		}
     		this.canvas.repaint();
@@ -63,11 +77,19 @@ class MoveAction extends AbstractAction {
     		//If player location is contained within a room, then show the suggestion button on the UI
         }
         
+        /**
+         * Check if the current move is valid by checking if it is a wall or not.
+         * @param newLocation - The location the player is trying to move
+         * @return boolean - whether the new location goes through a wall
+         */
         private boolean isValidMove(Point newLocation){
-//        	for(Polygon room : this.board.getRooms()){
-//        		
-//        	}
-        	
-        	return true;
+        	boolean isWall = false;
+        	for(Room room : this.board.getRooms()){
+        		Polygon boundingBox = room.getBoundingBox();
+        		if(boundingBox.contains(newLocation) && (!board.getDoors().contains(newLocation))){
+        			isWall = true;
+        		}
+        	}
+        	return !isWall;
         }
     }

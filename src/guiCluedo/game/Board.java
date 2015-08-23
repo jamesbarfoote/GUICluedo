@@ -1,4 +1,5 @@
 package guiCluedo.game;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,13 +12,14 @@ public class Board {
 
 	public ArrayList<Card> answer;
 	public ArrayList<Player> players = startScreen.players;
-	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Dagger", "Revolver", "Rope", "Lead Pipe", "Spanner"));
-	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
+	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Knife", "Revolver", "Rope", "Lead Pipe", "Wrench"));
+	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "Mr. Green", "Mrs. Peacock", "Professor Plum"));
 	private ArrayList<String> roomNames = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory","Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"));
 
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	private ArrayList<Character> characters = new ArrayList<Character>();
 	private ArrayList<Room> rooms = new ArrayList<Room>();
+	private ArrayList<Point> doors = new ArrayList<Point>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 	
 	private String[][] board = new String[21][23];
@@ -26,6 +28,7 @@ public class Board {
 		createCards();
 		this.answer = genAns();
 		genCards();
+		createDoors();
 	}
 
 	/**
@@ -189,6 +192,24 @@ public class Board {
 			}
 		}
 	}
+	
+	private void createDoors(){
+		this.doors.add(new Point(3, 4));
+		this.doors.add(new Point(8, 4));
+		this.doors.add(new Point(13, 2));
+		this.doors.add(new Point(15, 5));
+		this.doors.add(new Point(20, 4));
+		this.doors.add(new Point(20, 7));
+		this.doors.add(new Point(17, 9));
+		this.doors.add(new Point(17, 10));
+		this.doors.add(new Point(18, 15));
+		this.doors.add(new Point(14, 17));
+		this.doors.add(new Point(5, 17));
+		this.doors.add(new Point(4, 13));
+		this.doors.add(new Point(6, 11));
+		this.doors.add(new Point(6, 10));
+		this.doors.add(new Point(6, 9));
+	}
 
 	public ArrayList<Player> getPlayers(){
 		return players;
@@ -220,5 +241,9 @@ public class Board {
 	
 	public String[][] getBoard(){
 		return board;
+	}
+	
+	public ArrayList<Point> getDoors(){
+		return doors;
 	}
 }
