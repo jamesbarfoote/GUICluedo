@@ -124,6 +124,7 @@ new FormModel {
 				name: "errorOK"
 				"text": "OK"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "errorOKActionPerformed", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "errorOKActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "errorText2"

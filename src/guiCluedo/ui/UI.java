@@ -35,6 +35,7 @@ public class UI extends javax.swing.JFrame {
 	private static final String MOVE_RIGHT = "move right";
 	private static final String MOVE_DOWN = "move down";
 	private static final String MOVE_LEFT = "move left";
+	private boolean isGuess = true;
 
 	static JLabel obj1 = new JLabel();
 
@@ -80,27 +81,28 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void accusButtonActionPerformed(ActionEvent e) {
+		isGuess = false;
 		guessRoom.setEnabled(true);
 		guessDialoge.setVisible(true);
-		String room = guessRoom.getSelectedItem().toString();
-		String character = guessCharacter.getSelectedItem().toString();
-		String weapon = guessWeapon.getSelectedItem().toString();
-
-		//Make cards from these and add to arraylist
-		ArrayList<String> cards = new ArrayList<String>();
-		cards.add(room);
-		cards.add(weapon);
-		cards.add(character);
-		ArrayList<Card> guessHand = createGuess(cards, b);
-		//Pass Arraylist to the guess class
-		Guess g = new Guess(false, guessHand, currentPlayer, b);
 	}
 
 	private void guessButtonActionPerformed(ActionEvent e) {
-		if(findContainingRoom(b) != null){
-			guessRoom.setEnabled(false);
-			guessDialoge.setVisible(true);
+		isGuess = true;
+		guessRoom.setEnabled(false);
+		if(findContainingRoom(b) == null){
+			errorDialog.setVisible(true);
+			return;
+		}
+		guessDialoge.setVisible(true);
+	}
 
+	private void endTurnActionPerformed(ActionEvent e) {
+		// TODO add your code here
+	}
+
+	private void guessOKButtonActionPerformed(ActionEvent e) {
+		if(isGuess)
+		{
 			String room = findContainingRoom(b);
 			String character = guessCharacter.getSelectedItem().toString();
 			String weapon = guessWeapon.getSelectedItem().toString();
@@ -113,20 +115,26 @@ public class UI extends javax.swing.JFrame {
 			ArrayList<Card> guessHand = createGuess(cards, b);
 			//Pass Arraylist to the guess class
 			Guess g = new Guess(true, guessHand, currentPlayer, b);
+			guessDialoge.setVisible(false);
 		}
 		else
 		{
-			//Display error box
-			errorDialog.setVisible(true);
+			String room = guessRoom.getSelectedItem().toString();;
+			String character = guessCharacter.getSelectedItem().toString();
+			String weapon = guessWeapon.getSelectedItem().toString();
+
+			//Make cards from these and add to arraylist
+			ArrayList<String> cards = new ArrayList<String>();
+			cards.add(room);
+			cards.add(weapon);
+			cards.add(character);
+			ArrayList<Card> guessHand = createGuess(cards, b);
+			//Pass Arraylist to the guess class
+			Guess g = new Guess(true, guessHand, currentPlayer, b);
+			guessDialoge.setVisible(false);
 		}
-	}
 
-	private void endTurnActionPerformed(ActionEvent e) {
-		// TODO add your code here
-	}
-
-	private void guessOKButtonActionPerformed(ActionEvent e) {
-		guessDialoge.setVisible(false);
+		
 	}
 
 	public String findContainingRoom(Board b)
@@ -156,7 +164,9 @@ public class UI extends javax.swing.JFrame {
 				Room guessRoom = b.getRooms().get(index);
 			}
 			else if(i == 1){
-				int indexW = b.getWeaponNames().indexOf(cards.get(i));
+				String weaponName = cards.get(i);
+				System.out.println("weapon name = " + weaponName);
+				int indexW = b.getWeaponNames().indexOf(weaponName);
 				Weapon guessWeapon = b.getWeapons().get(indexW);
 			}
 			else if(i == 2)
@@ -312,6 +322,31 @@ public class UI extends javax.swing.JFrame {
 		errorOK = new JButton();
 		errorText2 = new JLabel();
 
+		guessWeapon.addItem("Knife");
+		guessWeapon.addItem("Revolver");
+		guessWeapon.addItem("Pipe");
+		guessWeapon.addItem("Rope");
+		guessWeapon.addItem("Candle Stick");
+		guessWeapon.addItem("Wrench");
+
+		guessCharacter.addItem("Colonel Mustard");
+		guessCharacter.addItem("Miss Scarlet");
+		guessCharacter.addItem("Mrs. White");
+		guessCharacter.addItem("Mrs. Peacock");
+		guessCharacter.addItem("Mr. Green");
+		guessCharacter.addItem("Professor Plum");
+
+		guessRoom.addItem("Ballroom");
+		guessRoom.addItem("Billard Room");
+		guessRoom.addItem("Conservatory");
+		guessRoom.addItem("Dining Room");
+		guessRoom.addItem("Hall");
+		guessRoom.addItem("Kitchen");
+		guessRoom.addItem("Library");
+		guessRoom.addItem("Lounge");
+		guessRoom.addItem("Study");
+
+
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Cluedo");
@@ -399,58 +434,58 @@ public class UI extends javax.swing.JFrame {
 		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
 		contentPane.setLayout(contentPaneLayout);
 		contentPaneLayout.setHorizontalGroup(
-			contentPaneLayout.createParallelGroup()
+				contentPaneLayout.createParallelGroup()
 				.addComponent(jSeparator1)
 				.addGroup(contentPaneLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(contentPaneLayout.createParallelGroup()
-						.addComponent(rollDice)
-						.addComponent(youRolledText))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addComponent(accusButton)
-							.addGap(96, 96, 96))
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-								.addComponent(guessButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(endTurn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(yourhandText)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)))
-					.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-					.addContainerGap())
-				.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
-		);
-		contentPaneLayout.setVerticalGroup(
-			contentPaneLayout.createParallelGroup()
-				.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
-					.addGroup(contentPaneLayout.createParallelGroup()
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addContainerGap()
+						.addGroup(contentPaneLayout.createParallelGroup()
 								.addComponent(rollDice)
-								.addComponent(endTurn))
-							.addGroup(contentPaneLayout.createParallelGroup()
+								.addComponent(youRolledText))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 								.addGroup(contentPaneLayout.createSequentialGroup()
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(guessButton)
-										.addComponent(yourhandText))
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(accusButton))
+										.addComponent(accusButton)
+										.addGap(96, 96, 96))
 								.addGroup(contentPaneLayout.createSequentialGroup()
-									.addGap(18, 18, 18)
-									.addComponent(youRolledText))))
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addGap(11, 11, 11)
-							.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-							.addGap(16, 16, 16)))
-					.addContainerGap())
-		);
+										.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+												.addComponent(guessButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(endTurn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(yourhandText)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)))
+						.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+						.addContainerGap())
+				.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+				);
+		contentPaneLayout.setVerticalGroup(
+				contentPaneLayout.createParallelGroup()
+				.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+						.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
+						.addGroup(contentPaneLayout.createParallelGroup()
+								.addGroup(contentPaneLayout.createSequentialGroup()
+										.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+										.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+												.addComponent(rollDice)
+												.addComponent(endTurn))
+										.addGroup(contentPaneLayout.createParallelGroup()
+												.addGroup(contentPaneLayout.createSequentialGroup()
+														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+														.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																.addComponent(guessButton)
+																.addComponent(yourhandText))
+														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(accusButton))
+												.addGroup(contentPaneLayout.createSequentialGroup()
+														.addGap(18, 18, 18)
+														.addComponent(youRolledText))))
+								.addGroup(contentPaneLayout.createSequentialGroup()
+										.addGap(11, 11, 11)
+										.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+										.addGap(16, 16, 16)))
+						.addContainerGap())
+				);
 		pack();
 		setLocationRelativeTo(getOwner());
 
@@ -482,52 +517,52 @@ public class UI extends javax.swing.JFrame {
 			GroupLayout guessDialogeLayout = new GroupLayout(guessDialoge);
 			guessDialoge.setLayout(guessDialogeLayout);
 			guessDialogeLayout.setHorizontalGroup(
-				guessDialogeLayout.createParallelGroup()
+					guessDialogeLayout.createParallelGroup()
 					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-						.addContainerGap(70, Short.MAX_VALUE)
-						.addGroup(guessDialogeLayout.createParallelGroup()
-							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-								.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-								.addGap(143, 143, 143))
-							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-								.addComponent(label2)
-								.addGap(43, 43, 43))))
+							.addContainerGap(70, Short.MAX_VALUE)
+							.addGroup(guessDialogeLayout.createParallelGroup()
+									.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+											.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+											.addGap(143, 143, 143))
+									.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+											.addComponent(label2)
+											.addGap(43, 43, 43))))
 					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-						.addGap(27, 27, 27)
-						.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-						.addGap(18, 18, 18)
-						.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-						.addGap(21, 21, 21))
+							.addContainerGap()
+							.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+							.addGap(27, 27, 27)
+							.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+							.addGap(18, 18, 18)
+							.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+							.addGap(21, 21, 21))
 					.addGroup(guessDialogeLayout.createSequentialGroup()
-						.addGap(45, 45, 45)
-						.addComponent(label1)
-						.addGap(96, 96, 96)
-						.addComponent(label3)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-						.addComponent(label4)
-						.addGap(70, 70, 70))
-			);
-			guessDialogeLayout.setVerticalGroup(
-				guessDialogeLayout.createParallelGroup()
-					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-						.addGap(12, 12, 12)
-						.addComponent(label2)
-						.addGap(8, 8, 8)
-						.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addGap(45, 45, 45)
 							.addComponent(label1)
+							.addGap(96, 96, 96)
 							.addComponent(label3)
-							.addComponent(label4))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-							.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-							.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-							.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-						.addGap(18, 18, 18)
-						.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-			);
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+							.addComponent(label4)
+							.addGap(70, 70, 70))
+					);
+			guessDialogeLayout.setVerticalGroup(
+					guessDialogeLayout.createParallelGroup()
+					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+							.addGap(12, 12, 12)
+							.addComponent(label2)
+							.addGap(8, 8, 8)
+							.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+									.addComponent(label1)
+									.addComponent(label3)
+									.addComponent(label4))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+									.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+									.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+									.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+							.addGap(18, 18, 18)
+							.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+					);
 			guessDialoge.pack();
 			guessDialoge.setLocationRelativeTo(guessDialoge.getOwner());
 		}
@@ -547,6 +582,7 @@ public class UI extends javax.swing.JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					errorOKActionPerformed(e);
+					errorOKActionPerformed(e);
 				}
 			});
 
@@ -557,27 +593,27 @@ public class UI extends javax.swing.JFrame {
 			GroupLayout errorDialogContentPaneLayout = new GroupLayout(errorDialogContentPane);
 			errorDialogContentPane.setLayout(errorDialogContentPaneLayout);
 			errorDialogContentPaneLayout.setHorizontalGroup(
-				errorDialogContentPaneLayout.createParallelGroup()
+					errorDialogContentPaneLayout.createParallelGroup()
 					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(errorDialogContentPaneLayout.createParallelGroup()
-							.addComponent(label5)
-							.addGroup(errorDialogContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-								.addComponent(errorOK)
-								.addComponent(errorText2)))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-			);
+							.addContainerGap()
+							.addGroup(errorDialogContentPaneLayout.createParallelGroup()
+									.addComponent(label5)
+									.addGroup(errorDialogContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+											.addComponent(errorOK)
+											.addComponent(errorText2)))
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					);
 			errorDialogContentPaneLayout.setVerticalGroup(
-				errorDialogContentPaneLayout.createParallelGroup()
+					errorDialogContentPaneLayout.createParallelGroup()
 					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
-						.addGap(22, 22, 22)
-						.addComponent(label5)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(errorText2)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-						.addComponent(errorOK)
-						.addContainerGap())
-			);
+							.addGap(22, 22, 22)
+							.addComponent(label5)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(errorText2)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+							.addComponent(errorOK)
+							.addContainerGap())
+					);
 			errorDialog.pack();
 			errorDialog.setLocationRelativeTo(errorDialog.getOwner());
 		}
