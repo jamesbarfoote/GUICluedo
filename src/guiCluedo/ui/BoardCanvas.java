@@ -91,7 +91,7 @@ public class BoardCanvas extends Canvas{
         		}
         	}
         }
-		g.setColor(Color.BLUE);
+		g.setColor(Color.BLACK);
 		for(Point door : gameBoard.getDoors()){
 			g.fillRect(((int) door.getX()*(width/23)), ((int) door.getY()*(height/22)), width/23, height/22);
 		}
