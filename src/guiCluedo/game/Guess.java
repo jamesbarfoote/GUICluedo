@@ -55,13 +55,15 @@ public class Guess {
 					else if(currentRoom.getBoundingBox().contains(weapon.getLocation()) && count == 0){
 						count++;
 					}
-					else if(!b.getUsedSquares().contains(p) && (count == 1) && (!currentRoom.getBoundingBox().contains(suggestedPlayer.getLocation()))){
-						b.getUsedSquares().remove(suggestedPlayer.getLocation());
-						b.getPlayerSquares().remove(suggestedPlayer.getLocation());
-						suggestedPlayer.setLocation(p);
-						b.getUsedSquares().add(suggestedPlayer.getLocation());
-						b.getPlayerSquares().remove(suggestedPlayer.getLocation());
-						count++;
+					else if(suggestedPlayer!=null){
+						if(!b.getUsedSquares().contains(p) && (count == 1) && (!currentRoom.getBoundingBox().contains(suggestedPlayer.getLocation()))){
+							b.getUsedSquares().remove(suggestedPlayer.getLocation());
+							b.getPlayerSquares().remove(suggestedPlayer.getLocation());
+							suggestedPlayer.setLocation(p);
+							b.getUsedSquares().add(suggestedPlayer.getLocation());
+							b.getPlayerSquares().remove(suggestedPlayer.getLocation());
+							count++;
+						}
 					}
 				}
 			}
