@@ -106,23 +106,29 @@ class MoveAction extends AbstractAction {
 	 * @return boolean - whether the new location goes through a wall
 	 */
 	private boolean isValidMove(Point newLocation){
+		//If trying to enter centre piece
 		if(board.getCentre().contains(newLocation)){
 			return false;
 		}
+		//If in room and trying to exit
 		for(Room room : this.board.getRooms()){
 			Polygon boundingBox = room.getBoundingBox();
 			if(boundingBox.contains(player.getLocation())){
 				if(!boundingBox.contains(newLocation)){
 					if(board.getDoors().contains(player.getLocation())){
+						//Exiting room
+						player.setRoom(null);
 						return true;
 					}
 					else{
 						return false;
 					}
 				}
+				//In room and staying in there
 				return true;
 			}
 		}
+		//Not in room and trying to enter one
 		for(Room room : this.board.getRooms()){
 			Polygon boundingBox = room.getBoundingBox();
 			if(boundingBox.contains(newLocation)){
@@ -130,10 +136,13 @@ class MoveAction extends AbstractAction {
 					return false;
 				}
 				else{
+					//Entering a room
+					player.setRoom(room);
 					return true;
 				}
 			}
 		}
+		//Not in room and staying that way
 		return true;
 	}
 }

@@ -36,7 +36,7 @@ public class Guess {
 			}
 		}
 		
-		if (player.getLocation().equals(room.getLocation())) {	//If player is in the suggested room
+		if (player.getRoom().equals(room)) {	//If player is in the suggested room
 			for (Card card : guess) {
 				int playerNum = player.getNum();
 				playerNum = (playerNum % b.players.size()) + 1;
