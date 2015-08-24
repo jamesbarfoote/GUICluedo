@@ -84,6 +84,9 @@ class MoveAction extends AbstractAction {
 	 * @return boolean - whether the new location goes through a wall
 	 */
 	private boolean isValidMove(Point newLocation){
+		if(board.getCentre().contains(newLocation)){
+			return false;
+		}
 		for(Room room : this.board.getRooms()){
 			Polygon boundingBox = room.getBoundingBox();
 			if(boundingBox.contains(player.getLocation())){
