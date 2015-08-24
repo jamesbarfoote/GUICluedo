@@ -37,6 +37,7 @@ class MoveAction extends AbstractAction {
 			if(location.getX() > 0){
 				Point newLocation = new Point((int) location.getX()-1, (int) location.getY());
 				if(isValidMove(newLocation)){
+					newLocation = checkStairwell(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -47,6 +48,7 @@ class MoveAction extends AbstractAction {
 			if(location.getY() > 0){
 				Point newLocation = new Point((int) location.getX(), (int) location.getY()-1);
 				if(isValidMove(newLocation)){
+					newLocation = checkStairwell(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -57,6 +59,7 @@ class MoveAction extends AbstractAction {
 			if(location.getX() < 22){
 				Point newLocation = new Point((int) location.getX()+1, (int) location.getY());
 				if(isValidMove(newLocation)){
+					newLocation = checkStairwell(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -67,13 +70,13 @@ class MoveAction extends AbstractAction {
 			if(location.getY() < 21){
 				Point newLocation = new Point((int) location.getX(), (int) location.getY()+1);
 				if(isValidMove(newLocation)){
+					newLocation = checkStairwell(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
 				}
 			}
 		}
-		checkStairwells();
 		this.canvas.repaint();
 	}
 	
@@ -81,19 +84,20 @@ class MoveAction extends AbstractAction {
 	 * If player ends on a stairwell, update their location
 	 * respectively.
 	 */
-	private void checkStairwells(){
-		if(player.getLocation().getX() == 0 && player.getLocation().getY() == 0){
-			player.setLocation(board.getStairwells().get(2));
+	private Point checkStairwell(Point newLocation){
+		if(newLocation.equals(board.getStairwells().get(0))){
+			return board.getStairwells().get(2);
 		}
-		else if(player.getLocation().getX() == 20 && player.getLocation().getY() == 0){
-			player.setLocation(board.getStairwells().get(3));
+		else if(newLocation.equals(board.getStairwells().get(1))){
+			return board.getStairwells().get(3);
 		}
-		else if(player.getLocation().getX() == 18 && player.getLocation().getY() == 21){
-			player.setLocation(board.getStairwells().get(0));
+		else if(newLocation.equals(board.getStairwells().get(2))){
+			return board.getStairwells().get(0);
 		}
-		else if(player.getLocation().getX() == 0 && player.getLocation().getY() == 16){
-			player.setLocation(board.getStairwells().get(1));
+		else if(newLocation.equals(board.getStairwells().get(3))){
+			return board.getStairwells().get(1);
 		}
+		return newLocation;
 	}
 
 	/**
