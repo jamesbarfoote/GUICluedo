@@ -55,7 +55,7 @@ public class UI extends javax.swing.JFrame {
 		System.out.println("Canvas created");
 		boardArea.add(canvas);
 		System.out.println("canvas added");
-		
+
 		System.out.println("Game played");
 
 		keyBindings();
@@ -68,7 +68,6 @@ public class UI extends javax.swing.JFrame {
 				handArea.setSize(handArea.getWidth(), handArea.getHeight());
 				canvas.setWidth(boardArea.getWidth());
 				hCanvas.setWidth(handArea.getWidth());
-				System.out.println("Hand width = " + handArea.getWidth());
 				canvas.setHeight(boardArea.getHeight());
 				hCanvas.setHeight(handArea.getHeight());
 				canvas.repaint();
@@ -89,7 +88,7 @@ public class UI extends javax.swing.JFrame {
 		obj1.getActionMap().put(MOVE_LEFT, new MoveAction("Left", currentPlayer, this.canvas, b));
 		add(obj1);
 	}
-	
+
 	void keyPressed(KeyEvent e)
 	{
 		movesLeftLabel.setText("You have " + currentPlayer.getRoll() + " moves left");
@@ -113,7 +112,10 @@ public class UI extends javax.swing.JFrame {
 
 	private void endTurnActionPerformed(ActionEvent e) {
 		playGame(b, currentPlayer.getNum());
+		//HandCanvas h = new HandCanvas(b, handArea.getWidth(), handArea.getHeight(), currentPlayer);
 		rollDice.setEnabled(true);
+		hCanvas.setHand(currentPlayer);
+		this.hCanvas.repaint();
 
 	}
 
@@ -220,13 +222,14 @@ public class UI extends javax.swing.JFrame {
 	 * @param playerNum - the prior players number
 	 */
 	public void playGame(Board b, int playerNum) {
-		
+
 		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
 		System.out.println("Current player is: " + playerNum + " " );
 		currentPlayer = b.getPlayers().get(playerNum - 1);
 		System.out.println(currentPlayer.getName());
 		Player eliminatedPlayer = null;
 		keyBindings();
+
 		//		while (finished == false) {	//While the game has not been won (or lost)
 		//			Room room = null;
 		//			for(Room r : b.getRooms()){
@@ -371,7 +374,7 @@ public class UI extends javax.swing.JFrame {
 		guessRoom.addItem("Lounge");
 		guessRoom.addItem("Study");
 
-		
+
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Cluedo");
@@ -468,55 +471,55 @@ public class UI extends javax.swing.JFrame {
 		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
 		contentPane.setLayout(contentPaneLayout);
 		contentPaneLayout.setHorizontalGroup(
-			contentPaneLayout.createParallelGroup()
+				contentPaneLayout.createParallelGroup()
 				.addGroup(contentPaneLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(contentPaneLayout.createParallelGroup()
-						.addComponent(rollDice)
-						.addComponent(youRolledText)
-						.addComponent(movesLeftLabel))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addComponent(accusButton)
-						.addComponent(guessButton)
-						.addComponent(endTurn, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
-					.addGap(32, 32, 32)
-					.addComponent(yourhandText)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-					.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-					.addContainerGap())
+						.addContainerGap()
+						.addGroup(contentPaneLayout.createParallelGroup()
+								.addComponent(rollDice)
+								.addComponent(youRolledText)
+								.addComponent(movesLeftLabel))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+								.addComponent(accusButton)
+								.addComponent(guessButton)
+								.addComponent(endTurn, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
+						.addGap(32, 32, 32)
+						.addComponent(yourhandText)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+						.addContainerGap())
 				.addComponent(jSeparator1, GroupLayout.Alignment.TRAILING)
 				.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
-		);
+				);
 		contentPaneLayout.setVerticalGroup(
-			contentPaneLayout.createParallelGroup()
+				contentPaneLayout.createParallelGroup()
 				.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addComponent(handArea, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-							.addGap(16, 16, 16))
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(rollDice)
-								.addComponent(endTurn))
-							.addGroup(contentPaneLayout.createParallelGroup()
+						.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
 								.addGroup(contentPaneLayout.createSequentialGroup()
-									.addGap(18, 18, 18)
-									.addComponent(youRolledText)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(movesLeftLabel))
+										.addComponent(handArea, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+										.addGap(16, 16, 16))
 								.addGroup(contentPaneLayout.createSequentialGroup()
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(guessButton)
-										.addComponent(yourhandText))
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(accusButton))))))
-		);
+										.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+												.addComponent(rollDice)
+												.addComponent(endTurn))
+										.addGroup(contentPaneLayout.createParallelGroup()
+												.addGroup(contentPaneLayout.createSequentialGroup()
+														.addGap(18, 18, 18)
+														.addComponent(youRolledText)
+														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+														.addComponent(movesLeftLabel))
+												.addGroup(contentPaneLayout.createSequentialGroup()
+														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+														.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+																.addComponent(guessButton)
+																.addComponent(yourhandText))
+														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(accusButton))))))
+				);
 		pack();
 		setLocationRelativeTo(getOwner());
 
@@ -548,52 +551,52 @@ public class UI extends javax.swing.JFrame {
 			GroupLayout guessDialogeLayout = new GroupLayout(guessDialoge);
 			guessDialoge.setLayout(guessDialogeLayout);
 			guessDialogeLayout.setHorizontalGroup(
-				guessDialogeLayout.createParallelGroup()
+					guessDialogeLayout.createParallelGroup()
 					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-						.addContainerGap(70, Short.MAX_VALUE)
-						.addGroup(guessDialogeLayout.createParallelGroup()
-							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-								.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-								.addGap(143, 143, 143))
-							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-								.addComponent(label2)
-								.addGap(43, 43, 43))))
+							.addContainerGap(70, Short.MAX_VALUE)
+							.addGroup(guessDialogeLayout.createParallelGroup()
+									.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+											.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+											.addGap(143, 143, 143))
+									.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+											.addComponent(label2)
+											.addGap(43, 43, 43))))
 					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-						.addGap(27, 27, 27)
-						.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-						.addGap(18, 18, 18)
-						.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-						.addGap(21, 21, 21))
+							.addContainerGap()
+							.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+							.addGap(27, 27, 27)
+							.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+							.addGap(18, 18, 18)
+							.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+							.addGap(21, 21, 21))
 					.addGroup(guessDialogeLayout.createSequentialGroup()
-						.addGap(45, 45, 45)
-						.addComponent(label1)
-						.addGap(96, 96, 96)
-						.addComponent(label3)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-						.addComponent(label4)
-						.addGap(70, 70, 70))
-			);
-			guessDialogeLayout.setVerticalGroup(
-				guessDialogeLayout.createParallelGroup()
-					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-						.addGap(12, 12, 12)
-						.addComponent(label2)
-						.addGap(8, 8, 8)
-						.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addGap(45, 45, 45)
 							.addComponent(label1)
+							.addGap(96, 96, 96)
 							.addComponent(label3)
-							.addComponent(label4))
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-							.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-							.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-							.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-						.addGap(18, 18, 18)
-						.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-			);
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+							.addComponent(label4)
+							.addGap(70, 70, 70))
+					);
+			guessDialogeLayout.setVerticalGroup(
+					guessDialogeLayout.createParallelGroup()
+					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+							.addGap(12, 12, 12)
+							.addComponent(label2)
+							.addGap(8, 8, 8)
+							.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+									.addComponent(label1)
+									.addComponent(label3)
+									.addComponent(label4))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+									.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+									.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+									.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+							.addGap(18, 18, 18)
+							.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+					);
 			guessDialoge.pack();
 			guessDialoge.setLocationRelativeTo(guessDialoge.getOwner());
 		}
@@ -624,27 +627,27 @@ public class UI extends javax.swing.JFrame {
 			GroupLayout errorDialogContentPaneLayout = new GroupLayout(errorDialogContentPane);
 			errorDialogContentPane.setLayout(errorDialogContentPaneLayout);
 			errorDialogContentPaneLayout.setHorizontalGroup(
-				errorDialogContentPaneLayout.createParallelGroup()
+					errorDialogContentPaneLayout.createParallelGroup()
 					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(errorDialogContentPaneLayout.createParallelGroup()
-							.addComponent(label5)
-							.addGroup(errorDialogContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-								.addComponent(errorOK)
-								.addComponent(errorText2)))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-			);
+							.addContainerGap()
+							.addGroup(errorDialogContentPaneLayout.createParallelGroup()
+									.addComponent(label5)
+									.addGroup(errorDialogContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+											.addComponent(errorOK)
+											.addComponent(errorText2)))
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					);
 			errorDialogContentPaneLayout.setVerticalGroup(
-				errorDialogContentPaneLayout.createParallelGroup()
+					errorDialogContentPaneLayout.createParallelGroup()
 					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
-						.addGap(22, 22, 22)
-						.addComponent(label5)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(errorText2)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-						.addComponent(errorOK)
-						.addContainerGap())
-			);
+							.addGap(22, 22, 22)
+							.addComponent(label5)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(errorText2)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+							.addComponent(errorOK)
+							.addContainerGap())
+					);
 			errorDialog.pack();
 			errorDialog.setLocationRelativeTo(errorDialog.getOwner());
 		}

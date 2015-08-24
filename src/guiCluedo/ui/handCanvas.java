@@ -33,7 +33,14 @@ public class HandCanvas extends Canvas{
 		setBackground (Color.BLUE);
 		setSize(width, height);
 		hand = player.getHand();
+		System.out.println("Card 1 = " + hand.get(0).getName());
+		System.out.println("Card 2 = " + hand.get(1).getName());
 		repaint();
+	}
+	
+	public void setHand(Player p)
+	{
+		hand = p.getHand();
 	}
 	
 	private static final String IMG_PATH = "src/guiCluedo/images/";
@@ -41,15 +48,11 @@ public class HandCanvas extends Canvas{
 	public void paint(Graphics g) {
 		for(int i = 0; i < hand.size(); i++){
 			try {
-				//BufferedImage myPicture = ImageIO.read(new File("images/" + "hand.get(i)" + ".jpg"));
 				BufferedImage myPicture = ImageIO.read(new File(IMG_PATH + hand.get(i).getName() + ".jpg"));
 				int cWidth = width / hand.size();
-				//int cWidth = width;
 				BufferedImage scaled = getScaledImage(myPicture, cWidth, height);
-				//g.drawImage(scaled, 0,0, getParent());
 				g.drawImage(scaled, cWidth * i,0, getParent());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
