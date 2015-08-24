@@ -441,7 +441,7 @@ public class UI extends javax.swing.JFrame {
 		
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
-		guessWeapon.addItem("Pipe");
+		guessWeapon.addItem("Lead Pipe");
 		guessWeapon.addItem("Rope");
 		guessWeapon.addItem("Candle Stick");
 		guessWeapon.addItem("Wrench");
