@@ -46,6 +46,7 @@ public class UI extends javax.swing.JFrame {
 	public UI() {
 		initComponents();
 		b = new Board();
+		playGame(b, 0);
 		System.out.println("Board created");
 		System.out.println("boardArea.getWidth() = " + boardArea.getWidth());
 		canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
@@ -54,7 +55,7 @@ public class UI extends javax.swing.JFrame {
 		System.out.println("Canvas created");
 		boardArea.add(canvas);
 		System.out.println("canvas added");
-		playGame(b, 0);
+		
 		System.out.println("Game played");
 
 		keyBindings();
@@ -338,7 +339,7 @@ public class UI extends javax.swing.JFrame {
 		label5 = new JLabel();
 		errorOK = new JButton();
 		errorText2 = new JLabel();
-		
+
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
 		guessWeapon.addItem("Pipe");
@@ -363,7 +364,7 @@ public class UI extends javax.swing.JFrame {
 		guessRoom.addItem("Lounge");
 		guessRoom.addItem("Study");
 
-
+		
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Cluedo");
@@ -481,9 +482,9 @@ public class UI extends javax.swing.JFrame {
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 					.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+					.addGroup(contentPaneLayout.createParallelGroup()
 						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addComponent(handArea, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+							.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
 							.addGap(16, 16, 16))
 						.addGroup(contentPaneLayout.createSequentialGroup()
 							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)

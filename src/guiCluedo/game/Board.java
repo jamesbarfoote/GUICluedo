@@ -36,6 +36,7 @@ public class Board {
 	 * @param cards
 	 */
 	private void createCards(){
+		
 		for(String weapon : weaponNames){
 			weapons.add(new Weapon(weapon));
 		}
@@ -168,7 +169,12 @@ public class Board {
 //			}
 //		}
 		//Delegate the cards out to the players.
+		
+		System.out.println("Generating cards");
+		
 		Collections.shuffle(allCards);
+		System.out.println(allCards.size());
+		System.out.println("Players = " + players.size());
 		int numCards = allCards.size();
 		for(Player p: players){
 			int i = 0;
@@ -182,6 +188,7 @@ public class Board {
 				j++;
 			}
 		}
+		System.out.println("Player 0 hand size = " + players.get(0).getHand().size());
 		//if any cards still need to be delegated, do the rest.
 		if(allCards.size()>0){
 			for(Player p : players){

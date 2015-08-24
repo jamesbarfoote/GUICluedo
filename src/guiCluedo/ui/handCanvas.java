@@ -30,26 +30,28 @@ public class HandCanvas extends Canvas{
 		this.height = height;
 		this.width = width;
 		setBackground (Color.BLUE);
-		setSize(500, 500);
-		//hand = player.getHand();
+		setSize(width, height);
+		hand = player.getHand();
 		repaint();
 	}
+	
+	private static final String IMG_PATH = "src/guiCluedo/images/";
 
 	public void paint(Graphics g) {
-		//for(int i = 0; i < hand.size(); i++){
+		for(int i = 0; i < hand.size(); i++){
 			try {
 				//BufferedImage myPicture = ImageIO.read(new File("images/" + "hand.get(i)" + ".jpg"));
-				BufferedImage myPicture = ImageIO.read(new File("hall.jpg"));
-				//int cWidth = width / hand.size();
-				int cWidth = width;
+				BufferedImage myPicture = ImageIO.read(new File(IMG_PATH + hand.get(i).getName() + ".jpg"));
+				int cWidth = width / hand.size();
+				//int cWidth = width;
 				BufferedImage scaled = getScaledImage(myPicture, cWidth, height);
-				g.drawImage(scaled, 0,0, getParent());
-				//g.drawImage(scaled, cWidth,0, getParent());
+				//g.drawImage(scaled, 0,0, getParent());
+				g.drawImage(scaled, cWidth * i,0, getParent());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		//}
+		}
 
 	}
 	
