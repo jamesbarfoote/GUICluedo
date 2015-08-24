@@ -22,6 +22,7 @@ public class Board {
 	private ArrayList<Point> doors = new ArrayList<Point>();
 	private ArrayList<Point> stairwells = new ArrayList<Point>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
+	private ArrayList<Point> weaponLocations = new ArrayList<Point>();
 	private Polygon centre;
 	
 	private String[][] board = new String[22][23];
@@ -39,9 +40,15 @@ public class Board {
 	 * @param cards
 	 */
 	private void createCards(){
-		
-		for(String weapon : weaponNames){
-			weapons.add(new Weapon(weapon));
+		weaponLocations.add(new Point(2,2));
+		weaponLocations.add(new Point(10,3));
+		weaponLocations.add(new Point(20,11));
+		weaponLocations.add(new Point(13,19));
+		weaponLocations.add(new Point(5,20));
+		weaponLocations.add(new Point(2,12));
+		Collections.shuffle(weaponLocations);
+		for(int i = 0; i < weaponNames.size(); i++){
+			weapons.add(new Weapon(weaponNames.get(i), weaponLocations.get(i)));
 		}
 		for(String character : characterNames){
 			characters.add(new Character(character));
