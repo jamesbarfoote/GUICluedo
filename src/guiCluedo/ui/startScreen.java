@@ -35,7 +35,7 @@ public class startScreen {
 		initComponents();
 		
 		//Create button groups
-		characterRadios.add(missScarlett);
+		characterRadios.add(missScarlet);
 		characterRadios.add(mrsPeacock);
 		characterRadios.add(profPlum);
 		characterRadios.add(mrsWhite);
@@ -66,7 +66,7 @@ public class startScreen {
 		selectionHeadText = new JLabel();
 		charSubCatTxt = new JLabel();
 		colourSubTxt = new JLabel();
-		missScarlett = new JRadioButton();
+		missScarlet = new JRadioButton();
 		profPlum = new JRadioButton();
 		mrsWhite = new JRadioButton();
 		colonelMustard = new JRadioButton();
@@ -119,12 +119,12 @@ public class startScreen {
 			colourSubTxt.setFont(new Font("Tahoma", Font.BOLD, 11));
 			colourSubTxt.setText("Colour:");
 
-			//---- missScarlett ----
-			missScarlett.setText("Miss Scarlett");
-			missScarlett.addActionListener(new ActionListener() {
+			//---- missScarlet ----
+			missScarlet.setText("Miss Scarlet");
+			missScarlet.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					missScarlettActionPerformed(e);
+					missScarletActionPerformed(e);
 				}
 			});
 
@@ -212,7 +212,7 @@ public class startScreen {
 										.addGroup(startScreenFormContentPaneLayout.createParallelGroup()
 											.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 												.addComponent(revGreen)
-												.addComponent(missScarlett, GroupLayout.Alignment.LEADING)
+												.addComponent(missScarlet, GroupLayout.Alignment.LEADING)
 												.addComponent(mrsPeacock, GroupLayout.Alignment.LEADING))
 											.addComponent(mrsWhite)
 											.addComponent(profPlum)
@@ -244,7 +244,7 @@ public class startScreen {
 							.addComponent(colourSubTxt))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-							.addComponent(missScarlett)
+							.addComponent(missScarlet)
 							.addComponent(colourRed))
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -483,7 +483,7 @@ public class startScreen {
 		
 		Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
 		players.add(p);
-		Player p1 = new Player("James", "Miss Scarlett", Color.BLUE, 2);
+		Player p1 = new Player("James", "Miss Scarlet", Color.BLUE, 2);
 		players.add(p1);
 		
 		System.out.println("Go to main game screen");
@@ -566,9 +566,9 @@ public class startScreen {
 			}
 			//Display error message	
 		}
-		else if(missScarlett.isSelected())
+		else if(missScarlet.isSelected())
 		{
-			String character = "Miss Scarlett";
+			String character = "Miss Scarlet";
 			if(chars.contains(character)){
 				return character;
 			}
@@ -609,9 +609,9 @@ public class startScreen {
 		return "";
 	}
 
-	private void missScarlettActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_missScarlettActionPerformed
+	private void missScarletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_missScarletActionPerformed
 		// TODO add your handling code here:
-	}//GEN-LAST:event_missScarlettActionPerformed
+	}//GEN-LAST:event_missScarletActionPerformed
 
 	private void mrsWhiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mrsWhiteActionPerformed
 		// TODO add your handling code here:
@@ -678,7 +678,7 @@ public class startScreen {
 	private JLabel selectionHeadText;
 	private JLabel charSubCatTxt;
 	private JLabel colourSubTxt;
-	private JRadioButton missScarlett;
+	private JRadioButton missScarlet;
 	private JRadioButton profPlum;
 	private JRadioButton mrsWhite;
 	private JRadioButton colonelMustard;
