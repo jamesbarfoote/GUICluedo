@@ -17,7 +17,7 @@ import guiCluedo.game.Player;
 import guiCluedo.game.Room;
 import guiCluedo.game.Weapon;
 
-public class UI extends javax.swing.JFrame {
+public class UI extends javax.swing.JFrame implements KeyListener{
 
 	private static final long serialVersionUID = 1L;
 	private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -29,10 +29,12 @@ public class UI extends javax.swing.JFrame {
 	private static final String MOVE_RIGHT = "move right";
 	private static final String MOVE_DOWN = "move down";
 	private static final String MOVE_LEFT = "move left";
+	private static final String N = "next turn";
 	private boolean isGuess = true;
 	private Card cardClicked;
 
 	static JLabel obj1 = new JLabel();
+	static JLabel shortCuts = new JLabel();
 	
 
 	/**
@@ -43,7 +45,7 @@ public class UI extends javax.swing.JFrame {
 		b = new Board();
 		
 		playGame(b, 0);
-		
+		this.addKeyListener(this);
 		System.out.println("Board created");
 		System.out.println("boardArea.getWidth() = " + boardArea.getWidth());
 		canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
@@ -80,6 +82,9 @@ public class UI extends javax.swing.JFrame {
 		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("RIGHT"), MOVE_RIGHT);
 		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("DOWN"), MOVE_DOWN);
 		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("LEFT"), MOVE_LEFT);
+		
+		shortCuts.getInputMap(IFW).put(KeyStroke.getKeyStroke("NEXT"), N);
+		shortCuts.getActionMap().put(N, new MoveAction("Next", currentPlayer, this.canvas, b));
 
 		obj1.getActionMap().put(MOVE_UP, new MoveAction("Up", currentPlayer, this.canvas, b));
 		obj1.getActionMap().put(MOVE_RIGHT, new MoveAction("Right", currentPlayer, this.canvas, b));
@@ -88,10 +93,10 @@ public class UI extends javax.swing.JFrame {
 		add(obj1);
 	}
 
-	void keyPressed(KeyEvent e)
-	{
-		movesLeftLabel.setText("You have " + currentPlayer.getRoll() + " moves left");
-	}
+//	void keyPressed(KeyEvent e)
+//	{
+//		movesLeftLabel.setText("You have " + currentPlayer.getRoll() + " moves left");
+//	}
 
 	private void accusButtonActionPerformed(ActionEvent e) {
 		isGuess = false;
@@ -1000,6 +1005,30 @@ public class UI extends javax.swing.JFrame {
 	private JButton guessDiagOkButton;
 	private JLabel guessDiagPlayerNameText;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println("Pressed");
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		System.out.println("Released");
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		System.out.println("Typed");
+		if(e.equals(KeyEvent.VK_P))
+		{
+			this.setFocusable(true);
+			endTurnActionPerformed(null);
+		}
+		
+	}
 
 	
 }
