@@ -156,6 +156,8 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			//Pass Arraylist to the guess class
 			Guess g = new Guess(true, guessHand, currentPlayer, b);
 			g.moveIcons(guessHand, b);
+			Player previousPlayer = currentPlayer;
+			currentPlayer = checkHasCard(guessHand);
 			canvas.repaint();
 			guessDialoge.setVisible(false);
 
@@ -163,11 +165,22 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			//one with a matching card from the guess hand
 			//Then displays the popup asking for them to click on a card in their hand that matches
 			guessDiagPlayerNameText.setText(currentPlayer.getName());
-			line1Text.setText("Player blah guessed these three cards");
-			line2Text.setText("name of the 3 cards");
-			line3Text.setText("Please select one of these cards from your hand and click ok");
+			line1Text.setText(previousPlayer.getName() + " guessed these three cards:");
+			line2Text.setText(guessHand.get(0).getName() + ", " + guessHand.get(1).getName() + " and " + guessHand.get(2).getName());
+			line3Text.setText("Please select one of these cards from your hand then click ok");
+			hCanvas.setHand(currentPlayer);
+			hCanvas.repaint();
 			guessDialog.setVisible(true);
 			guessDialog.setAlwaysOnTop(true);
+			Card selectedCard = hCanvas.getSelectedCard();
+			System.out.println(selectedCard.getName());
+			for(Card card : guessHand){
+				if(selectedCard.equals(card)){
+					guessDialog.setVisible(false);
+					previousPlayer.addToDiscoveredCards(card);
+					currentPlayer = previousPlayer;
+				}
+			}
 		}
 		else
 		{
@@ -222,6 +235,24 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		}
 
 
+	}
+	
+	private Player checkHasCard(ArrayList<Card> guess){
+		for (Card card : guess) {
+			int playerNum = currentPlayer.getNum();
+			playerNum = (playerNum % b.players.size()) + 1;
+			int start = currentPlayer.getNum();
+			while (playerNum != start) {	//iterate over all the other players
+				ArrayList<Card> cards = b.players.get(playerNum-1).getHand();
+				for (Card c : cards) {	//Check the hand of all the other players
+					if (c.equals(card)) { //If a player has one of the suggested cards in their hand
+						return b.players.get(playerNum-1);
+					}
+				}
+				playerNum = (playerNum % b.players.size()) + 1;
+			}
+		}
+		return null;
 	}
 
 	public String findContainingRoom(Board b)

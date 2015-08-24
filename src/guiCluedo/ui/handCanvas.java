@@ -46,7 +46,7 @@ public class HandCanvas extends Canvas implements MouseListener{
 	
 	public void setHand(Player p)
 	{
-		hand = p.getHand();
+		this.hand = p.getHand();
 	}
 	
 	private static final String IMG_PATH = "src/guiCluedo/images/";

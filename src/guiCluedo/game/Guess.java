@@ -81,53 +81,20 @@ public class Guess {
 	 */
 	private void Suggestion(List<Card> guess, Board b) {
 		Room room = null;
-		Card discoveredCard = null;
-		ArrayList<Player> players = b.players;
 		for (Card card : guess) {
 			System.out.println("reached");
 			if (card instanceof Room) {	//Grab the room from the 3 suggested cards
 				room = (Room) card;
 			}
 		}
-
 		if (player.getRoom().equals(room)) {	//If player is in the suggested room
-			for (Card card : guess) {
-				int playerNum = player.getNum();
-				playerNum = (playerNum % b.players.size()) + 1;
-				int start = player.getNum();
-				while (playerNum != start) {	//iterate over all the other players
-					ArrayList<Card> cards = players.get(playerNum-1).getHand();
-					for (Card c : cards) {	//Check the hand of all the other players
-						if (c.equals(card)) { //If a player has one of the suggested cards in their hand
-							discoveredCard = c;
-							System.out.println(players.get(playerNum-1).getName());
-							break;
-						}
-					}
-					playerNum = (playerNum % b.players.size()) + 1;
-					if (discoveredCard != null) {
-						break;
-					}
-				}
-				if (discoveredCard != null) {
-					break;
-				}
-			}
+			return;
 		}
 		else{
 			System.out.println("Must be in the room to suggest it");
 			this.failed= true;
 			return;
 		}
-		if (discoveredCard != null) {
-			for (Player p : players) {
-				p.addToDiscoveredCards(discoveredCard);	//Add the discovered card to the list of discovered cards in every player
-			}
-		} else {
-			System.out.println("No player had any of the suggested cards");
-			return;
-		}
-		System.out.println("Discovered card was: " + discoveredCard.getName() + " this card has been added to everyones hand");
 	}
 
 	/**
