@@ -40,6 +40,7 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JLayeredPane", new FormLayoutManager( class javax.swing.JLayeredPane ) ) {
 				name: "handArea"
 				"border": new javax.swing.border.SoftBevelBorder( 1, null, null, null, null )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "handAreaMouseClicked", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "yourhandText"
