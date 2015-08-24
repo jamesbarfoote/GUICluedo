@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 			"$horizontalGroup": "par l {seq l {space :::p, par l {comp rollDice:::p::p, comp youRolledText::l:p::p, comp movesLeftLabel::l:p::p}, space u:::p, par l:::p {comp accusButton::l:p::p, comp guessButton:::p::p, comp endTurn:::p:85:p}, space :p:32:p, comp yourhandText:::p::p, space u:::p, comp handArea::::126:x, space :::p}, comp jSeparator1::t:::x, comp boardArea::l::444:x}"
-			"$verticalGroup": "par l {seq t {comp boardArea::::261:x, space :p::p, comp jSeparator1:::p:10:p, space :p::p, par l {seq {comp handArea::::81:x, space :p:16:p}, seq {par b {comp rollDice::b:p::p, comp endTurn::b:p::p}, par l {seq l {space :p:18:p, comp youRolledText:::p::p, space :::x, comp movesLeftLabel:::p::p}, seq l {space :::p, par b {comp guessButton::b:p::p, comp yourhandText::b:p::p}, space :::p, comp accusButton:::p::p}}}}}}"
+			"$verticalGroup": "par l {seq t {comp boardArea::::261:x, space :::p, comp jSeparator1:::p:10:p, space :::p, par l:::p {seq {comp handArea:::p:81:p, space :p:16:p}, seq {par b {comp rollDice::b:p::p, comp endTurn::b:p::p}, par l {seq l {space :p:18:p, comp youRolledText:::p::p, space :::x, comp movesLeftLabel:::p::p}, seq l {space :::p, par b {comp guessButton::b:p::p, comp yourhandText::b:p::p}, space :::p, comp accusButton:::p::p}}}}}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
