@@ -73,28 +73,26 @@ class MoveAction extends AbstractAction {
 				}
 			}
 		}
+		checkStairwells();
 		this.canvas.repaint();
 	}
-	//	Point p = new Point(0,0);
-	//	stairwells.add(p);
-	//	p = new Point(20,0);
-	//	stairwells.add(p);
-	//	p = new Point(18,21);
-	//	stairwells.add(p);
-	//	p = new Point(0,16);
-	//	stairwells.add(p);
+	
+	/**
+	 * If player ends on a stairwell, update their location
+	 * respectively.
+	 */
 	private void checkStairwells(){
 		if(player.getLocation().getX() == 0 && player.getLocation().getY() == 0){
-			//player.setLocation(p);
+			player.setLocation(board.getStairwells().get(2));
 		}
 		else if(player.getLocation().getX() == 20 && player.getLocation().getY() == 0){
-
+			player.setLocation(board.getStairwells().get(3));
 		}
 		else if(player.getLocation().getX() == 18 && player.getLocation().getY() == 21){
-
+			player.setLocation(board.getStairwells().get(0));
 		}
 		else if(player.getLocation().getX() == 0 && player.getLocation().getY() == 16){
-
+			player.setLocation(board.getStairwells().get(1));
 		}
 	}
 

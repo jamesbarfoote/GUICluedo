@@ -19,6 +19,7 @@ import guiCluedo.game.Player;
 
 public class HandCanvas extends Canvas{
 
+	private static final long serialVersionUID = 1L;
 	private Board gameBoard;
 	private int width;
 	private int height;
