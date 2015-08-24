@@ -208,5 +208,40 @@ new FormModel {
 			"location": new java.awt.Point( 510, 440 )
 			"size": new java.awt.Dimension( 300, 200 )
 		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq {space :::p, par l {comp label8::l:p::p, comp label9::l:p::p, comp label10::l:p::p, comp label11::l:p::p, comp label12::l:p::p}}, seq l {space :p:111:p, comp shortcutOK:::p:82:p}}, space ::7:x}}"
+			"$verticalGroup": "par l {seq l {space :p:19:p, comp label8:::p::p, space :::p, comp label9:::p::p, space s:::p, comp label10:::p::p, space s:::p, comp label11:::p::p, space s:::p, comp label12:::p::p, space :p:18:p, comp shortcutOK::::38:x, space :::p}}"
+		} ) {
+			name: "shortcuts"
+			"title": "Shortcuts"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label8"
+				"text": "Press any of these keys to perform their corresponding action"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label9"
+				"text": "N = Next player / end turn"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label10"
+				"text": "S = Perform Suggestion"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label11"
+				"text": "A = Perform Accusation"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label12"
+				"text": "G = New Game"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "shortcutOK"
+				"text": "OK"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "shortcutOKActionPerformed", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 45, 500 )
+			"size": new java.awt.Dimension( 330, 255 )
+		} )
 	}
 }
