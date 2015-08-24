@@ -84,7 +84,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("LEFT"), MOVE_LEFT);
 		
 		shortCuts.getInputMap(IFW).put(KeyStroke.getKeyStroke("NEXT"), N);
-		shortCuts.getActionMap().put(N, new MoveAction("Next", currentPlayer, this.canvas, b));
+		shortCuts.getActionMap().put(N, new shortcutKeys("Next", this, this.canvas, b));
 
 		obj1.getActionMap().put(MOVE_UP, new MoveAction("Up", currentPlayer, this.canvas, b));
 		obj1.getActionMap().put(MOVE_RIGHT, new MoveAction("Right", currentPlayer, this.canvas, b));
