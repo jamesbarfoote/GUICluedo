@@ -135,6 +135,12 @@ public class UI extends javax.swing.JFrame {
 			//Pass Arraylist to the guess class
 			Guess g = new Guess(true, guessHand, currentPlayer, b);
 			guessDialoge.setVisible(false);
+			
+			//Call method that iterates over all the players and finds the first
+			//one with a matching card from the guess hand
+			//Then displays the popup asking for them to click on a card in their hand that matches
+			guessDialog.setVisible(true);
+			guessDialog.setAlwaysOnTop(true);
 		}
 		else
 		{
@@ -244,9 +250,34 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void newGameActionPerformed(ActionEvent e) {
+		b.players.clear();
 		startScreen sc = new startScreen();
 		sc.startScreenForm.setVisible(true);
 		this.setVisible(false);
+	}
+
+	private void handAreaMouseClicked(MouseEvent e) {
+		// TODO add your code here
+	}
+
+	private void showShortcutsActionPerformed(ActionEvent e) {
+		// TODO add your code here
+	}
+
+	private void discoveredCardsmenuItemActionPerformed(ActionEvent e) {
+		// TODO add your code here
+	}
+
+	private void checkBoxMenuItem1ItemStateChanged(ItemEvent e) {
+		// TODO add your code here
+	}
+
+	private void cheatAnswerItemStateChanged(ItemEvent e) {
+		// TODO add your code here
+	}
+
+	private void guessDiagOkButtonActionPerformed(ActionEvent e) {
+		
 	}
 
 	
@@ -365,7 +396,12 @@ public class UI extends javax.swing.JFrame {
 		jMenuBar = new JMenuBar();
 		fileMenu = new JMenu();
 		newGame = new JMenuItem();
+		showShortcuts = new JMenuItem();
 		GameMenu = new JMenu();
+		discoveredCardsmenuItem = new JMenuItem();
+		menu1 = new JMenu();
+		checkBoxMenuItem1 = new JCheckBoxMenuItem();
+		cheatAnswer = new JCheckBoxMenuItem();
 		rollDice = new JButton();
 		endTurn = new JButton();
 		guessButton = new JButton();
@@ -390,7 +426,12 @@ public class UI extends javax.swing.JFrame {
 		errorText1 = new JLabel();
 		errorOK = new JButton();
 		errorText2 = new JLabel();
-		
+		guessDialog = new JDialog();
+		line1Text = new JLabel();
+		line2Text = new JLabel();
+		line3Text = new JLabel();
+		guessDiagOkButton = new JButton();
+		guessDiagPlayerNameText = new JLabel();
 		
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
@@ -438,6 +479,16 @@ public class UI extends javax.swing.JFrame {
 					}
 				});
 				fileMenu.add(newGame);
+
+				//---- showShortcuts ----
+				showShortcuts.setText("Show shortcuts");
+				showShortcuts.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						showShortcutsActionPerformed(e);
+					}
+				});
+				fileMenu.add(showShortcuts);
 			}
 			jMenuBar.add(fileMenu);
 
@@ -454,8 +505,44 @@ public class UI extends javax.swing.JFrame {
 						GameMenuMenuSelected(e);
 					}
 				});
+
+				//---- discoveredCardsmenuItem ----
+				discoveredCardsmenuItem.setText("Show discovered cards");
+				discoveredCardsmenuItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						discoveredCardsmenuItemActionPerformed(e);
+					}
+				});
+				GameMenu.add(discoveredCardsmenuItem);
 			}
 			jMenuBar.add(GameMenu);
+
+			//======== menu1 ========
+			{
+				menu1.setText("Cheats");
+
+				//---- checkBoxMenuItem1 ----
+				checkBoxMenuItem1.setText("Infinite move");
+				checkBoxMenuItem1.addItemListener(new ItemListener() {
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						checkBoxMenuItem1ItemStateChanged(e);
+					}
+				});
+				menu1.add(checkBoxMenuItem1);
+
+				//---- cheatAnswer ----
+				cheatAnswer.setText("Show answer");
+				cheatAnswer.addItemListener(new ItemListener() {
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						cheatAnswerItemStateChanged(e);
+					}
+				});
+				menu1.add(cheatAnswer);
+			}
+			jMenuBar.add(menu1);
 		}
 		setJMenuBar(jMenuBar);
 
@@ -471,6 +558,7 @@ public class UI extends javax.swing.JFrame {
 
 		//---- endTurn ----
 		endTurn.setText("End Turn");
+		endTurn.setToolTipText("End your turn so that the next player can go");
 		endTurn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -480,6 +568,7 @@ public class UI extends javax.swing.JFrame {
 
 		//---- guessButton ----
 		guessButton.setText("Suggestion");
+		guessButton.setToolTipText("Make a guess as to what cards you think are the answer");
 		guessButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -489,6 +578,7 @@ public class UI extends javax.swing.JFrame {
 
 		//---- accusButton ----
 		accusButton.setText("Accusation");
+		accusButton.setToolTipText("If you are sure what the answer if click me the make your accusation");
 		accusButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -505,7 +595,12 @@ public class UI extends javax.swing.JFrame {
 		{
 			handArea.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
 			handArea.setDoubleBuffered(true);
-			
+			handArea.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					handAreaMouseClicked(e);
+				}
+			});
 		}
 
 		//---- yourhandText ----
@@ -679,6 +774,7 @@ public class UI extends javax.swing.JFrame {
 				public void actionPerformed(ActionEvent e) {
 					errorOKActionPerformed(e);
 					errorOKActionPerformed(e);
+					errorOKActionPerformed(e);
 				}
 			});
 
@@ -712,6 +808,76 @@ public class UI extends javax.swing.JFrame {
 			);
 			errorDialog.pack();
 			errorDialog.setLocationRelativeTo(errorDialog.getOwner());
+		}
+
+		//======== guessDialog ========
+		{
+			guessDialog.setTitle("Suggestion");
+			Container guessDialogContentPane = guessDialog.getContentPane();
+
+			//---- line1Text ----
+			line1Text.setText("Player blah guessed these cards:");
+
+			//---- line2Text ----
+			line2Text.setText("Insert 3 cards here");
+
+			//---- line3Text ----
+			line3Text.setText("Please click ok and then select one of your cards");
+
+			//---- guessDiagOkButton ----
+			guessDiagOkButton.setText("OK");
+			guessDiagOkButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					guessDiagOkButtonActionPerformed(e);
+				}
+			});
+
+			//---- guessDiagPlayerNameText ----
+			guessDiagPlayerNameText.setText("Player 1");
+
+			GroupLayout guessDialogContentPaneLayout = new GroupLayout(guessDialogContentPane);
+			guessDialogContentPane.setLayout(guessDialogContentPaneLayout);
+			guessDialogContentPaneLayout.setHorizontalGroup(
+				guessDialogContentPaneLayout.createParallelGroup()
+					.addGroup(guessDialogContentPaneLayout.createSequentialGroup()
+						.addGap(117, 117, 117)
+						.addComponent(guessDiagOkButton)
+						.addContainerGap(120, Short.MAX_VALUE))
+					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogContentPaneLayout.createSequentialGroup()
+						.addGap(0, 33, Short.MAX_VALUE)
+						.addGroup(guessDialogContentPaneLayout.createParallelGroup()
+							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogContentPaneLayout.createSequentialGroup()
+								.addComponent(line3Text)
+								.addGap(19, 19, 19))
+							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogContentPaneLayout.createSequentialGroup()
+								.addComponent(line1Text)
+								.addGap(52, 52, 52))
+							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogContentPaneLayout.createSequentialGroup()
+								.addComponent(line2Text)
+								.addGap(88, 88, 88))))
+					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogContentPaneLayout.createSequentialGroup()
+						.addContainerGap(130, Short.MAX_VALUE)
+						.addComponent(guessDiagPlayerNameText)
+						.addGap(115, 115, 115))
+			);
+			guessDialogContentPaneLayout.setVerticalGroup(
+				guessDialogContentPaneLayout.createParallelGroup()
+					.addGroup(guessDialogContentPaneLayout.createSequentialGroup()
+						.addGap(5, 5, 5)
+						.addComponent(guessDiagPlayerNameText)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(line1Text)
+						.addGap(13, 13, 13)
+						.addComponent(line2Text)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(line3Text)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+						.addComponent(guessDiagOkButton)
+						.addContainerGap())
+			);
+			guessDialog.pack();
+			guessDialog.setLocationRelativeTo(guessDialog.getOwner());
 		}
 	}// </editor-fold>//GEN-END:initComponents
 
@@ -790,7 +956,12 @@ public class UI extends javax.swing.JFrame {
 	private JMenuBar jMenuBar;
 	private JMenu fileMenu;
 	private JMenuItem newGame;
+	private JMenuItem showShortcuts;
 	private JMenu GameMenu;
+	private JMenuItem discoveredCardsmenuItem;
+	private JMenu menu1;
+	private JCheckBoxMenuItem checkBoxMenuItem1;
+	private JCheckBoxMenuItem cheatAnswer;
 	private JButton rollDice;
 	private JButton endTurn;
 	private JButton guessButton;
@@ -815,6 +986,12 @@ public class UI extends javax.swing.JFrame {
 	private JLabel errorText1;
 	private JButton errorOK;
 	private JLabel errorText2;
+	private JDialog guessDialog;
+	private JLabel line1Text;
+	private JLabel line2Text;
+	private JLabel line3Text;
+	private JButton guessDiagOkButton;
+	private JLabel guessDiagPlayerNameText;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 
 	
