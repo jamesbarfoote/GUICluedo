@@ -5,17 +5,22 @@
  */
 package guiCluedo.ui;
 
+import java.awt.*;
 import java.awt.Color;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.*;
 import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle;
 import guiCluedo.game.Player;
 
 /**
  *
  * @author James
  */
-public class startScreen extends javax.swing.JFrame {
+public class startScreen {
 	public int numberOPlayers = 2;
 	private int counter;
 	public static ArrayList<Player> players = new ArrayList<Player>();
@@ -52,297 +57,351 @@ public class startScreen extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	// Generated using JFormDesigner Evaluation license - James Barfoote
+	private void initComponents() {
+		startScreenForm = new JFrame();
+		donePlayerSetup = new JButton();
+		mainYNameTxt = new JLabel();
+		playerName = new JTextField();
+		selectionHeadText = new JLabel();
+		charSubCatTxt = new JLabel();
+		colourSubTxt = new JLabel();
+		missScarlett = new JRadioButton();
+		profPlum = new JRadioButton();
+		mrsWhite = new JRadioButton();
+		colonelMustard = new JRadioButton();
+		revGreen = new JRadioButton();
+		mrsPeacock = new JRadioButton();
+		colourRed = new JRadioButton();
+		colourBlue = new JRadioButton();
+		colourYellow = new JRadioButton();
+		colourPurple = new JRadioButton();
+		colourWhite = new JRadioButton();
+		colourGreen = new JRadioButton();
+		setPlayersButton = new JButton();
+		setPlayers = new JDialog();
+		setPHowManyText = new JLabel();
+		okNumPlayers = new JButton();
+		setPHeadText = new JLabel();
+		numPLayers = new JComboBox<>();
+		warning = new JDialog();
+		warningTextHead = new JLabel();
+		warningOk = new JButton();
+		warningLine1 = new JLabel();
+		warningLine2 = new JLabel();
 
-        setPlayers = new javax.swing.JDialog();
-        setPHowManyText = new javax.swing.JLabel();
-        okNumPlayers = new javax.swing.JButton();
-        setPHeadText = new javax.swing.JLabel();
-        numPLayers = new javax.swing.JComboBox();
-        warning = new javax.swing.JDialog();
-        warningTextHead = new javax.swing.JLabel();
-        warningOk = new javax.swing.JButton();
-        warningLine1 = new javax.swing.JLabel();
-        warningLine2 = new javax.swing.JLabel();
-        donePlayerSetup = new javax.swing.JButton();
-        mainYNameTxt = new javax.swing.JLabel();
-        playerName = new javax.swing.JTextField();
-        selectionHeadText = new javax.swing.JLabel();
-        charSubCatTxt = new javax.swing.JLabel();
-        colourSubTxt = new javax.swing.JLabel();
-        missScarlett = new javax.swing.JRadioButton();
-        profPlum = new javax.swing.JRadioButton();
-        mrsWhite = new javax.swing.JRadioButton();
-        colonelMustard = new javax.swing.JRadioButton();
-        revGreen = new javax.swing.JRadioButton();
-        mrsPeacock = new javax.swing.JRadioButton();
-        colourRed = new javax.swing.JRadioButton();
-        colourBlue = new javax.swing.JRadioButton();
-        colourYellow = new javax.swing.JRadioButton();
-        colourPurple = new javax.swing.JRadioButton();
-        colourWhite = new javax.swing.JRadioButton();
-        colourGreen = new javax.swing.JRadioButton();
-        setPlayersButton = new javax.swing.JButton();
+		//======== startScreenForm ========
+		{
+			startScreenForm.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+			Container startScreenFormContentPane = startScreenForm.getContentPane();
 
-        setPlayers.setAlwaysOnTop(true);
-        setPlayers.setMinimumSize(new java.awt.Dimension(400, 200));
+			//---- donePlayerSetup ----
+			donePlayerSetup.setText("Done");
+			donePlayerSetup.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					donePlayerSetupActionPerformed(e);
+				}
+			});
 
-        setPHowManyText.setText("How many players?");
+			//---- mainYNameTxt ----
+			mainYNameTxt.setText("You name:");
 
-        okNumPlayers.setText("OK");
-        okNumPlayers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okNumPlayersActionPerformed(evt);
-            }
-        });
+			//---- selectionHeadText ----
+			selectionHeadText.setFont(new Font("Tahoma", Font.BOLD, 36));
+			selectionHeadText.setText("Player Selection");
 
-        setPHeadText.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        setPHeadText.setText("Welcome to Cluedo!");
+			//---- charSubCatTxt ----
+			charSubCatTxt.setFont(new Font("Tahoma", Font.BOLD, 11));
+			charSubCatTxt.setText("Character:");
 
-        numPLayers.setMaximumRowCount(5);
-        numPLayers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2", "3", "4", "5", "6" }));
-        numPLayers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numPLayersActionPerformed(evt);
-            }
-        });
+			//---- colourSubTxt ----
+			colourSubTxt.setFont(new Font("Tahoma", Font.BOLD, 11));
+			colourSubTxt.setText("Colour:");
 
-        javax.swing.GroupLayout setPlayersLayout = new javax.swing.GroupLayout(setPlayers.getContentPane());
-        setPlayers.getContentPane().setLayout(setPlayersLayout);
-        setPlayersLayout.setHorizontalGroup(
-            setPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(setPlayersLayout.createSequentialGroup()
-                .addGroup(setPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(setPlayersLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(setPHeadText))
-                    .addGroup(setPlayersLayout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(okNumPlayers))
-                    .addGroup(setPlayersLayout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addGroup(setPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(setPHowManyText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(numPLayers, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(48, Short.MAX_VALUE))
-        );
-        setPlayersLayout.setVerticalGroup(
-            setPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(setPlayersLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(setPHeadText)
-                .addGap(18, 18, 18)
-                .addComponent(setPHowManyText)
-                .addGap(18, 18, 18)
-                .addComponent(numPLayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(okNumPlayers)
-                .addGap(23, 23, 23))
-        );
+			//---- missScarlett ----
+			missScarlett.setText("Miss Scarlett");
+			missScarlett.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					missScarlettActionPerformed(e);
+				}
+			});
 
-        warningTextHead.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        warningTextHead.setText("WARNING!");
+			//---- profPlum ----
+			profPlum.setText("Professor Plum");
 
-        warningOk.setText("OK");
-        warningOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                warningOkActionPerformed(evt);
-            }
-        });
+			//---- mrsWhite ----
+			mrsWhite.setText("Mrs. White");
+			mrsWhite.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					mrsWhiteActionPerformed(e);
+				}
+			});
 
-        warningLine1.setText("Make sure that you have selected one from character and one from colour and only one");
+			//---- colonelMustard ----
+			colonelMustard.setText("Colonel Mustard");
 
-        warningLine2.setText("Make sure that you have alos entered your name");
+			//---- revGreen ----
+			revGreen.setText("The Reverend Green");
 
-        javax.swing.GroupLayout warningLayout = new javax.swing.GroupLayout(warning.getContentPane());
-        warning.getContentPane().setLayout(warningLayout);
-        warningLayout.setHorizontalGroup(
-            warningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(warningLayout.createSequentialGroup()
-                .addGroup(warningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(warningLayout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(warningTextHead))
-                    .addGroup(warningLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(warningLine1))
-                    .addGroup(warningLayout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(warningOk, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(warningLayout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(warningLine2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        warningLayout.setVerticalGroup(
-            warningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(warningLayout.createSequentialGroup()
-                .addComponent(warningTextHead)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(warningLine1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(warningLine2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(warningOk)
-                .addContainerGap())
-        );
+			//---- mrsPeacock ----
+			mrsPeacock.setText("Mrs. Peacock");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+			//---- colourRed ----
+			colourRed.setText("Red");
 
-        donePlayerSetup.setText("Done");
-        donePlayerSetup.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                donePlayerSetupActionPerformed(evt);
-            }
-        });
+			//---- colourBlue ----
+			colourBlue.setText("Blue");
 
-        mainYNameTxt.setText("You name:");
+			//---- colourYellow ----
+			colourYellow.setText("Yellow");
+			colourYellow.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					colourYellowActionPerformed(e);
+				}
+			});
 
-        selectionHeadText.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        selectionHeadText.setText("Player Selection");
+			//---- colourPurple ----
+			colourPurple.setText("Purple");
 
-        charSubCatTxt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        charSubCatTxt.setText("Character:");
+			//---- colourWhite ----
+			colourWhite.setText("White");
 
-        colourSubTxt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        colourSubTxt.setText("Colour:");
+			//---- colourGreen ----
+			colourGreen.setText("Green");
 
-        missScarlett.setText("Miss Scarlett");
-        missScarlett.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                missScarlettActionPerformed(evt);
-            }
-        });
+			//---- setPlayersButton ----
+			setPlayersButton.setText("Set # Players");
+			setPlayersButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					setPlayersButtonActionPerformed(e);
+				}
+			});
 
-        profPlum.setText("Professor Plum");
+			GroupLayout startScreenFormContentPaneLayout = new GroupLayout(startScreenFormContentPane);
+			startScreenFormContentPane.setLayout(startScreenFormContentPaneLayout);
+			startScreenFormContentPaneLayout.setHorizontalGroup(
+				startScreenFormContentPaneLayout.createParallelGroup()
+					.addGroup(startScreenFormContentPaneLayout.createSequentialGroup()
+						.addGroup(startScreenFormContentPaneLayout.createParallelGroup()
+							.addGroup(startScreenFormContentPaneLayout.createSequentialGroup()
+								.addGap(231, 231, 231)
+								.addComponent(donePlayerSetup, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+							.addGroup(startScreenFormContentPaneLayout.createSequentialGroup()
+								.addGap(149, 149, 149)
+								.addComponent(mainYNameTxt)
+								.addGap(18, 18, 18)
+								.addComponent(playerName, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
+							.addGroup(startScreenFormContentPaneLayout.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(setPlayersButton)
+								.addGap(42, 42, 42)
+								.addComponent(selectionHeadText))
+							.addGroup(startScreenFormContentPaneLayout.createSequentialGroup()
+								.addGap(70, 70, 70)
+								.addGroup(startScreenFormContentPaneLayout.createParallelGroup()
+									.addGroup(startScreenFormContentPaneLayout.createSequentialGroup()
+										.addComponent(charSubCatTxt)
+										.addGap(253, 253, 253)
+										.addComponent(colourSubTxt))
+									.addGroup(startScreenFormContentPaneLayout.createSequentialGroup()
+										.addGroup(startScreenFormContentPaneLayout.createParallelGroup()
+											.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+												.addComponent(revGreen)
+												.addComponent(missScarlett, GroupLayout.Alignment.LEADING)
+												.addComponent(mrsPeacock, GroupLayout.Alignment.LEADING))
+											.addComponent(mrsWhite)
+											.addComponent(profPlum)
+											.addComponent(colonelMustard))
+										.addGap(187, 187, 187)
+										.addGroup(startScreenFormContentPaneLayout.createParallelGroup()
+											.addComponent(colourRed)
+											.addComponent(colourBlue)
+											.addComponent(colourYellow)
+											.addComponent(colourPurple)
+											.addComponent(colourWhite)
+											.addComponent(colourGreen))))))
+						.addContainerGap(148, Short.MAX_VALUE))
+			);
+			startScreenFormContentPaneLayout.setVerticalGroup(
+				startScreenFormContentPaneLayout.createParallelGroup()
+					.addGroup(GroupLayout.Alignment.TRAILING, startScreenFormContentPaneLayout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(startScreenFormContentPaneLayout.createParallelGroup()
+							.addComponent(selectionHeadText)
+							.addComponent(setPlayersButton))
+						.addGap(18, 18, 18)
+						.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(mainYNameTxt)
+							.addComponent(playerName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGap(32, 32, 32)
+						.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(charSubCatTxt)
+							.addComponent(colourSubTxt))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(missScarlett)
+							.addComponent(colourRed))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(profPlum)
+							.addComponent(colourGreen))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(mrsWhite)
+							.addComponent(colourBlue))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(colonelMustard)
+							.addComponent(colourYellow))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(revGreen)
+							.addComponent(colourPurple))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(startScreenFormContentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(mrsPeacock)
+							.addComponent(colourWhite))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(donePlayerSetup, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+			);
+			startScreenForm.pack();
+			startScreenForm.setLocationRelativeTo(startScreenForm.getOwner());
+		}
 
-        mrsWhite.setText("Mrs. White");
-        mrsWhite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mrsWhiteActionPerformed(evt);
-            }
-        });
+		//======== setPlayers ========
+		{
+			setPlayers.setAlwaysOnTop(true);
+			setPlayers.setMinimumSize(new Dimension(400, 200));
+			Container setPlayersContentPane = setPlayers.getContentPane();
 
-        colonelMustard.setText("Colonel Mustard");
+			//---- setPHowManyText ----
+			setPHowManyText.setText("How many players?");
 
-        revGreen.setText("The Reverend Green");
+			//---- okNumPlayers ----
+			okNumPlayers.setText("OK");
+			okNumPlayers.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					okNumPlayersActionPerformed(e);
+				}
+			});
 
-        mrsPeacock.setText("Mrs. Peacock");
+			//---- setPHeadText ----
+			setPHeadText.setFont(new Font("Tahoma", Font.BOLD, 24));
+			setPHeadText.setText("Welcome to Cluedo!");
 
-        colourRed.setText("Red");
+			//---- numPLayers ----
+			numPLayers.setMaximumRowCount(5);
+			numPLayers.setModel(new DefaultComboBoxModel<>(new String[] {
+				"2",
+				"3",
+				"4",
+				"5",
+				"6"
+			}));
+			numPLayers.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					numPLayersActionPerformed(e);
+				}
+			});
 
-        colourBlue.setText("Blue");
+			GroupLayout setPlayersContentPaneLayout = new GroupLayout(setPlayersContentPane);
+			setPlayersContentPane.setLayout(setPlayersContentPaneLayout);
+			setPlayersContentPaneLayout.setHorizontalGroup(
+				setPlayersContentPaneLayout.createParallelGroup()
+					.addGroup(setPlayersContentPaneLayout.createSequentialGroup()
+						.addGroup(setPlayersContentPaneLayout.createParallelGroup()
+							.addGroup(setPlayersContentPaneLayout.createSequentialGroup()
+								.addGap(39, 39, 39)
+								.addComponent(setPHeadText))
+							.addGroup(setPlayersContentPaneLayout.createSequentialGroup()
+								.addGap(128, 128, 128)
+								.addComponent(okNumPlayers))
+							.addGroup(setPlayersContentPaneLayout.createSequentialGroup()
+								.addGap(108, 108, 108)
+								.addGroup(setPlayersContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+									.addComponent(setPHowManyText, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(numPLayers))))
+						.addContainerGap(48, Short.MAX_VALUE))
+			);
+			setPlayersContentPaneLayout.setVerticalGroup(
+				setPlayersContentPaneLayout.createParallelGroup()
+					.addGroup(setPlayersContentPaneLayout.createSequentialGroup()
+						.addGap(8, 8, 8)
+						.addComponent(setPHeadText)
+						.addGap(18, 18, 18)
+						.addComponent(setPHowManyText)
+						.addGap(18, 18, 18)
+						.addComponent(numPLayers, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+						.addComponent(okNumPlayers)
+						.addGap(23, 23, 23))
+			);
+		}
 
-        colourYellow.setText("Yellow");
-        colourYellow.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                colourYellowActionPerformed(evt);
-            }
-        });
+		//======== warning ========
+		{
+			Container warningContentPane = warning.getContentPane();
 
-        colourPurple.setText("Purple");
+			//---- warningTextHead ----
+			warningTextHead.setFont(new Font("Tahoma", Font.BOLD, 36));
+			warningTextHead.setText("WARNING!");
 
-        colourWhite.setText("White");
+			//---- warningOk ----
+			warningOk.setText("OK");
+			warningOk.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					warningOkActionPerformed(e);
+				}
+			});
 
-        colourGreen.setText("Green");
+			//---- warningLine1 ----
+			warningLine1.setText("Make sure that you have selected one from character and one from colour and only one");
 
-        setPlayersButton.setText("Set # Players");
-        setPlayersButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setPlayersButtonActionPerformed(evt);
-            }
-        });
+			//---- warningLine2 ----
+			warningLine2.setText("Make sure that you have alos entered your name");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(donePlayerSetup, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(mainYNameTxt)
-                        .addGap(18, 18, 18)
-                        .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(setPlayersButton)
-                        .addGap(42, 42, 42)
-                        .addComponent(selectionHeadText))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(charSubCatTxt)
-                                .addGap(253, 253, 253)
-                                .addComponent(colourSubTxt))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(revGreen)
-                                        .addComponent(missScarlett, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(mrsPeacock, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(mrsWhite)
-                                    .addComponent(profPlum)
-                                    .addComponent(colonelMustard))
-                                .addGap(187, 187, 187)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(colourRed)
-                                    .addComponent(colourBlue)
-                                    .addComponent(colourYellow)
-                                    .addComponent(colourPurple)
-                                    .addComponent(colourWhite)
-                                    .addComponent(colourGreen))))))
-                .addContainerGap(125, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(selectionHeadText)
-                    .addComponent(setPlayersButton))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mainYNameTxt)
-                    .addComponent(playerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(charSubCatTxt)
-                    .addComponent(colourSubTxt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(missScarlett)
-                    .addComponent(colourRed))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(profPlum)
-                    .addComponent(colourGreen))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mrsWhite)
-                    .addComponent(colourBlue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(colonelMustard)
-                    .addComponent(colourYellow))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(revGreen)
-                    .addComponent(colourPurple))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mrsPeacock)
-                    .addComponent(colourWhite))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addComponent(donePlayerSetup, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        pack();
+			GroupLayout warningContentPaneLayout = new GroupLayout(warningContentPane);
+			warningContentPane.setLayout(warningContentPaneLayout);
+			warningContentPaneLayout.setHorizontalGroup(
+				warningContentPaneLayout.createParallelGroup()
+					.addGroup(warningContentPaneLayout.createSequentialGroup()
+						.addGroup(warningContentPaneLayout.createParallelGroup()
+							.addGroup(warningContentPaneLayout.createSequentialGroup()
+								.addGap(121, 121, 121)
+								.addComponent(warningTextHead))
+							.addGroup(warningContentPaneLayout.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(warningLine1))
+							.addGroup(warningContentPaneLayout.createSequentialGroup()
+								.addGap(175, 175, 175)
+								.addComponent(warningOk, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
+							.addGroup(warningContentPaneLayout.createSequentialGroup()
+								.addGap(98, 98, 98)
+								.addComponent(warningLine2)))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+			);
+			warningContentPaneLayout.setVerticalGroup(
+				warningContentPaneLayout.createParallelGroup()
+					.addGroup(warningContentPaneLayout.createSequentialGroup()
+						.addComponent(warningTextHead)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(warningLine1)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(warningLine2)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+						.addComponent(warningOk)
+						.addContainerGap())
+			);
+		}
     }// </editor-fold>//GEN-END:initComponents
 
 	private void okNumPlayersActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -432,7 +491,7 @@ public class startScreen extends javax.swing.JFrame {
 		UI u = new UI();
 		System.out.println("UI created");
 		u.setVisible(true);
-		this.setVisible(false);//Hide the player setup screen
+		startScreenForm.setVisible(false);//Hide the player setup screen
 
 //		counter++;
 //		if(counter >= numberOPlayers )
@@ -605,40 +664,42 @@ public class startScreen extends javax.swing.JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new startScreen().setVisible(true);
+				new startScreen().startScreenForm.setVisible(true);
 			}
 		});
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel charSubCatTxt;
-    private javax.swing.JRadioButton colonelMustard;
-    private javax.swing.JRadioButton colourBlue;
-    private javax.swing.JRadioButton colourGreen;
-    private javax.swing.JRadioButton colourPurple;
-    private javax.swing.JRadioButton colourRed;
-    private javax.swing.JLabel colourSubTxt;
-    private javax.swing.JRadioButton colourWhite;
-    private javax.swing.JRadioButton colourYellow;
-    private javax.swing.JButton donePlayerSetup;
-    private javax.swing.JLabel mainYNameTxt;
-    private javax.swing.JRadioButton missScarlett;
-    private javax.swing.JRadioButton mrsPeacock;
-    private javax.swing.JRadioButton mrsWhite;
-    private javax.swing.JComboBox numPLayers;
-    private javax.swing.JButton okNumPlayers;
-    private javax.swing.JTextField playerName;
-    private javax.swing.JRadioButton profPlum;
-    private javax.swing.JRadioButton revGreen;
-    private javax.swing.JLabel selectionHeadText;
-    private javax.swing.JLabel setPHeadText;
-    private javax.swing.JLabel setPHowManyText;
-    private javax.swing.JDialog setPlayers;
-    private javax.swing.JButton setPlayersButton;
-    private javax.swing.JDialog warning;
-    private javax.swing.JLabel warningLine1;
-    private javax.swing.JLabel warningLine2;
-    private javax.swing.JButton warningOk;
-    private javax.swing.JLabel warningTextHead;
+	// Generated using JFormDesigner Evaluation license - James Barfoote
+	JFrame startScreenForm;
+	private JButton donePlayerSetup;
+	private JLabel mainYNameTxt;
+	private JTextField playerName;
+	private JLabel selectionHeadText;
+	private JLabel charSubCatTxt;
+	private JLabel colourSubTxt;
+	private JRadioButton missScarlett;
+	private JRadioButton profPlum;
+	private JRadioButton mrsWhite;
+	private JRadioButton colonelMustard;
+	private JRadioButton revGreen;
+	private JRadioButton mrsPeacock;
+	private JRadioButton colourRed;
+	private JRadioButton colourBlue;
+	private JRadioButton colourYellow;
+	private JRadioButton colourPurple;
+	private JRadioButton colourWhite;
+	private JRadioButton colourGreen;
+	private JButton setPlayersButton;
+	private JDialog setPlayers;
+	private JLabel setPHowManyText;
+	private JButton okNumPlayers;
+	private JLabel setPHeadText;
+	private JComboBox<String> numPLayers;
+	private JDialog warning;
+	private JLabel warningTextHead;
+	private JButton warningOk;
+	private JLabel warningLine1;
+	private JLabel warningLine2;
     // End of variables declaration//GEN-END:variables
 }

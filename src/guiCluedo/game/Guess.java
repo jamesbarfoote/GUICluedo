@@ -30,12 +30,13 @@ public class Guess {
 		Card discoveredCard = null;
 		ArrayList<Player> players = b.players;
 		for (Card card : guess) {
+			System.out.println("reached");
 			if (card instanceof Room) {	//Grab the room from the 3 suggested cards
 				room = (Room) card;
 			}
 		}
 		
-		if (player.getLocation().equals(room.getLocation())) {	//If player is in the suggested room
+		if (player.getRoom().equals(room)) {	//If player is in the suggested room
 			for (Card card : guess) {
 				int playerNum = player.getNum();
 				playerNum = (playerNum % b.players.size()) + 1;
@@ -66,7 +67,7 @@ public class Guess {
 		}
 		if (discoveredCard != null) {
 			for (Player p : players) {
-				p.addToHand2(discoveredCard);	//Add the discovered card to the list of discovered cards in every player
+				p.addToDiscoveredCards(discoveredCard);	//Add the discovered card to the list of discovered cards in every player
 			}
 		} else {
 			System.out.println("No player had any of the suggested cards");
@@ -103,6 +104,7 @@ public class Guess {
 						playerNum = (playerNum % b.players.size()) + 1;
 					}
 				}
+				System.out.println("Eliminated player was: " + player.getName());
 				eliminatedPlayer = player;
 				
 			}

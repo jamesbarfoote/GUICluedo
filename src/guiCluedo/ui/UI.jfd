@@ -4,15 +4,12 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :::p, par l {comp rollDice:::p::p, comp youRolledText::l:p::p, comp movesLeftLabel::l:p::p}, space u:::p, par l:::p {comp accusButton::l:p::p, comp guessButton:::p::p, comp endTurn:::p:85:p}, space :p:32:p, comp yourhandText:::p::p, space u:::p, comp handArea::::126:x, space :::p}, comp jSeparator1::t:::x, comp boardArea::l::444:x}"
-			"$verticalGroup": "par l {seq t {comp boardArea::::261:x, space :::p, comp jSeparator1:::p:10:p, space :::p, par l:::p {seq {comp handArea:::p:81:p, space :p:16:p}, seq {par b {comp rollDice::b:p::p, comp endTurn::b:p::p}, par l {seq l {space :p:18:p, comp youRolledText:::p::p, space :::x, comp movesLeftLabel:::p::p}, seq l {space :::p, par b {comp guessButton::b:p::p, comp yourhandText::b:p::p}, space :::p, comp accusButton:::p::p}}}}}}"
+			"$horizontalGroup": "par l {comp boardArea::l:::x, seq {par l {seq {par l {comp youRolledText::l:p::p, comp movesLeftLabel::l:p::p, comp rollDice::l:p:93:p, comp playerTurnText:::p:130:p}, space :::p, par l {comp endTurn::l:p:85:p, comp accusButton::l:p::p, seq l {comp guessButton:::p::p, space u:::p, comp yourhandText:::p::p}}, space :p::p, comp handArea:::::x}, seq l {comp separator1:::p:444:p, space :0:0:x}}, space :10:10:p}}"
+			"$verticalGroup": "par l {seq t {comp boardArea::::270:x, space :::p, comp separator1:::p:2:p, par l {seq t {space :p:10:p, comp endTurn:::p::p, space :::p, par t {comp guessButton:::p::p, comp yourhandText:::p::p}, space :::p, comp accusButton:::p::p, space :::p}, par l {seq t {space :p:6:p, comp playerTurnText:::p:16:p, space :::p, comp youRolledText:::p::p, space :::p, comp movesLeftLabel:::p::p, space :::p, comp rollDice:::p:28:p, space :p:6:p}, seq l {space :::p, comp handArea:::p:81:p, space :::p}}}}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
 			"title": "Cluedo"
-			add( new FormComponent( "javax.swing.JSeparator" ) {
-				name: "jSeparator1"
-			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "rollDice"
 				"text": "Roll Dice"
@@ -22,24 +19,30 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "endTurn"
 				"text": "End Turn"
+				"toolTipText": "End your turn so that the next player can go"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "endTurnActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "guessButton"
 				"text": "Suggestion"
+				"toolTipText": "Make a guess as to what cards you think are the answer"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "guessButtonActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "accusButton"
 				"text": "Accusation"
+				"toolTipText": "If you are sure what the answer if click me the make your accusation"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "accusButtonActionPerformed", true ) )
 			} )
 			add( new FormContainer( "javax.swing.JLayeredPane", new FormLayoutManager( class javax.swing.JLayeredPane ) ) {
 				name: "boardArea"
+				"doubleBuffered": true
 			} )
 			add( new FormContainer( "javax.swing.JLayeredPane", new FormLayoutManager( class javax.swing.JLayeredPane ) ) {
 				name: "handArea"
 				"border": new javax.swing.border.SoftBevelBorder( 1, null, null, null, null )
+				"doubleBuffered": true
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "handAreaMouseClicked", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "yourhandText"
@@ -53,6 +56,14 @@ new FormModel {
 				name: "movesLeftLabel"
 				"text": "You have 0 moves left"
 			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "playerTurnText"
+				"text": "Hello it is your turn"
+				"font": new java.awt.Font( "Tahoma", 1, 12 )
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "separator1"
+			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "jMenuBar"
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
@@ -61,12 +72,37 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "newGame"
 						"text": "New Game"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "newGameActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "showShortcuts"
+						"text": "Show shortcuts"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showShortcutsActionPerformed", true ) )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "GameMenu"
 					"text": "Game"
 					addEvent( new FormEvent( "javax.swing.event.MenuListener", "menuSelected", "GameMenuMenuSelected", true ) )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "discoveredCardsmenuItem"
+						"text": "Show discovered cards"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "discoveredCardsmenuItemActionPerformed", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": "Cheats"
+					add( new FormComponent( "javax.swing.JCheckBoxMenuItem" ) {
+						name: "checkBoxMenuItem1"
+						"text": "Infinite move"
+						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "checkBoxMenuItem1ItemStateChanged", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JCheckBoxMenuItem" ) {
+						name: "cheatAnswer"
+						"text": "Show answer"
+						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "cheatAnswerItemStateChanged", true ) )
+					} )
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {
@@ -114,19 +150,20 @@ new FormModel {
 			"size": new java.awt.Dimension( 445, 200 )
 		} )
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, par l {comp label5::l:p::p, par t:l {comp errorOK:::p::p, comp errorText2:::p::p}}, space :::x}}"
-			"$verticalGroup": "par l {seq l {space :p:22:p, comp label5:::p::p, space :::p, comp errorText2:::p::p, space ::65:x, comp errorOK:::p::p, space :::p}}"
+			"$horizontalGroup": "par l {seq {space :::p, par l {comp errorText1::l:p::p, par t:l {comp errorOK:::p::p, comp errorText2:::p::p}}, space :::x}}"
+			"$verticalGroup": "par l {seq l {space :p:22:p, comp errorText1:::p::p, space :::p, comp errorText2:::p::p, space ::65:x, comp errorOK:::p::p, space :::p}}"
 		} ) {
 			name: "errorDialog"
 			"title": "ERROR!"
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label5"
+				name: "errorText1"
 				"text": "You have tried to perform a suggestion "
 				"font": new java.awt.Font( "Tahoma", 0, 14 )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "errorOK"
 				"text": "OK"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "errorOKActionPerformed", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "errorOKActionPerformed", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "errorOKActionPerformed", true ) )
 			} )
@@ -138,6 +175,37 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 630, 0 )
 			"size": new java.awt.Dimension( 270, 200 )
+		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :p:117:p, comp guessDiagOkButton:::p::p, space ::120:x}, seq t {space :0:33:x, par l {seq t {comp line3Text:::p::p, space :p:19:p}, seq t {comp line1Text:::p::p, space :p:52:p}, seq t {comp line2Text:::p::p, space :p:88:p}}}, seq t {space ::130:x, comp guessDiagPlayerNameText:::p::p, space :p:115:p}}"
+			"$verticalGroup": "par l {seq l {space :p:5:p, comp guessDiagPlayerNameText:::p::p, space :::p, comp line1Text:::p::p, space :p:13:p, comp line2Text:::p::p, space :::p, comp line3Text:::p::p, space ::41:x, comp guessDiagOkButton:::p::p, space :::p}}"
+		} ) {
+			name: "guessDialog"
+			"title": "Suggestion"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "line1Text"
+				"text": "Player blah guessed these cards:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "line2Text"
+				"text": "Insert 3 cards here"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "line3Text"
+				"text": "Please click ok and then select one of your cards"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "guessDiagOkButton"
+				"text": "OK"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "guessDiagOkButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "guessDiagPlayerNameText"
+				"text": "Player 1"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 510, 440 )
+			"size": new java.awt.Dimension( 300, 200 )
 		} )
 	}
 }

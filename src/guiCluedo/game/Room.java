@@ -1,22 +1,24 @@
 package guiCluedo.game;
 
+import java.awt.Point;
 import java.awt.Polygon;
 
 public class Room extends Card{
 	private String name;
-	private Location location;
+	private Point location;
 	private Polygon boundingBox;
 	
-	public Room(String name, Polygon polygon){
+	public Room(String name, Polygon polygon, Point location){
 		this.name = name;
 		this.boundingBox = polygon;
+		this.location = location;
 	}
 	
 	/**
-	 * Returns the location of the room.
+	 * Returns the location of the room where the name will be drawn.
 	 * @return Location
 	 */
-	public Location getLocation(){
+	public Point getLocation(){
 		return location;
 	}
 	

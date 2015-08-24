@@ -4,16 +4,9 @@ package guiCluedo.ui;
 import java.awt.*;
 import java.awt.Component;
 import java.awt.event.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.*;
-import javax.swing.GroupLayout;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.KeyStroke;
-import javax.swing.LayoutStyle;
 import javax.swing.border.*;
 import javax.swing.event.*;
 import guiCluedo.game.Board;
@@ -37,6 +30,7 @@ public class UI extends javax.swing.JFrame {
 	private static final String MOVE_DOWN = "move down";
 	private static final String MOVE_LEFT = "move left";
 	private boolean isGuess = true;
+	private Card cardClicked;
 
 	static JLabel obj1 = new JLabel();
 
@@ -44,9 +38,12 @@ public class UI extends javax.swing.JFrame {
 	 * Creates new form UI
 	 */
 	public UI() {
+		
 		initComponents();
 		b = new Board();
+		
 		playGame(b, 0);
+		
 		System.out.println("Board created");
 		System.out.println("boardArea.getWidth() = " + boardArea.getWidth());
 		canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
@@ -55,10 +52,12 @@ public class UI extends javax.swing.JFrame {
 		System.out.println("Canvas created");
 		boardArea.add(canvas);
 		System.out.println("canvas added");
-		
+
 		System.out.println("Game played");
 
 		keyBindings();
+//		handArea.addMouseListener(this);
+//		addMouseListener(this);
 
 		this.addComponentListener(new ComponentAdapter() 
 		{  
@@ -88,7 +87,7 @@ public class UI extends javax.swing.JFrame {
 		obj1.getActionMap().put(MOVE_LEFT, new MoveAction("Left", currentPlayer, this.canvas, b));
 		add(obj1);
 	}
-	
+
 	void keyPressed(KeyEvent e)
 	{
 		movesLeftLabel.setText("You have " + currentPlayer.getRoll() + " moves left");
@@ -112,13 +111,17 @@ public class UI extends javax.swing.JFrame {
 
 	private void endTurnActionPerformed(ActionEvent e) {
 		playGame(b, currentPlayer.getNum());
+		//HandCanvas h = new HandCanvas(b, handArea.getWidth(), handArea.getHeight(), currentPlayer);
 		rollDice.setEnabled(true);
+		hCanvas.setHand(currentPlayer);
+		this.hCanvas.repaint();
 
 	}
 
 	private void guessOKButtonActionPerformed(ActionEvent e) {
 		if(isGuess)
 		{
+			//Suggestion logic
 			String room = findContainingRoom(b);
 			String character = guessCharacter.getSelectedItem().toString();
 			String weapon = guessWeapon.getSelectedItem().toString();
@@ -135,6 +138,7 @@ public class UI extends javax.swing.JFrame {
 		}
 		else
 		{
+			//Accusation logic
 			String room = guessRoom.getSelectedItem().toString();;
 			String character = guessCharacter.getSelectedItem().toString();
 			String weapon = guessWeapon.getSelectedItem().toString();
@@ -146,8 +150,17 @@ public class UI extends javax.swing.JFrame {
 			cards.add(character);
 			ArrayList<Card> guessHand = createGuess(cards, b);
 			//Pass Arraylist to the guess class
-			Guess g = new Guess(true, guessHand, currentPlayer, b);
+			Guess g = new Guess(false, guessHand, currentPlayer, b);
 			guessDialoge.setVisible(false);
+			if(g.getEliminatedPlayer()!=null){
+				b.players.remove(g.getEliminatedPlayer());
+				canvas.repaint();
+				playGame(b, currentPlayer.getNum());
+				rollDice.setEnabled(true);
+				hCanvas.setHand(currentPlayer);
+				this.hCanvas.repaint();
+				//Need to display pop-up box telling player they have been eliminated here
+			}
 		}
 
 
@@ -176,31 +189,75 @@ public class UI extends javax.swing.JFrame {
 		{
 			if(i == 0){
 				String roomName = cards.get(i);
+				System.out.println("room name = " + roomName);
 				int index = b.getRoomNames().indexOf(roomName);
 				Room guessRoom = b.getRooms().get(index);
+				guessHand.add(guessRoom);
 			}
 			else if(i == 1){
 				String weaponName = cards.get(i);
 				System.out.println("weapon name = " + weaponName);
 				int indexW = b.getWeaponNames().indexOf(weaponName);
 				Weapon guessWeapon = b.getWeapons().get(indexW);
+				guessHand.add(guessWeapon);
 			}
 			else if(i == 2)
 			{
 				String characterN = cards.get(i);
+				System.out.println("character name = " + characterN);
 				int indexC = b.getCharacterNames().indexOf(characterN);
 				Character guessCharacter = b.getCharacters().get(indexC);
+				guessHand.add(guessCharacter);
 			}
 		}
-
-
-
 		return guessHand;
 
 	}
 
 	private void errorOKActionPerformed(ActionEvent e) {
 		errorDialog.setVisible(false);
+	}
+
+	private void newGameActionPerformed(ActionEvent e) {
+		startScreen sc = new startScreen();
+		sc.startScreenForm.setVisible(true);
+		this.setVisible(false);
+	}
+
+	private void handAreaMouseClicked(MouseEvent e) {
+		System.out.println("Clicked");
+		// Get the clicked location
+		int x = e.getX();
+		int y = e.getY();
+		System.out.println("X = " + x + " Y = " + y);
+		
+		//Get the starting x and y location of the hand area
+		int handX = handArea.getX();
+		int handY = handArea.getY();
+		int maxY = handY + handArea.getHeight();
+		
+		//Get the width of each card
+		ArrayList<Card> hand = currentPlayer.getHand();
+		int numCards = hand.size();
+		int cardSize = numCards / handArea.getWidth();
+		
+		//Figure out which card was clicked
+			//for each card in the hand
+		for(int i = 0; i < hand.size(); i++)
+		{
+			int currentX = (cardSize * i) + handX;
+			
+			//x = (width * i) + startLoc
+			//y = start y + (handArea + height)
+				if(x >= currentX && x <= currentX + cardSize)
+				{
+					if(y >= handY && y <= maxY)
+					{
+						cardClicked = hand.get(i);
+						System.out.println("Clicked card = " + cardClicked);
+					}
+				}
+		}
 	}
 
 	/**
@@ -213,13 +270,15 @@ public class UI extends javax.swing.JFrame {
 	 * @param playerNum - the prior players number
 	 */
 	public void playGame(Board b, int playerNum) {
-		
 		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
 		System.out.println("Current player is: " + playerNum + " " );
 		currentPlayer = b.getPlayers().get(playerNum - 1);
+		playerTurnText.setText(currentPlayer.getName() + " / " + currentPlayer.getCharacterName());
+
 		System.out.println(currentPlayer.getName());
 		Player eliminatedPlayer = null;
 		keyBindings();
+
 		//		while (finished == false) {	//While the game has not been won (or lost)
 		//			Room room = null;
 		//			for(Room r : b.getRooms()){
@@ -316,7 +375,6 @@ public class UI extends javax.swing.JFrame {
 		fileMenu = new JMenu();
 		newGame = new JMenuItem();
 		GameMenu = new JMenu();
-		jSeparator1 = new JSeparator();
 		rollDice = new JButton();
 		endTurn = new JButton();
 		guessButton = new JButton();
@@ -326,11 +384,14 @@ public class UI extends javax.swing.JFrame {
 		yourhandText = new JLabel();
 		youRolledText = new JLabel();
 		movesLeftLabel = new JLabel();
+		playerTurnText = new JLabel();
+		separator1 = new JSeparator();
 		guessDialoge = new Dialog(this);
 		guessOKButton = new JButton();
 		guessWeapon = new JComboBox();
 		guessCharacter = new JComboBox();
 		guessRoom = new JComboBox();
+		
 		label2 = new JLabel();
 		label1 = new JLabel();
 		label3 = new JLabel();
@@ -339,10 +400,9 @@ public class UI extends javax.swing.JFrame {
 		label5 = new JLabel();
 		errorOK = new JButton();
 		errorText2 = new JLabel();
-
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
-		guessWeapon.addItem("Pipe");
+		guessWeapon.addItem("Lead Pipe");
 		guessWeapon.addItem("Rope");
 		guessWeapon.addItem("Candle Stick");
 		guessWeapon.addItem("Wrench");
@@ -364,7 +424,6 @@ public class UI extends javax.swing.JFrame {
 		guessRoom.addItem("Lounge");
 		guessRoom.addItem("Study");
 
-		
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Cluedo");
@@ -379,6 +438,12 @@ public class UI extends javax.swing.JFrame {
 
 				//---- newGame ----
 				newGame.setText("New Game");
+				newGame.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						newGameActionPerformed(e);
+					}
+				});
 				fileMenu.add(newGame);
 			}
 			jMenuBar.add(fileMenu);
@@ -438,9 +503,21 @@ public class UI extends javax.swing.JFrame {
 			}
 		});
 
+		//======== boardArea ========
+		{
+			boardArea.setDoubleBuffered(true);
+		}
+
 		//======== handArea ========
 		{
 			handArea.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
+			handArea.setDoubleBuffered(true);
+			handArea.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					handAreaMouseClicked(e);
+				}
+			});
 		}
 
 		//---- yourhandText ----
@@ -452,57 +529,70 @@ public class UI extends javax.swing.JFrame {
 		//---- movesLeftLabel ----
 		movesLeftLabel.setText("You have 0 moves left");
 
+		//---- playerTurnText ----
+		playerTurnText.setText("Hello it is your turn");
+		playerTurnText.setFont(new Font("Tahoma", Font.BOLD, 12));
+
 		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
 		contentPane.setLayout(contentPaneLayout);
 		contentPaneLayout.setHorizontalGroup(
 			contentPaneLayout.createParallelGroup()
+				.addComponent(boardArea)
 				.addGroup(contentPaneLayout.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(contentPaneLayout.createParallelGroup()
-						.addComponent(rollDice)
-						.addComponent(youRolledText)
-						.addComponent(movesLeftLabel))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addComponent(accusButton)
-						.addComponent(guessButton)
-						.addComponent(endTurn, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
-					.addGap(32, 32, 32)
-					.addComponent(yourhandText)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-					.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-					.addContainerGap())
-				.addComponent(jSeparator1, GroupLayout.Alignment.TRAILING)
-				.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+						.addGroup(contentPaneLayout.createSequentialGroup()
+							.addGroup(contentPaneLayout.createParallelGroup()
+								.addComponent(youRolledText)
+								.addComponent(movesLeftLabel)
+								.addComponent(rollDice, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+								.addComponent(playerTurnText, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(contentPaneLayout.createParallelGroup()
+								.addComponent(endTurn, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+								.addComponent(accusButton)
+								.addGroup(contentPaneLayout.createSequentialGroup()
+									.addComponent(guessButton)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+									.addComponent(yourhandText)))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(handArea))
+						.addGroup(contentPaneLayout.createSequentialGroup()
+							.addComponent(separator1, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
+							.addGap(0, 0, Short.MAX_VALUE)))
+					.addGap(10, 10, 10))
 		);
 		contentPaneLayout.setVerticalGroup(
 			contentPaneLayout.createParallelGroup()
 				.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addComponent(handArea, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-							.addGap(16, 16, 16))
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(rollDice)
-								.addComponent(endTurn))
-							.addGroup(contentPaneLayout.createParallelGroup()
-								.addGroup(contentPaneLayout.createSequentialGroup()
-									.addGap(18, 18, 18)
-									.addComponent(youRolledText)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(movesLeftLabel))
-								.addGroup(contentPaneLayout.createSequentialGroup()
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(guessButton)
-										.addComponent(yourhandText))
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(accusButton))))))
+					.addComponent(separator1, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
+					.addGroup(contentPaneLayout.createParallelGroup()
+						.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+							.addGap(10, 10, 10)
+							.addComponent(endTurn)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(guessButton)
+								.addComponent(yourhandText))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(accusButton)
+							.addContainerGap())
+						.addGroup(contentPaneLayout.createParallelGroup()
+							.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+								.addGap(6, 6, 6)
+								.addComponent(playerTurnText, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(youRolledText)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(movesLeftLabel)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(rollDice, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+								.addGap(6, 6, 6))
+							.addGroup(contentPaneLayout.createSequentialGroup()
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(handArea, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()))))
 		);
 		pack();
 		setLocationRelativeTo(getOwner());
@@ -667,51 +757,7 @@ public class UI extends javax.swing.JFrame {
 	//private javax.swing.JLayeredPane handArea;
 
 
-	/**
-	 * Creates a guess for the specified board. A guess consists of 3 cards used for
-	 * either a suggestion or an accusation
-	 * @param scan - The scanner used for accessing user input
-	 * @param b - The current board
-	 * @return The list of 3 cards to be used in the suggestion/accusation.
-	 */
-	private static ArrayList<Card> createGuess(Scanner scan, Board b) {
-		String roomName = scan.next();
-		int index = b.getRoomNames().indexOf(roomName);
-		Room guessRoom = null;
-		if (index != -1) {
-			guessRoom = b.getRooms().get(index);
-		} else {
-			System.out.println("Room name was incorrect, please type the 3 cards again");
-			return null;
-		}
-
-		int indexW = b.getWeaponNames().indexOf(scan.next());
-		Weapon guessWeapon = null;
-		if (indexW != -1) {
-			guessWeapon = b.getWeapons().get(indexW);
-		} else {
-			System.out.println("Weapon name was incorrect, please type the 3 cards again");
-			return null;
-		}
-
-		String characterN = scan.next();
-		int indexC = b.getCharacterNames().indexOf(characterN);
-		Character guessCharacter = null;
-		if (indexC != -1) {
-			guessCharacter = b.getCharacters().get(indexC);
-		} else {
-			System.out.println("Character name was incorrect, please type the 3 cards again");
-			return null;
-		}
-
-		ArrayList<Card> guessHand = new ArrayList<Card>();
-		guessHand.add(guessRoom);
-		guessHand.add(guessWeapon);
-		guessHand.add(guessCharacter);
-
-		return guessHand;
-
-	}
+	
 
 	/**
 	 * Checks if the given string can be parsed to an integer.
@@ -757,7 +803,6 @@ public class UI extends javax.swing.JFrame {
 	private JMenu fileMenu;
 	private JMenuItem newGame;
 	private JMenu GameMenu;
-	private JSeparator jSeparator1;
 	private JButton rollDice;
 	private JButton endTurn;
 	private JButton guessButton;
@@ -767,6 +812,8 @@ public class UI extends javax.swing.JFrame {
 	private JLabel yourhandText;
 	private JLabel youRolledText;
 	private JLabel movesLeftLabel;
+	private JLabel playerTurnText;
+	private JSeparator separator1;
 	private Dialog guessDialoge;
 	private JButton guessOKButton;
 	private JComboBox guessWeapon;
@@ -781,4 +828,6 @@ public class UI extends javax.swing.JFrame {
 	private JButton errorOK;
 	private JLabel errorText2;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
+
+	
 }
