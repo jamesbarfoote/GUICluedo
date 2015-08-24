@@ -12,9 +12,12 @@ public class Board {
 
 	public ArrayList<Card> answer;
 	public ArrayList<Player> players = startScreen.players;
-	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Knife", "Revolver", "Rope", "Lead Pipe", "Wrench"));
-	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "Mr. Green", "Mrs. Peacock", "Professor Plum"));
-	private ArrayList<String> roomNames = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory","Billiard Room", "Library", "Study", "Hall", "Lounge", "Dining Room"));
+	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Knife", "Revolver", "Rope", "Lead Pipe", 
+			"Wrench"));
+	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlet", "Colonel Mustard","Mrs. White", "Mr. Green", 
+			"Mrs. Peacock", "Professor Plum"));
+	private ArrayList<String> roomNames = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory","Billiard Room", "Library", 
+			"Study", "Hall", "Lounge", "Dining Room"));
 
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	private ArrayList<Character> characters = new ArrayList<Character>();
@@ -23,8 +26,9 @@ public class Board {
 	private ArrayList<Point> stairwells = new ArrayList<Point>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 	private ArrayList<Point> weaponLocations = new ArrayList<Point>();
+	private ArrayList<Point> usedSquares = new ArrayList<Point>();
 	private Polygon centre;
-	
+
 	private String[][] board = new String[22][23];
 
 	public Board() {
@@ -33,6 +37,9 @@ public class Board {
 		genCards();
 		createDoors();
 		addToStairwells();
+		for(Player player : players){
+			usedSquares.add(player.getLocation());
+		}
 	}
 
 	/**
@@ -47,6 +54,9 @@ public class Board {
 		weaponLocations.add(new Point(5,20));
 		weaponLocations.add(new Point(2,12));
 		Collections.shuffle(weaponLocations);
+		for(Point weapon : weaponLocations){
+			usedSquares.add(weapon);
+		}
 		for(int i = 0; i < weaponNames.size(); i++){
 			weapons.add(new Weapon(weaponNames.get(i), weaponLocations.get(i)));
 		}
@@ -118,7 +128,7 @@ public class Board {
 		allCards.addAll(characters);
 		allCards.addAll(rooms);
 	}
-	
+
 	private void addToStairwells(){
 		Point p = new Point(0,0);
 		stairwells.add(p);
@@ -128,6 +138,9 @@ public class Board {
 		stairwells.add(p);
 		p = new Point(0,16);
 		stairwells.add(p);
+		for(Point stairwell : stairwells){
+			usedSquares.add(stairwell);
+		}
 	}
 
 	/**
@@ -158,44 +171,44 @@ public class Board {
 	 * @param numPlayers - The number of player in the game
 	 */
 	private void genCards() {
-//		Random rand = new Random();
-//		int characterNum = rand.nextInt(characters.size());
-//		int count = 0;
-//		ArrayList<Integer> usedCharacters = new ArrayList<Integer>();
-//		while(count < numPlayers){
-//			usedCharacters.add(characterNum);
-//			if(characterNames.get(characterNum) == "Miss Scarlett"){
-//				players.add(new Player("Miss Scarlett", new Location(9,0), count+1));
-//			}
-//			if(characterNames.get(characterNum) == "Colonel Mustard"){
-//				players.add(new Player("Colonel Mustard", new Location(17,0), count+1));
-//			}
-//			if(characterNames.get(characterNum) == "Mrs. White"){
-//				players.add(new Player("Mrs. White", new Location(24,4), count+1));
-//			}
-//			if(characterNames.get(characterNum) == "The Reverend Green"){
-//				players.add(new Player("The Reverend Green", new Location(15,24), count+1));
-//			}
-//			if(characterNames.get(characterNum) == "Mrs. Peacock"){
-//				players.add(new Player("Mrs. Peacock", new Location(6,24), count+1));
-//			}
-//			if(characterNames.get(characterNum) == "Professor Plum"){
-//				players.add(new Player("Professor Plum", new Location(0,15), count+1));
-//			}
-//			count++;
-//			//Make sure there are no duplicate player characters
-//			while(true){
-//				int newCharacterNum = rand.nextInt(characters.size());
-//				if(usedCharacters.contains(newCharacterNum) == false || count == 6){
-//					characterNum = newCharacterNum;
-//					break;
-//				}
-//			}
-//		}
+		//		Random rand = new Random();
+		//		int characterNum = rand.nextInt(characters.size());
+		//		int count = 0;
+		//		ArrayList<Integer> usedCharacters = new ArrayList<Integer>();
+		//		while(count < numPlayers){
+		//			usedCharacters.add(characterNum);
+		//			if(characterNames.get(characterNum) == "Miss Scarlett"){
+		//				players.add(new Player("Miss Scarlett", new Location(9,0), count+1));
+		//			}
+		//			if(characterNames.get(characterNum) == "Colonel Mustard"){
+		//				players.add(new Player("Colonel Mustard", new Location(17,0), count+1));
+		//			}
+		//			if(characterNames.get(characterNum) == "Mrs. White"){
+		//				players.add(new Player("Mrs. White", new Location(24,4), count+1));
+		//			}
+		//			if(characterNames.get(characterNum) == "The Reverend Green"){
+		//				players.add(new Player("The Reverend Green", new Location(15,24), count+1));
+		//			}
+		//			if(characterNames.get(characterNum) == "Mrs. Peacock"){
+		//				players.add(new Player("Mrs. Peacock", new Location(6,24), count+1));
+		//			}
+		//			if(characterNames.get(characterNum) == "Professor Plum"){
+		//				players.add(new Player("Professor Plum", new Location(0,15), count+1));
+		//			}
+		//			count++;
+		//			//Make sure there are no duplicate player characters
+		//			while(true){
+		//				int newCharacterNum = rand.nextInt(characters.size());
+		//				if(usedCharacters.contains(newCharacterNum) == false || count == 6){
+		//					characterNum = newCharacterNum;
+		//					break;
+		//				}
+		//			}
+		//		}
 		//Delegate the cards out to the players.
-		
+
 		System.out.println("Generating cards");
-		
+
 		Collections.shuffle(allCards);
 		System.out.println(allCards.size());
 		System.out.println("Players = " + players.size());
@@ -223,7 +236,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	private void createDoors(){
 		this.doors.add(new Point(3, 4));
 		this.doors.add(new Point(8, 4));
@@ -240,49 +253,56 @@ public class Board {
 		this.doors.add(new Point(6, 11));
 		this.doors.add(new Point(6, 10));
 		this.doors.add(new Point(6, 9));
+		for(Point door : this.doors){
+			this.usedSquares.add(door);
+		}
 	}
 
 	public ArrayList<Player> getPlayers(){
 		return players;
 	}
-	
+
 	public ArrayList<String> getWeaponNames(){
 		return weaponNames;
 	}
-	
+
 	public ArrayList<String> getCharacterNames(){
 		return characterNames;
 	}
-	
+
 	public ArrayList<String> getRoomNames(){
 		return roomNames;
 	}
-	
+
 	public ArrayList<Room> getRooms(){
 		return rooms;
 	}
-	
+
 	public ArrayList<Weapon> getWeapons(){
 		return weapons;
 	}
-	
+
 	public ArrayList<Character> getCharacters(){
 		return characters;
 	}
-	
+
 	public String[][] getBoard(){
 		return board;
 	}
-	
+
 	public ArrayList<Point> getDoors(){
 		return doors;
 	}
-	
+
 	public Polygon getCentre(){
 		return centre;
 	}
-	
+
 	public ArrayList<Point> getStairwells(){
 		return stairwells;
+	}
+
+	public ArrayList<Point> getUsedSquares(){
+		return usedSquares;
 	}
 }

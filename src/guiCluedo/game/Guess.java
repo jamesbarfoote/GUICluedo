@@ -1,4 +1,5 @@
 package guiCluedo.game;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,36 @@ public class Guess {
 		}
 	}
 
+	public void moveIcons(List<Card> guess, Board b){
+		Room currentRoom = player.getRoom();
+		Weapon weapon = null;
+		for(Card card : guess){
+			if (card instanceof Weapon){
+				weapon = (Weapon) card;
+			}
+		}
+		int count = 0;
+		for(int i = 0; i < 22; i++){
+			for(int j = 0; j < 23; j++){
+				if(currentRoom.getBoundingBox().contains(i, j)){
+					Point p = new Point(i, j);
+					if(!b.getUsedSquares().contains(p) && (count == 0) && (!currentRoom.getBoundingBox().contains(weapon.getLocation()))){
+						b.getUsedSquares().remove(weapon.getLocation());
+						weapon.setLocation(p);
+						b.getUsedSquares().add(weapon.getLocation());
+					}
+					else if(!b.getUsedSquares().contains(p) && (count == 1) && (!currentRoom.getBoundingBox().contains(player.getLocation()))){
+						b.getUsedSquares().remove(player.getLocation());
+						player.setLocation(p);
+						b.getUsedSquares().add(player.getLocation());
+					}
+				}
+			}
+		}
+	}
+
+
+
 	/**
 	 * Makes a suggestion based on the 3 cards given,
 	 * if suggestion is valid and not the answer then a
@@ -35,7 +66,7 @@ public class Guess {
 				room = (Room) card;
 			}
 		}
-		
+
 		if (player.getRoom().equals(room)) {	//If player is in the suggested room
 			for (Card card : guess) {
 				int playerNum = player.getNum();
@@ -106,23 +137,23 @@ public class Guess {
 				}
 				System.out.println("Eliminated player was: " + player.getName());
 				eliminatedPlayer = player;
-				
+
 			}
 		}
 		if(entered == false && !guess.contains(null)){
 			this.won = true;
 		}
-		
+
 	}
-	
+
 	public boolean hasWon(){
 		return won;
 	}
-	
+
 	public Player getEliminatedPlayer(){
 		return eliminatedPlayer;
 	}
-	
+
 	public boolean getFailed(){
 		return failed;
 	}
