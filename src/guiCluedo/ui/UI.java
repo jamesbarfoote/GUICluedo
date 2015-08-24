@@ -17,7 +17,7 @@ import guiCluedo.game.Player;
 import guiCluedo.game.Room;
 import guiCluedo.game.Weapon;
 
-public class UI extends javax.swing.JFrame implements MouseListener {
+public class UI extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -38,8 +38,10 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 	 * Creates new form UI
 	 */
 	public UI() {
+		
 		initComponents();
 		b = new Board();
+		
 		playGame(b, 0);
 		
 		System.out.println("Board created");
@@ -54,8 +56,8 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 		System.out.println("Game played");
 
 		keyBindings();
-		handArea.addMouseListener(this);
-		addMouseListener(this);
+//		handArea.addMouseListener(this);
+//		addMouseListener(this);
 
 		this.addComponentListener(new ComponentAdapter() 
 		{  
@@ -744,51 +746,7 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 	//private javax.swing.JLayeredPane handArea;
 
 
-	/**
-	 * Creates a guess for the specified board. A guess consists of 3 cards used for
-	 * either a suggestion or an accusation
-	 * @param scan - The scanner used for accessing user input
-	 * @param b - The current board
-	 * @return The list of 3 cards to be used in the suggestion/accusation.
-	 */
-	private static ArrayList<Card> createGuess(Scanner scan, Board b) {
-		String roomName = scan.next();
-		int index = b.getRoomNames().indexOf(roomName);
-		Room guessRoom = null;
-		if (index != -1) {
-			guessRoom = b.getRooms().get(index);
-		} else {
-			System.out.println("Room name was incorrect, please type the 3 cards again");
-			return null;
-		}
-
-		int indexW = b.getWeaponNames().indexOf(scan.next());
-		Weapon guessWeapon = null;
-		if (indexW != -1) {
-			guessWeapon = b.getWeapons().get(indexW);
-		} else {
-			System.out.println("Weapon name was incorrect, please type the 3 cards again");
-			return null;
-		}
-
-		String characterN = scan.next();
-		int indexC = b.getCharacterNames().indexOf(characterN);
-		Character guessCharacter = null;
-		if (indexC != -1) {
-			guessCharacter = b.getCharacters().get(indexC);
-		} else {
-			System.out.println("Character name was incorrect, please type the 3 cards again");
-			return null;
-		}
-
-		ArrayList<Card> guessHand = new ArrayList<Card>();
-		guessHand.add(guessRoom);
-		guessHand.add(guessWeapon);
-		guessHand.add(guessCharacter);
-
-		return guessHand;
-
-	}
+	
 
 	/**
 	 * Checks if the given string can be parsed to an integer.
@@ -860,33 +818,5 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 	private JLabel errorText2;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
