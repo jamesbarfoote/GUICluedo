@@ -5,11 +5,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.imageio.ImageIO;
+
 import guiCluedo.game.Board;
 import guiCluedo.game.Player;
 import guiCluedo.game.Room;
@@ -17,6 +24,7 @@ import guiCluedo.game.Room;
 public class BoardCanvas extends Canvas{
 
 	private static final long serialVersionUID = 1L;
+	private static final String IMG_PATH = "src/guiCluedo/ui/images/weapon icons/";
 	Board gameBoard;
 	private String[][] board;
 	private ArrayList<Player> players;
@@ -135,6 +143,30 @@ public class BoardCanvas extends Canvas{
 			g.setColor(p.getColor());
 			g.fillOval((int) p.getLocation().getX()*(width/23), (int) p.getLocation().getY()*(height/22), width/23, height/22);
 		}
+		//Draw weapons
+		for(int i = 0; i < gameBoard.getWeapons().size(); i++){
+			try {
+				//BufferedImage myPicture = ImageIO.read(new File("images/" + "hand.get(i)" + ".jpg"));
+				BufferedImage myPicture = ImageIO.read(new File(IMG_PATH + gameBoard.getWeapons().get(i).getName() + ".jpg"));
+				int cWidth = width / gameBoard.getWeapons().size();
+				//int cWidth = width;
+				BufferedImage scaled = getScaledImage(myPicture, cWidth, height);
+				//g.drawImage(scaled, 0,0, getParent());
+				g.drawImage(scaled, cWidth * i,0, getParent());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private BufferedImage getScaledImage(Image img, int w, int h){
+	    BufferedImage resized = new BufferedImage(w, h, BufferedImage.TRANSLUCENT);
+	    Graphics2D g2 = resized.createGraphics();
+	    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+	    g2.drawImage(img, 0, 0, w, h, null);
+	    g2.dispose();
+	    return resized;
 	}
 
 	public void setWidth(int width){
