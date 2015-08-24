@@ -74,8 +74,28 @@ class MoveAction extends AbstractAction {
 			}
 		}
 		this.canvas.repaint();
+	}
+	//	Point p = new Point(0,0);
+	//	stairwells.add(p);
+	//	p = new Point(20,0);
+	//	stairwells.add(p);
+	//	p = new Point(18,21);
+	//	stairwells.add(p);
+	//	p = new Point(0,16);
+	//	stairwells.add(p);
+	private void checkStairwells(){
+		if(player.getLocation().getX() == 0 && player.getLocation().getY() == 0){
+			//player.setLocation(p);
+		}
+		else if(player.getLocation().getX() == 20 && player.getLocation().getY() == 0){
 
-		//If player location is contained within a room, then show the suggestion button on the UI
+		}
+		else if(player.getLocation().getX() == 18 && player.getLocation().getY() == 21){
+
+		}
+		else if(player.getLocation().getX() == 0 && player.getLocation().getY() == 16){
+
+		}
 	}
 
 	/**

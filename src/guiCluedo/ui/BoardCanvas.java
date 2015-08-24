@@ -2,6 +2,7 @@ package guiCluedo.ui;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import guiCluedo.game.Board;
 import guiCluedo.game.Player;
+import guiCluedo.game.Room;
 
 public class BoardCanvas extends Canvas{
 
@@ -104,6 +106,16 @@ public class BoardCanvas extends Canvas{
 					g.fillRect(j*(width/23), i*(height/22), width/23, height/22);
 				}
 			}
+		}
+		g.setColor(new Color(0x796145));
+		for(Point p : gameBoard.getStairwells()){
+			g.fillRect(((int) p.getX()*(width/23)), ((int) p.getY()*(height/22)), width/23, height/22);
+		}
+		Font myFont = new Font("Serif", Font.ITALIC, width/60);
+		g.setFont(myFont);
+		g.setColor(Color.RED);
+		for(Room room : gameBoard.getRooms()){
+			g.drawString(room.getName(),((int) room.getLocation().getX()*(width/23)), ((int) room.getLocation().getY()*(height/22)));
 		}
 	}
 
