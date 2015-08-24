@@ -22,8 +22,4 @@ public class Weapon extends Card{
 	public Point getLocation(){
 		return location;
 	}
-	
-	public void setLocation(Point location){
-		this.location = location;
-	}
 }
