@@ -1,4 +1,5 @@
 package guiCluedo.game;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,34 @@ public class Guess {
 			Suggestion(guess, b);
 		} else {
 			Accusation(guess, b);
+		}
+	}
+	
+	public void moveIcons(List<Card> guess, Board b){
+		Room currentRoom = player.getRoom();
+		Weapon weapon = null;
+		for(Card card : guess){
+			if (card instanceof Weapon){
+				weapon = (Weapon) card;
+			}
+		}
+		int count = 0;
+		for(int i = 0; i < 22; i++){
+			for(int j = 0; j < 23; j++){
+				if(currentRoom.getBoundingBox().contains(i, j)){
+					Point p = new Point(i, j);
+					if(!b.getUsedSquares().contains(p) && (count == 0) && (!currentRoom.getBoundingBox().contains(weapon.getLocation()))){
+						b.getUsedSquares().remove(weapon.getLocation());
+						weapon.setLocation(p);
+						b.getUsedSquares().add(weapon.getLocation());
+					}
+					else if(!b.getUsedSquares().contains(p) && (count == 1) && (!currentRoom.getBoundingBox().contains(player.getLocation()))){
+						b.getUsedSquares().remove(player.getLocation());
+						player.setLocation(p);
+						b.getUsedSquares().add(player.getLocation());
+					}
+				}
+			}
 		}
 	}
 

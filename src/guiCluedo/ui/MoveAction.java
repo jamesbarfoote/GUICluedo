@@ -38,6 +38,8 @@ class MoveAction extends AbstractAction {
 				Point newLocation = new Point((int) location.getX()-1, (int) location.getY());
 				if(isValidMove(newLocation)){
 					newLocation = checkStairwell(newLocation);
+					board.getUsedSquares().remove(location);
+					board.getUsedSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -49,6 +51,8 @@ class MoveAction extends AbstractAction {
 				Point newLocation = new Point((int) location.getX(), (int) location.getY()-1);
 				if(isValidMove(newLocation)){
 					newLocation = checkStairwell(newLocation);
+					board.getUsedSquares().remove(location);
+					board.getUsedSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -60,6 +64,8 @@ class MoveAction extends AbstractAction {
 				Point newLocation = new Point((int) location.getX()+1, (int) location.getY());
 				if(isValidMove(newLocation)){
 					newLocation = checkStairwell(newLocation);
+					board.getUsedSquares().remove(location);
+					board.getUsedSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -71,6 +77,8 @@ class MoveAction extends AbstractAction {
 				Point newLocation = new Point((int) location.getX(), (int) location.getY()+1);
 				if(isValidMove(newLocation)){
 					newLocation = checkStairwell(newLocation);
+					board.getUsedSquares().remove(location);
+					board.getUsedSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);

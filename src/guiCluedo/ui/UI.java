@@ -134,6 +134,8 @@ public class UI extends javax.swing.JFrame {
 			ArrayList<Card> guessHand = createGuess(cards, b);
 			//Pass Arraylist to the guess class
 			Guess g = new Guess(true, guessHand, currentPlayer, b);
+			g.moveIcons(guessHand, b);
+			canvas.repaint();
 			guessDialoge.setVisible(false);
 		}
 		else
@@ -159,7 +161,6 @@ public class UI extends javax.swing.JFrame {
 				rollDice.setEnabled(true);
 				hCanvas.setHand(currentPlayer);
 				this.hCanvas.repaint();
-				//Need to display pop-up box telling player they have been eliminated here
 			}
 		}
 
@@ -273,6 +274,7 @@ public class UI extends javax.swing.JFrame {
 		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
 		System.out.println("Current player is: " + playerNum + " " );
 		currentPlayer = b.getPlayers().get(playerNum - 1);
+		currentPlayer.setRoll(0);
 		playerTurnText.setText(currentPlayer.getName() + " / " + currentPlayer.getCharacterName());
 
 		System.out.println(currentPlayer.getName());
