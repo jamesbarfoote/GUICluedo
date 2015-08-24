@@ -3,6 +3,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.midi.Synthesizer;
+
 public class Guess {
 
 	private Player player;
@@ -22,12 +24,24 @@ public class Guess {
 	public void moveIcons(List<Card> guess, Board b){
 		Room currentRoom = player.getRoom();
 		Weapon weapon = null;
+		Character character = null;
 		for(Card card : guess){
 			if (card instanceof Weapon){
 				weapon = (Weapon) card;
 			}
 		}
+		for(Card card : guess){
+			if (card instanceof Character){
+				character = (Character) card;
+			}
+		}
 		int count = 0;
+		Player suggestedPlayer = null;
+		for(Player player : b.getPlayers()){
+			if(player.getCharacterName().equals(character.getName())){
+				suggestedPlayer = player;
+			}
+		}
 		for(int i = 0; i < 22; i++){
 			for(int j = 0; j < 23; j++){
 				if(currentRoom.getBoundingBox().contains(i, j)){
@@ -38,10 +52,14 @@ public class Guess {
 						b.getUsedSquares().add(weapon.getLocation());
 						count++;
 					}
-					else if(!b.getUsedSquares().contains(p) && (count == 1) && (!currentRoom.getBoundingBox().contains(player.getLocation()))){
-						b.getUsedSquares().remove(player.getLocation());
-						player.setLocation(p);
-						b.getUsedSquares().add(player.getLocation());
+					else if(currentRoom.getBoundingBox().contains(weapon.getLocation()) && count == 0){
+						count++;
+					}
+					else if(!b.getUsedSquares().contains(p) && (count == 1) && (!currentRoom.getBoundingBox().contains(suggestedPlayer.getLocation()))){
+						b.getUsedSquares().remove(suggestedPlayer.getLocation());
+						suggestedPlayer.setLocation(p);
+						b.getUsedSquares().add(suggestedPlayer.getLocation());
+						count++;
 					}
 				}
 			}
