@@ -13,6 +13,7 @@ public class shortcutKeys  extends AbstractAction {
 	String key;
 	BoardCanvas canvas;
 	Board board;
+	private static final long serialVersionUID = 1L;
 
 	public shortcutKeys(String key, UI ui, BoardCanvas canvas, Board b) {
 		this.ui = ui;
@@ -25,8 +26,10 @@ public class shortcutKeys  extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(key.equals("Next"))
+		System.out.println("Action performed");
+		if(key.equals("N"))
 		{
+			System.out.println("N pressed");
 			ui.endTurnActionPerformed(null);
 		}
 

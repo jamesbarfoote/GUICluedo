@@ -18,17 +18,36 @@ class MoveAction extends AbstractAction {
 	BoardCanvas canvas;
 	Board board;
 	Room currentRoom;
+	UI ui;
 
-	MoveAction(String direction, Player player, BoardCanvas canvas, Board board) {
+	MoveAction(String direction, Player player, BoardCanvas canvas, Board board, UI ui) {
 
 		this.direction = direction;
 		this.player = player;
 		this.canvas = canvas;
 		this.board = board;
+		this.ui = ui;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(direction.equals("N"))
+		{
+			ui.endTurnActionPerformed(null);
+		}
+		else if(direction.equals("A"))
+		{
+			ui.accusButtonActionPerformed(null);
+		}
+		else if(direction.equals("S"))
+		{
+			ui.guessButtonActionPerformed(null);
+		}
+		else if(direction.equals("G"))
+		{
+			ui.newGameActionPerformed(null);
+		}
+		
 		if(player.getRoll()  <= 0){
 			return;
 		}
@@ -93,6 +112,7 @@ class MoveAction extends AbstractAction {
 				}
 			}
 		}
+		
 		this.canvas.repaint();
 	}
 	
