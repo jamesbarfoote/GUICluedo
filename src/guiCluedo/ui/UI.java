@@ -49,7 +49,7 @@ public class UI extends javax.swing.JFrame {
 		System.out.println("Board created");
 		System.out.println("boardArea.getWidth() = " + boardArea.getWidth());
 		canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
-		hCanvas = new HandCanvas(b, handArea.getWidth(), handArea.getHeight());
+		hCanvas = new HandCanvas(b, handArea.getWidth(), handArea.getHeight(), currentPlayer);
 		handArea.add(hCanvas);
 		System.out.println("Canvas created");
 		boardArea.add(canvas);
@@ -64,13 +64,13 @@ public class UI extends javax.swing.JFrame {
 			public void componentResized(ComponentEvent evt) {
 				Component c = (Component)evt.getSource();
 				boardArea.setSize(boardArea.getWidth(), boardArea.getHeight());
-				//handArea.setSize(handArea.getWidth(), handArea.getHeight());
+				handArea.setSize(handArea.getWidth(), handArea.getHeight());
 				canvas.setWidth(boardArea.getWidth());
-				//hCanvas.setWidth(handArea.getWidth());
+				hCanvas.setWidth(handArea.getWidth());
 				canvas.setHeight(boardArea.getHeight());
-				//hCanvas.setWidth(boardArea.getWidth());
+				hCanvas.setHeight(handArea.getHeight());
 				canvas.repaint();
-				//hCanvas.repaint();
+				hCanvas.repaint();
 			}
 		});
 	}
