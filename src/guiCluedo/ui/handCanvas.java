@@ -86,36 +86,30 @@ public class HandCanvas extends Canvas implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("Clicked");
 		// Get the clicked location
 		int x = e.getX();
 		int y = e.getY();
-		System.out.println("X = " + x + " Y = " + y);
 		
 		//Get the starting x and y location of the hand area
-		int handX = this.getX();
-		int handY = this.getY();
-		int maxY = handY + this.getHeight();
+		int handX = 0;
+		int handY = 0;
+		int maxY = 80;
 		
 		//Get the width of each card
 		ArrayList<Card> hand = p.getHand();
 		int numCards = hand.size();
-		int cardSize = numCards / this.getWidth();
-		
+		int cardSize = this.getWidth() / numCards;
 		//Figure out which card was clicked
 			//for each card in the hand
 		for(int i = 0; i < hand.size(); i++)
 		{
 			int currentX = (cardSize * i) + handX;
-			
-			//x = (width * i) + startLoc
-			//y = start y + (handArea + height)
 				if(x >= currentX && x <= currentX + cardSize)
 				{
 					if(y >= handY && y <= maxY)
 					{
 						cardClicked = hand.get(i);
-						System.out.println("Clicked card = " + cardClicked);
+						System.out.println("Clicked card = " + cardClicked.getName());
 					}
 				}
 		}
@@ -124,26 +118,19 @@ public class HandCanvas extends Canvas implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		System.out.println("Mouse entered");
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		System.out.println("Mouse exited");
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }
