@@ -4,16 +4,9 @@ package guiCluedo.ui;
 import java.awt.*;
 import java.awt.Component;
 import java.awt.event.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.*;
-import javax.swing.GroupLayout;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.KeyStroke;
-import javax.swing.LayoutStyle;
 import javax.swing.border.*;
 import javax.swing.event.*;
 import guiCluedo.game.Board;
@@ -24,7 +17,7 @@ import guiCluedo.game.Player;
 import guiCluedo.game.Room;
 import guiCluedo.game.Weapon;
 
-public class UI extends javax.swing.JFrame {
+public class UI extends javax.swing.JFrame implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -37,6 +30,7 @@ public class UI extends javax.swing.JFrame {
 	private static final String MOVE_DOWN = "move down";
 	private static final String MOVE_LEFT = "move left";
 	private boolean isGuess = true;
+	private Card cardClicked;
 
 	static JLabel obj1 = new JLabel();
 
@@ -59,6 +53,8 @@ public class UI extends javax.swing.JFrame {
 		System.out.println("Game played");
 
 		keyBindings();
+		handArea.addMouseListener(this);
+		addMouseListener(this);
 
 		this.addComponentListener(new ComponentAdapter() 
 		{  
@@ -797,4 +793,66 @@ public class UI extends javax.swing.JFrame {
 	private JButton errorOK;
 	private JLabel errorText2;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		System.out.println("Clicked");
+		// Get the clicked location
+		int x = arg0.getX();
+		int y = arg0.getY();
+		System.out.println("X = " + x + " Y = " + y);
+		
+		//Get the starting x and y location of the hand area
+		int handX = handArea.getX();
+		int handY = handArea.getY();
+		int maxY = handY + handArea.getHeight();
+		
+		//Get the width of each card
+		ArrayList<Card> hand = currentPlayer.getHand();
+		int numCards = hand.size();
+		int cardSize = numCards / handArea.getWidth();
+		
+		//Figure out which card was clicked
+			//for each card in the hand
+		for(int i = 0; i < hand.size(); i++)
+		{
+			int currentX = (cardSize * i) + handX;
+			
+			//x = (width * i) + startLoc
+			//y = start y + (handArea + height)
+				if(x >= currentX && x <= currentX + cardSize)
+				{
+					if(y >= handY && y <= maxY)
+					{
+						cardClicked = hand.get(i);
+						System.out.println("Clicked card = " + cardClicked);
+					}
+				}
+		}
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
