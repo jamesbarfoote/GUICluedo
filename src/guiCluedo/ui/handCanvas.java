@@ -96,7 +96,7 @@ public class HandCanvas extends Canvas implements MouseListener{
 		int maxY = 80;
 		
 		//Get the width of each card
-		ArrayList<Card> hand = p.getHand();
+		ArrayList<Card> hand = this.hand;
 		int numCards = hand.size();
 		int cardSize = this.getWidth() / numCards;
 		//Figure out which card was clicked

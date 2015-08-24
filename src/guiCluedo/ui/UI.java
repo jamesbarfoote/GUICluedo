@@ -34,7 +34,9 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	private static final String VK_A = "make accusation";
 	private static final String VK_NG = "new game";
 	private boolean isGuess = true;
-	private Card cardClicked;
+	private Card selectedCard;
+	private Player previousPlayer;
+	private ArrayList<Card> guessHand;
 
 	static JLabel obj1 = new JLabel();
 	static JLabel shortCuts = new JLabel();
@@ -172,15 +174,8 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			hCanvas.repaint();
 			guessDialog.setVisible(true);
 			guessDialog.setAlwaysOnTop(true);
-			Card selectedCard = hCanvas.getSelectedCard();
-			System.out.println(selectedCard.getName());
-			for(Card card : guessHand){
-				if(selectedCard.equals(card)){
-					guessDialog.setVisible(false);
-					previousPlayer.addToDiscoveredCards(card);
-					currentPlayer = previousPlayer;
-				}
-			}
+			this.previousPlayer = previousPlayer;
+			this.guessHand = guessHand;
 		}
 		else
 		{
@@ -335,7 +330,19 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	}
 
 	private void guessDiagOkButtonActionPerformed(ActionEvent e) {
-
+		this.selectedCard = hCanvas.getSelectedCard();
+		if(this.selectedCard != null){
+			for(Card card : guessHand){
+				if(selectedCard.equals(card)){
+					guessDialog.setVisible(false);
+					previousPlayer.addToDiscoveredCards(card);
+					currentPlayer = previousPlayer;
+					guessDialog.setVisible(false);
+					hCanvas.setHand(currentPlayer);
+					hCanvas.repaint();
+				}
+			}
+		}
 	}
 
 	private void shortcutOKActionPerformed(ActionEvent e) {
