@@ -91,10 +91,11 @@ public class BoardCanvas extends Canvas{
 		for(Point door : gameBoard.getDoors()){
 			g.fillRect(((int) door.getX()*(width/23)), ((int) door.getY()*(height/22)), width/23, height/22);
 		}
+		g.fillRect(width/23, 0, 1, height);
 		for(int i = 0; i < board.length; i++){
 			g.setColor(Color.BLACK);
 			g.fillRect(0, (i+1)*(height/22), width, 1);
-			g.fillRect((i+1)*(width/23), 0, 1, height);
+			g.fillRect((i+2)*(width/23), 0, 1, height);
 		}
 		for(int i = 0; i < board.length; i++){
 			for(int j = 0; j < board[i].length; j++){
