@@ -40,6 +40,8 @@ class MoveAction extends AbstractAction {
 					newLocation = checkStairwell(newLocation);
 					board.getUsedSquares().remove(location);
 					board.getUsedSquares().add(newLocation);
+					board.getPlayerSquares().remove(location);
+					board.getPlayerSquares().remove(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -53,6 +55,8 @@ class MoveAction extends AbstractAction {
 					newLocation = checkStairwell(newLocation);
 					board.getUsedSquares().remove(location);
 					board.getUsedSquares().add(newLocation);
+					board.getPlayerSquares().remove(location);
+					board.getPlayerSquares().remove(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -66,6 +70,8 @@ class MoveAction extends AbstractAction {
 					newLocation = checkStairwell(newLocation);
 					board.getUsedSquares().remove(location);
 					board.getUsedSquares().add(newLocation);
+					board.getPlayerSquares().remove(location);
+					board.getPlayerSquares().remove(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -79,6 +85,8 @@ class MoveAction extends AbstractAction {
 					newLocation = checkStairwell(newLocation);
 					board.getUsedSquares().remove(location);
 					board.getUsedSquares().add(newLocation);
+					board.getPlayerSquares().remove(location);
+					board.getPlayerSquares().remove(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -117,6 +125,12 @@ class MoveAction extends AbstractAction {
 		//If trying to enter centre piece
 		if(board.getCentre().contains(newLocation)){
 			return false;
+		}
+		//If Trying to enter square occupied by another player
+		for(Point point : board.getPlayerSquares()){
+			if(newLocation.equals(point)){
+				return false;
+			}
 		}
 		//If in room and trying to exit
 		for(Room room : this.board.getRooms()){

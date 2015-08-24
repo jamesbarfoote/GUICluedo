@@ -27,6 +27,7 @@ public class Board {
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 	private ArrayList<Point> weaponLocations = new ArrayList<Point>();
 	private ArrayList<Point> usedSquares = new ArrayList<Point>();
+	private ArrayList<Point> playerSquares = new ArrayList<Point>();
 	private Polygon centre;
 
 	private String[][] board = new String[22][23];
@@ -39,6 +40,7 @@ public class Board {
 		addToStairwells();
 		for(Player player : players){
 			usedSquares.add(player.getLocation());
+			playerSquares.add(player.getLocation());
 		}
 	}
 
@@ -304,5 +306,9 @@ public class Board {
 
 	public ArrayList<Point> getUsedSquares(){
 		return usedSquares;
+	}
+	
+	public ArrayList<Point> getPlayerSquares(){
+		return playerSquares;
 	}
 }
