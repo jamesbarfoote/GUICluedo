@@ -66,7 +66,7 @@ public class Guess {
 		}
 		if (discoveredCard != null) {
 			for (Player p : players) {
-				p.addToHand2(discoveredCard);	//Add the discovered card to the list of discovered cards in every player
+				p.addToDiscoveredCards(discoveredCard);	//Add the discovered card to the list of discovered cards in every player
 			}
 		} else {
 			System.out.println("No player had any of the suggested cards");

@@ -60,7 +60,7 @@ public class Player {
 		hand.add(c);
 	}
 	
-	public void addToHand2(Card c){
+	public void addToDiscoveredCards(Card c){
 		discoveredCards.add(c);
 	}
 	
