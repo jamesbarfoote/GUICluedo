@@ -80,6 +80,7 @@ public class BoardCanvas extends Canvas{
 	 *Draws the board, for every square it draws the corresponding colour.
 	 *@param g - The graphics object
 	 */
+	//Draw the rooms
 	private void drawBoard(Graphics2D g){
 		for(int i = 0; i < board.length; i++){
 			for(int j = 0; j < board[i].length; j++){
@@ -89,16 +90,19 @@ public class BoardCanvas extends Canvas{
 				}
 			}
 		}
+		//Draw the doors
 		g.setColor(Color.BLACK);
 		for(Point door : gameBoard.getDoors()){
 			g.fillRect(((int) door.getX()*(width/23)), ((int) door.getY()*(height/22)), width/23, height/22);
 		}
+		//Draw the gridlines
 		g.fillRect(width/23, 0, 1, height);
 		for(int i = 0; i < board.length; i++){
 			g.setColor(Color.BLACK);
 			g.fillRect(0, (i+1)*(height/22), width, 1);
 			g.fillRect((i+2)*(width/23), 0, 1, height);
 		}
+		//Draw the centre piece
 		for(int i = 0; i < board.length; i++){
 			for(int j = 0; j < board[i].length; j++){
 				if(board[i][j].equals("C")){
@@ -107,10 +111,12 @@ public class BoardCanvas extends Canvas{
 				}
 			}
 		}
+		//Draw the stairwells
 		g.setColor(new Color(0x796145));
 		for(Point p : gameBoard.getStairwells()){
 			g.fillRect(((int) p.getX()*(width/23)), ((int) p.getY()*(height/22)), width/23, height/22);
 		}
+		//Draw the room labels
 		Font myFont = new Font("Serif", Font.ITALIC, width/60);
 		g.setFont(myFont);
 		g.setColor(Color.RED);
@@ -119,7 +125,12 @@ public class BoardCanvas extends Canvas{
 		}
 	}
 
+	/**
+	 * Draws the players and weapons
+	 * @param g
+	 */
 	private void drawIcons(Graphics2D g){
+		//Draw the players
 		for(Player p : players){
 			g.setColor(p.getColor());
 			g.fillOval((int) p.getLocation().getX()*(width/23), (int) p.getLocation().getY()*(height/22), width/23, height/22);
