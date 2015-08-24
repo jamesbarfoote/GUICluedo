@@ -68,6 +68,7 @@ public class UI extends javax.swing.JFrame {
 				handArea.setSize(handArea.getWidth(), handArea.getHeight());
 				canvas.setWidth(boardArea.getWidth());
 				hCanvas.setWidth(handArea.getWidth());
+				System.out.println("Hand width = " + handArea.getWidth());
 				canvas.setHeight(boardArea.getHeight());
 				hCanvas.setHeight(handArea.getHeight());
 				canvas.repaint();
@@ -201,6 +202,12 @@ public class UI extends javax.swing.JFrame {
 
 	private void errorOKActionPerformed(ActionEvent e) {
 		errorDialog.setVisible(false);
+	}
+
+	private void newGameActionPerformed(ActionEvent e) {
+		startScreen sc = new startScreen();
+		sc.startScreenForm.setVisible(true);
+		this.setVisible(false);
 	}
 
 	/**
@@ -379,6 +386,12 @@ public class UI extends javax.swing.JFrame {
 
 				//---- newGame ----
 				newGame.setText("New Game");
+				newGame.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						newGameActionPerformed(e);
+					}
+				});
 				fileMenu.add(newGame);
 			}
 			jMenuBar.add(fileMenu);

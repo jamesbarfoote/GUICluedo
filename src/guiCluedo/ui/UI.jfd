@@ -61,6 +61,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "newGame"
 						"text": "New Game"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "newGameActionPerformed", true ) )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {

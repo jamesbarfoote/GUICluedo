@@ -67,6 +67,7 @@ public class HandCanvas extends Canvas{
 	
 	public void setWidth(int width){
 		this.width = width;
+		setSize(this.width, this.height);
 	}
 	
 	public void setHeight(int height){

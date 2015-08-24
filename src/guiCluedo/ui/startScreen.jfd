@@ -1,0 +1,163 @@
+JFDML JFormDesigner: "5.2.2.0.199" Java: "1.8.0_51" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq {space :p:231:p, comp donePlayerSetup:::p:101:p}, seq l {space :p:149:p, comp mainYNameTxt:::p::p, space s:::p, comp playerName:::p:177:p}, seq l {space :::p, comp setPlayersButton:::p::p, space :p:42:p, comp selectionHeadText:::p::p}, seq l {space :p:70:p, par l {seq {comp charSubCatTxt:::p::p, space :p:253:p, comp colourSubTxt:::p::p}, seq {par l {par t {comp revGreen::t:p::p, comp missScarlett::l:p::p, comp mrsPeacock::l:p::p}, comp mrsWhite:::p::p, comp profPlum:::p::p, comp colonelMustard:::p::p}, space :p:187:p, par l {comp colourRed:::p::p, comp colourBlue:::p::p, comp colourYellow:::p::p, comp colourPurple:::p::p, comp colourWhite:::p::p, comp colourGreen:::p::p}}}}}, space ::148:x}}"
+			"$verticalGroup": "par l {seq t {space :::p, par l {comp selectionHeadText:::p::p, comp setPlayersButton:::p::p}, space s:::p, par b {comp mainYNameTxt::b:p::p, comp playerName::b:p::p}, space :p:32:p, par b {comp charSubCatTxt::b:p::p, comp colourSubTxt::b:p::p}, space u:::p, par b {comp missScarlett::b:p::p, comp colourRed::b:p::p}, space u:::p, par b {comp profPlum::b:p::p, comp colourGreen::b:p::p}, space u:::p, par b {comp mrsWhite::b:p::p, comp colourBlue::b:p::p}, space u:::p, par b {comp colonelMustard::b:p::p, comp colourYellow::b:p::p}, space :::p, par b {comp revGreen::b:p::p, comp colourPurple::b:p::p}, space :::p, par b {comp mrsPeacock::b:p::p, comp colourWhite::b:p::p}, space :::x, comp donePlayerSetup:::p:35:p, space :::p}}"
+		} ) {
+			name: "startScreenForm"
+			"defaultCloseOperation": 3
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "donePlayerSetup"
+				"text": "Done"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "donePlayerSetupActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "mainYNameTxt"
+				"text": "You name:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "playerName"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "selectionHeadText"
+				"font": new java.awt.Font( "Tahoma", 1, 36 )
+				"text": "Player Selection"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "charSubCatTxt"
+				"font": new java.awt.Font( "Tahoma", 1, 11 )
+				"text": "Character:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "colourSubTxt"
+				"font": new java.awt.Font( "Tahoma", 1, 11 )
+				"text": "Colour:"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "missScarlett"
+				"text": "Miss Scarlett"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "missScarlettActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "profPlum"
+				"text": "Professor Plum"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "mrsWhite"
+				"text": "Mrs. White"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mrsWhiteActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "colonelMustard"
+				"text": "Colonel Mustard"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "revGreen"
+				"text": "The Reverend Green"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "mrsPeacock"
+				"text": "Mrs. Peacock"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "colourRed"
+				"text": "Red"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "colourBlue"
+				"text": "Blue"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "colourYellow"
+				"text": "Yellow"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "colourYellowActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "colourPurple"
+				"text": "Purple"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "colourWhite"
+				"text": "White"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "colourGreen"
+				"text": "Green"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "setPlayersButton"
+				"text": "Set # Players"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "setPlayersButtonActionPerformed", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 605, 375 )
+			"location": new java.awt.Point( 0, 0 )
+		} )
+		add( new FormContainer( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:39:p, comp setPHeadText:::p::p}, seq l {space :p:128:p, comp okNumPlayers:::p::p}, seq l {space :p:108:p, par l:::p {comp setPHowManyText:::::x, comp numPLayers:::::x}}}, space ::48:x}}"
+			"$verticalGroup": "par l {seq l {space :p:8:p, comp setPHeadText:::p::p, space s:::p, comp setPHowManyText:::p::p, space s:::p, comp numPLayers:::p::p, space ::37:x, comp okNumPlayers:::p::p, space :p:23:p}}"
+		} ) {
+			name: "setPlayers"
+			"alwaysOnTop": true
+			"minimumSize": new java.awt.Dimension( 400, 200 )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "setPHowManyText"
+				"text": "How many players?"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "okNumPlayers"
+				"text": "OK"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "okNumPlayersActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "setPHeadText"
+				"font": new java.awt.Font( "Tahoma", 1, 24 )
+				"text": "Welcome to Cluedo!"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "numPLayers"
+				"maximumRowCount": 5
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "2"
+					addElement( "2" )
+					addElement( "3" )
+					addElement( "4" )
+					addElement( "5" )
+					addElement( "6" )
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "numPLayersActionPerformed", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 480, 400 )
+		} )
+		add( new FormContainer( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq {space :p:121:p, comp warningTextHead:::p::p}, seq l {space :::p, comp warningLine1:::p::p}, seq l {space :p:175:p, comp warningOk:::p:79:p}, seq l {space :p:98:p, comp warningLine2:::p::p}}, space :::x}}"
+			"$verticalGroup": "par l {seq l {comp warningTextHead:::p::p, space :::p, comp warningLine1:::p::p, space u:::p, comp warningLine2:::p::p, space ::21:x, comp warningOk:::p::p, space :::p}}"
+		} ) {
+			name: "warning"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "warningTextHead"
+				"font": new java.awt.Font( "Tahoma", 1, 36 )
+				"text": "WARNING!"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "warningOk"
+				"text": "OK"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "warningOkActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "warningLine1"
+				"text": "Make sure that you have selected one from character and one from colour and only one"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "warningLine2"
+				"text": "Make sure that you have alos entered your name"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 549 )
+		} )
+	}
+}
