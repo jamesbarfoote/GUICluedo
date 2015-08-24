@@ -159,7 +159,32 @@ public class UI extends javax.swing.JFrame {
 				rollDice.setEnabled(true);
 				hCanvas.setHand(currentPlayer);
 				this.hCanvas.repaint();
-				//Need to display pop-up box telling player they have been eliminated here
+
+				//Show message that you have been eliminated
+				errorDialog.setTitle("YOU HAVE BEEN ELIMINATED!!");
+				errorText1.setText(currentPlayer.getName() + " you have been eliminated!");
+				errorText2.setText("");
+				errorDialog.setVisible(true);
+				
+				
+				
+				if(b.getPlayers().size() == 1){
+					
+					try {
+						Thread.sleep(4000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
+					
+					//Show message that you have been eliminated
+					errorDialog.setTitle("YOU HAVE WON!!");
+					errorText1.setText(currentPlayer.getName() + " you have won the game!");
+					errorText2.setText("Congratulations!");
+					errorDialog.setVisible(true);
+					}
 			}
 		}
 
@@ -224,42 +249,7 @@ public class UI extends javax.swing.JFrame {
 		this.setVisible(false);
 	}
 
-	private void handAreaMouseClicked(MouseEvent e) {
-		System.out.println("Clicked");
-		// Get the clicked location
-		int x = e.getX();
-		int y = e.getY();
-		System.out.println("X = " + x + " Y = " + y);
-		
-		//Get the starting x and y location of the hand area
-		int handX = handArea.getX();
-		int handY = handArea.getY();
-		int maxY = handY + handArea.getHeight();
-		
-		//Get the width of each card
-		ArrayList<Card> hand = currentPlayer.getHand();
-		int numCards = hand.size();
-		int cardSize = numCards / handArea.getWidth();
-		
-		//Figure out which card was clicked
-			//for each card in the hand
-		for(int i = 0; i < hand.size(); i++)
-		{
-			int currentX = (cardSize * i) + handX;
-			
-			//x = (width * i) + startLoc
-			//y = start y + (handArea + height)
-				if(x >= currentX && x <= currentX + cardSize)
-				{
-					if(y >= handY && y <= maxY)
-					{
-						cardClicked = hand.get(i);
-						System.out.println("Clicked card = " + cardClicked);
-					}
-				}
-		}
-	}
-
+	
 	/**
 	 * Loop through all the players while the game hasn't been won. If a player
 	 * gets eliminated, break the loop then remove the player and start the loop
@@ -270,6 +260,7 @@ public class UI extends javax.swing.JFrame {
 	 * @param playerNum - the prior players number
 	 */
 	public void playGame(Board b, int playerNum) {
+		
 		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
 		System.out.println("Current player is: " + playerNum + " " );
 		currentPlayer = b.getPlayers().get(playerNum - 1);
@@ -391,18 +382,19 @@ public class UI extends javax.swing.JFrame {
 		guessWeapon = new JComboBox();
 		guessCharacter = new JComboBox();
 		guessRoom = new JComboBox();
-		
 		label2 = new JLabel();
 		label1 = new JLabel();
 		label3 = new JLabel();
 		label4 = new JLabel();
 		errorDialog = new JDialog();
-		label5 = new JLabel();
+		errorText1 = new JLabel();
 		errorOK = new JButton();
 		errorText2 = new JLabel();
+		
+		
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
-		guessWeapon.addItem("Lead Pipe");
+		guessWeapon.addItem("Pipe");
 		guessWeapon.addItem("Rope");
 		guessWeapon.addItem("Candle Stick");
 		guessWeapon.addItem("Wrench");
@@ -423,6 +415,7 @@ public class UI extends javax.swing.JFrame {
 		guessRoom.addItem("Library");
 		guessRoom.addItem("Lounge");
 		guessRoom.addItem("Study");
+
 
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -512,12 +505,7 @@ public class UI extends javax.swing.JFrame {
 		{
 			handArea.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
 			handArea.setDoubleBuffered(true);
-			handArea.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					handAreaMouseClicked(e);
-				}
-			});
+			
 		}
 
 		//---- yourhandText ----
@@ -680,9 +668,9 @@ public class UI extends javax.swing.JFrame {
 			errorDialog.setTitle("ERROR!");
 			Container errorDialogContentPane = errorDialog.getContentPane();
 
-			//---- label5 ----
-			label5.setText("You have tried to perform a suggestion ");
-			label5.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			//---- errorText1 ----
+			errorText1.setText("You have tried to perform a suggestion ");
+			errorText1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 			//---- errorOK ----
 			errorOK.setText("OK");
@@ -705,7 +693,7 @@ public class UI extends javax.swing.JFrame {
 					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(errorDialogContentPaneLayout.createParallelGroup()
-							.addComponent(label5)
+							.addComponent(errorText1)
 							.addGroup(errorDialogContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addComponent(errorOK)
 								.addComponent(errorText2)))
@@ -715,7 +703,7 @@ public class UI extends javax.swing.JFrame {
 				errorDialogContentPaneLayout.createParallelGroup()
 					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
 						.addGap(22, 22, 22)
-						.addComponent(label5)
+						.addComponent(errorText1)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(errorText2)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
@@ -824,7 +812,7 @@ public class UI extends javax.swing.JFrame {
 	private JLabel label3;
 	private JLabel label4;
 	private JDialog errorDialog;
-	private JLabel label5;
+	private JLabel errorText1;
 	private JButton errorOK;
 	private JLabel errorText2;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables

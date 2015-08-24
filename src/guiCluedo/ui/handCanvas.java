@@ -133,4 +133,9 @@ public class HandCanvas extends Canvas implements MouseListener{
 	public void mouseReleased(MouseEvent arg0) {
 	}
 	
+	public Card getSelectedCard()
+	{
+		return cardClicked;
+	}
+	
 }
