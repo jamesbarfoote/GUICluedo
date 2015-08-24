@@ -24,7 +24,7 @@ public class startScreen {
 	public int numberOPlayers = 2;
 	private int counter;
 	public static ArrayList<Player> players = new ArrayList<Player>();
-	private ArrayList<String> chars = new ArrayList<>(Arrays.asList("Miss Scarlett", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
+	private ArrayList<String> chars = new ArrayList<>(Arrays.asList("Miss Scarlet", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
 	private ArrayList<String> iColours = new ArrayList<>(Arrays.asList("Red", "Green", "Blue", "White", "Yellow", "Purple"));
 	private ButtonGroup characterRadios = new ButtonGroup();
 	private ButtonGroup colourRadios = new ButtonGroup();
