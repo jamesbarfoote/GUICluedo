@@ -134,6 +134,8 @@ public class UI extends javax.swing.JFrame {
 			ArrayList<Card> guessHand = createGuess(cards, b);
 			//Pass Arraylist to the guess class
 			Guess g = new Guess(true, guessHand, currentPlayer, b);
+			g.moveIcons(guessHand, b);
+			canvas.repaint();
 			guessDialoge.setVisible(false);
 			
 			//Call method that iterates over all the players and finds the first
