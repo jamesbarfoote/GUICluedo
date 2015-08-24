@@ -21,6 +21,7 @@ public class Board {
 	private ArrayList<Room> rooms = new ArrayList<Room>();
 	private ArrayList<Point> doors = new ArrayList<Point>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
+	private Polygon centre;
 	
 	private String[][] board = new String[22][23];
 
@@ -64,7 +65,7 @@ public class Board {
 			}
 			if(room.equals("Billiard Room")){
 				int[] xCords = {20, 23, 23, 20};
-				int[] yCords = {0, 0, 5, 5};
+				int[] yCords = {0, 0, 6, 6};
 				Polygon p = new Polygon(xCords, yCords, 4);
 				rooms.add(new Room(room, p));
 			}
@@ -99,6 +100,9 @@ public class Board {
 				rooms.add(new Room(room, p));
 			}
 		}
+		int[] xCords = {9, 16, 16, 9};
+		int[] yCords = {7, 7, 12, 12};
+		this.centre = new Polygon(xCords, yCords, 4);
 		//Add to newly created cards to allCards, allCards temporarily holds all the cards not included in the answer
 		//to make it easier to delegate them out to the players
 		allCards.addAll(weapons);
@@ -252,5 +256,9 @@ public class Board {
 	
 	public ArrayList<Point> getDoors(){
 		return doors;
+	}
+	
+	public Polygon getCentre(){
+		return centre;
 	}
 }

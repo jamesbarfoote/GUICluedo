@@ -24,7 +24,7 @@ public class Player {
 		this.playerNum = playerNum;	
 		
 		if(character.equals("Miss Scarlett")){
-			this.location = new Point(21, 12);
+			this.location = new Point(22, 14);
 		}
 		if(character.equals("Colonel Mustard")){
 			this.location = new Point(15,22);
@@ -60,7 +60,7 @@ public class Player {
 		hand.add(c);
 	}
 	
-	public void addToHand2(Card c){
+	public void addToDiscoveredCards(Card c){
 		discoveredCards.add(c);
 	}
 	
