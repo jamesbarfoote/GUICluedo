@@ -145,7 +145,7 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 			cards.add(character);
 			ArrayList<Card> guessHand = createGuess(cards, b);
 			//Pass Arraylist to the guess class
-			Guess g = new Guess(true, guessHand, currentPlayer, b);
+			Guess g = new Guess(false, guessHand, currentPlayer, b);
 			guessDialoge.setVisible(false);
 		}
 
@@ -175,25 +175,27 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 		{
 			if(i == 0){
 				String roomName = cards.get(i);
+				System.out.println("room name = " + roomName);
 				int index = b.getRoomNames().indexOf(roomName);
 				Room guessRoom = b.getRooms().get(index);
+				guessHand.add(guessRoom);
 			}
 			else if(i == 1){
 				String weaponName = cards.get(i);
 				System.out.println("weapon name = " + weaponName);
 				int indexW = b.getWeaponNames().indexOf(weaponName);
 				Weapon guessWeapon = b.getWeapons().get(indexW);
+				guessHand.add(guessWeapon);
 			}
 			else if(i == 2)
 			{
 				String characterN = cards.get(i);
+				System.out.println("character name = " + characterN);
 				int indexC = b.getCharacterNames().indexOf(characterN);
 				Character guessCharacter = b.getCharacters().get(indexC);
+				guessHand.add(guessCharacter);
 			}
 		}
-
-
-
 		return guessHand;
 
 	}

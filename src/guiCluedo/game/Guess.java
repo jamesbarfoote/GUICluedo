@@ -30,6 +30,7 @@ public class Guess {
 		Card discoveredCard = null;
 		ArrayList<Player> players = b.players;
 		for (Card card : guess) {
+			System.out.println("reached");
 			if (card instanceof Room) {	//Grab the room from the 3 suggested cards
 				room = (Room) card;
 			}
