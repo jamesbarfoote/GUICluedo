@@ -43,29 +43,29 @@ public class tests {
 		assertEquals(b.getCharacters().size(), 6);
 	}
 
-	@Test
-	public void checkCardEquals()
-	{
-		Weapon w = new Weapon("Dagger");
-		assertTrue(w.equals(w));
-	}
-
-	@Test
-	public void checkCarNotEquals()
-	{
-		Weapon w = new Weapon("Dagger");
-		Character c = new Character("Miss Scarlett");
-		assertFalse(w.equals(c));
-	}
-
-
-	@Test
-	public void checkName()
-	{
-		Weapon w = new Weapon("Dagger");
-		String wName = w.getName();
-		assertTrue(wName.equals("Dagger"));
-	}
+//	@Test
+//	public void checkCardEquals()
+//	{
+//		Weapon w = new Weapon("Dagger");
+//		assertTrue(w.equals(w));
+//	}
+//
+//	@Test
+//	public void checkCarNotEquals()
+//	{
+//		Weapon w = new Weapon("Dagger");
+//		Character c = new Character("Miss Scarlett");
+//		assertFalse(w.equals(c));
+//	}
+//
+//
+//	@Test
+//	public void checkName()
+//	{
+//		Weapon w = new Weapon("Dagger");
+//		String wName = w.getName();
+//		assertTrue(wName.equals("Dagger"));
+//	}
 
 	@Test
 	public void checkValidAccusation()

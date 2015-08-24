@@ -24,7 +24,7 @@ import guiCluedo.game.Room;
 public class BoardCanvas extends Canvas{
 
 	private static final long serialVersionUID = 1L;
-	private static final String IMG_PATH = "src/guiCluedo/ui/images/weapon icons/";
+	private static final String IMG_PATH = "src/guiCluedo/ui/images/weaponIcons/";
 	Board gameBoard;
 	private String[][] board;
 	private ArrayList<Player> players;
@@ -146,13 +146,12 @@ public class BoardCanvas extends Canvas{
 		//Draw weapons
 		for(int i = 0; i < gameBoard.getWeapons().size(); i++){
 			try {
-				//BufferedImage myPicture = ImageIO.read(new File("images/" + "hand.get(i)" + ".jpg"));
-				BufferedImage myPicture = ImageIO.read(new File(IMG_PATH + gameBoard.getWeapons().get(i).getName() + ".jpg"));
-				int cWidth = width / gameBoard.getWeapons().size();
-				//int cWidth = width;
-				BufferedImage scaled = getScaledImage(myPicture, cWidth, height);
-				//g.drawImage(scaled, 0,0, getParent());
-				g.drawImage(scaled, cWidth * i,0, getParent());
+				BufferedImage myPicture = ImageIO.read(new File(IMG_PATH + gameBoard.getWeapons().get(i).getName() + ".png"));
+				int width = this.width / 40;
+				int height = this.height / 25;
+				BufferedImage scaled = getScaledImage(myPicture, width, height);
+				g.drawImage(scaled, ((int) gameBoard.getWeapons().get(i).getLocation().getX()*(this.width/23)), 
+							((int) gameBoard.getWeapons().get(i).getLocation().getY()*(this.height/22)) ,getParent());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
