@@ -31,6 +31,10 @@ public class startScreen {
 	/**
 	 * Creates new form startScreen
 	 */
+	private void missScarlettActionPerformed(ActionEvent e) {
+		// TODO add your code here
+	}
+
 	public startScreen() {
 		initComponents();
 		
@@ -97,6 +101,7 @@ public class startScreen {
 
 			//---- donePlayerSetup ----
 			donePlayerSetup.setText("Done");
+			donePlayerSetup.setToolTipText("Done setting up this player and go to the next player");
 			donePlayerSetup.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -106,6 +111,9 @@ public class startScreen {
 
 			//---- mainYNameTxt ----
 			mainYNameTxt.setText("You name:");
+
+			//---- playerName ----
+			playerName.setToolTipText("Your name. This name will be displayed when it is your turn");
 
 			//---- selectionHeadText ----
 			selectionHeadText.setFont(new Font("Tahoma", Font.BOLD, 36));
@@ -124,7 +132,7 @@ public class startScreen {
 			missScarlet.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					missScarletActionPerformed(e);
+					missScarlettActionPerformed(e);
 				}
 			});
 
@@ -175,6 +183,7 @@ public class startScreen {
 
 			//---- setPlayersButton ----
 			setPlayersButton.setText("Set # Players");
+			setPlayersButton.setToolTipText("Set the number of players for the game. This only needs to be selected once");
 			setPlayersButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {

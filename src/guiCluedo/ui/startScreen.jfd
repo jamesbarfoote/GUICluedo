@@ -4,14 +4,15 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {par l {seq {space :p:231:p, comp donePlayerSetup:::p:101:p}, seq l {space :p:149:p, comp mainYNameTxt:::p::p, space s:::p, comp playerName:::p:177:p}, seq l {space :::p, comp setPlayersButton:::p::p, space :p:42:p, comp selectionHeadText:::p::p}, seq l {space :p:70:p, par l {seq {comp charSubCatTxt:::p::p, space :p:253:p, comp colourSubTxt:::p::p}, seq {par l {par t {comp revGreen::t:p::p, comp missScarlett::l:p::p, comp mrsPeacock::l:p::p}, comp mrsWhite:::p::p, comp profPlum:::p::p, comp colonelMustard:::p::p}, space :p:187:p, par l {comp colourRed:::p::p, comp colourBlue:::p::p, comp colourYellow:::p::p, comp colourPurple:::p::p, comp colourWhite:::p::p, comp colourGreen:::p::p}}}}}, space ::148:x}}"
-			"$verticalGroup": "par l {seq t {space :::p, par l {comp selectionHeadText:::p::p, comp setPlayersButton:::p::p}, space s:::p, par b {comp mainYNameTxt::b:p::p, comp playerName::b:p::p}, space :p:32:p, par b {comp charSubCatTxt::b:p::p, comp colourSubTxt::b:p::p}, space u:::p, par b {comp missScarlett::b:p::p, comp colourRed::b:p::p}, space u:::p, par b {comp profPlum::b:p::p, comp colourGreen::b:p::p}, space u:::p, par b {comp mrsWhite::b:p::p, comp colourBlue::b:p::p}, space u:::p, par b {comp colonelMustard::b:p::p, comp colourYellow::b:p::p}, space :::p, par b {comp revGreen::b:p::p, comp colourPurple::b:p::p}, space :::p, par b {comp mrsPeacock::b:p::p, comp colourWhite::b:p::p}, space :::x, comp donePlayerSetup:::p:35:p, space :::p}}"
+			"$horizontalGroup": "par l {seq {par l {seq {space :p:231:p, comp donePlayerSetup:::p:101:p}, seq l {space :p:149:p, comp mainYNameTxt:::p::p, space s:::p, comp playerName:::p:177:p}, seq l {space :::p, comp setPlayersButton:::p::p, space :p:42:p, comp selectionHeadText:::p::p}, seq l {space :p:70:p, par l {seq {comp charSubCatTxt:::p::p, space :p:253:p, comp colourSubTxt:::p::p}, seq {par l {par t {comp revGreen::t:p::p, comp missScarlet::l:p::p, comp mrsPeacock::l:p::p}, comp mrsWhite:::p::p, comp profPlum:::p::p, comp colonelMustard:::p::p}, space :p:187:p, par l {comp colourRed:::p::p, comp colourBlue:::p::p, comp colourYellow:::p::p, comp colourPurple:::p::p, comp colourWhite:::p::p, comp colourGreen:::p::p}}}}}, space ::148:x}}"
+			"$verticalGroup": "par l {seq t {space :::p, par l {comp selectionHeadText:::p::p, comp setPlayersButton:::p::p}, space s:::p, par b {comp mainYNameTxt::b:p::p, comp playerName::b:p::p}, space :p:32:p, par b {comp charSubCatTxt::b:p::p, comp colourSubTxt::b:p::p}, space u:::p, par b {comp missScarlet::b:p::p, comp colourRed::b:p::p}, space u:::p, par b {comp profPlum::b:p::p, comp colourGreen::b:p::p}, space u:::p, par b {comp mrsWhite::b:p::p, comp colourBlue::b:p::p}, space u:::p, par b {comp colonelMustard::b:p::p, comp colourYellow::b:p::p}, space :::p, par b {comp revGreen::b:p::p, comp colourPurple::b:p::p}, space :::p, par b {comp mrsPeacock::b:p::p, comp colourWhite::b:p::p}, space :::x, comp donePlayerSetup:::p:35:p, space :::p}}"
 		} ) {
 			name: "startScreenForm"
 			"defaultCloseOperation": 3
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "donePlayerSetup"
 				"text": "Done"
+				"toolTipText": "Done setting up this player and go to the next player"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "donePlayerSetupActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -20,6 +21,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "playerName"
+				"toolTipText": "Your name. This name will be displayed when it is your turn"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "selectionHeadText"
@@ -37,8 +39,8 @@ new FormModel {
 				"text": "Colour:"
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
-				name: "missScarlett"
-				"text": "Miss Scarlett"
+				name: "missScarlet"
+				"text": "Miss Scarlet"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "missScarlettActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
@@ -90,6 +92,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "setPlayersButton"
 				"text": "Set # Players"
+				"toolTipText": "Set the number of players for the game. This only needs to be selected once"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "setPlayersButtonActionPerformed", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {

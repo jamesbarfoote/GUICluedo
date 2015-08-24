@@ -441,7 +441,7 @@ public class UI extends javax.swing.JFrame {
 		
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
-		guessWeapon.addItem("Lead Pipe");
+		guessWeapon.addItem("Pipe");
 		guessWeapon.addItem("Rope");
 		guessWeapon.addItem("Candle Stick");
 		guessWeapon.addItem("Wrench");
@@ -555,6 +555,7 @@ public class UI extends javax.swing.JFrame {
 		//---- rollDice ----
 		rollDice.setText("Roll Dice");
 		rollDice.setName("rollDice");
+		rollDice.setToolTipText("Roll the dice so that you can move");
 		rollDice.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
