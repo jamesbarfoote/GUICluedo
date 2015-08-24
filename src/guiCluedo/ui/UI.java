@@ -29,7 +29,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	private static final String MOVE_RIGHT = "move right";
 	private static final String MOVE_DOWN = "move down";
 	private static final String MOVE_LEFT = "move left";
-	private static final String N = "next turn";
+	private static final String VK_N = "next turn";
 	private boolean isGuess = true;
 	private Card cardClicked;
 
@@ -83,8 +83,9 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("DOWN"), MOVE_DOWN);
 		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("LEFT"), MOVE_LEFT);
 		
-		shortCuts.getInputMap(IFW).put(KeyStroke.getKeyStroke("NEXT"), N);
-		shortCuts.getActionMap().put(N, new shortcutKeys("Next", this, this.canvas, b));
+		shortCuts.getInputMap(IFW).put(KeyStroke.getKeyStroke("NEXT"), VK_N);
+		shortCuts.getActionMap().put(VK_N, new shortcutKeys("Next", this, this.canvas, b));
+		add(shortCuts);
 
 		obj1.getActionMap().put(MOVE_UP, new MoveAction("Up", currentPlayer, this.canvas, b));
 		obj1.getActionMap().put(MOVE_RIGHT, new MoveAction("Right", currentPlayer, this.canvas, b));
@@ -114,7 +115,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		guessDialoge.setVisible(true);
 	}
 
-	private void endTurnActionPerformed(ActionEvent e) {
+	public void endTurnActionPerformed(ActionEvent e) {
 		playGame(b, currentPlayer.getNum());
 		//HandCanvas h = new HandCanvas(b, handArea.getWidth(), handArea.getHeight(), currentPlayer);
 		rollDice.setEnabled(true);

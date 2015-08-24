@@ -27,7 +27,7 @@ public class shortcutKeys  extends AbstractAction {
 	public void actionPerformed(ActionEvent arg0) {
 		if(key.equals("Next"))
 		{
-			
+			ui.endTurnActionPerformed(null);
 		}
 
 	}
