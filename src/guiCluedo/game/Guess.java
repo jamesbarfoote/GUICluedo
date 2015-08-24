@@ -36,6 +36,7 @@ public class Guess {
 						b.getUsedSquares().remove(weapon.getLocation());
 						weapon.setLocation(p);
 						b.getUsedSquares().add(weapon.getLocation());
+						count++;
 					}
 					else if(!b.getUsedSquares().contains(p) && (count == 1) && (!currentRoom.getBoundingBox().contains(player.getLocation()))){
 						b.getUsedSquares().remove(player.getLocation());
