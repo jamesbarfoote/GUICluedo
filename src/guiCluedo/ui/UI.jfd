@@ -19,16 +19,19 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "endTurn"
 				"text": "End Turn"
+				"toolTipText": "End your turn so that the next player can go"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "endTurnActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "guessButton"
 				"text": "Suggestion"
+				"toolTipText": "Make a guess as to what cards you think are the answer"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "guessButtonActionPerformed", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "accusButton"
 				"text": "Accusation"
+				"toolTipText": "If you are sure what the answer if click me the make your accusation"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "accusButtonActionPerformed", true ) )
 			} )
 			add( new FormContainer( "javax.swing.JLayeredPane", new FormLayoutManager( class javax.swing.JLayeredPane ) ) {
@@ -71,11 +74,35 @@ new FormModel {
 						"text": "New Game"
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "newGameActionPerformed", true ) )
 					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "showShortcuts"
+						"text": "Show shortcuts"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showShortcutsActionPerformed", true ) )
+					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "GameMenu"
 					"text": "Game"
 					addEvent( new FormEvent( "javax.swing.event.MenuListener", "menuSelected", "GameMenuMenuSelected", true ) )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "discoveredCardsmenuItem"
+						"text": "Show discovered cards"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "discoveredCardsmenuItemActionPerformed", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": "Cheats"
+					add( new FormComponent( "javax.swing.JCheckBoxMenuItem" ) {
+						name: "checkBoxMenuItem1"
+						"text": "Infinite move"
+						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "checkBoxMenuItem1ItemStateChanged", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JCheckBoxMenuItem" ) {
+						name: "cheatAnswer"
+						"text": "Show answer"
+						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "cheatAnswerItemStateChanged", true ) )
+					} )
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {
@@ -123,19 +150,20 @@ new FormModel {
 			"size": new java.awt.Dimension( 445, 200 )
 		} )
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, par l {comp label5::l:p::p, par t:l {comp errorOK:::p::p, comp errorText2:::p::p}}, space :::x}}"
-			"$verticalGroup": "par l {seq l {space :p:22:p, comp label5:::p::p, space :::p, comp errorText2:::p::p, space ::65:x, comp errorOK:::p::p, space :::p}}"
+			"$horizontalGroup": "par l {seq {space :::p, par l {comp errorText1::l:p::p, par t:l {comp errorOK:::p::p, comp errorText2:::p::p}}, space :::x}}"
+			"$verticalGroup": "par l {seq l {space :p:22:p, comp errorText1:::p::p, space :::p, comp errorText2:::p::p, space ::65:x, comp errorOK:::p::p, space :::p}}"
 		} ) {
 			name: "errorDialog"
 			"title": "ERROR!"
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label5"
+				name: "errorText1"
 				"text": "You have tried to perform a suggestion "
 				"font": new java.awt.Font( "Tahoma", 0, 14 )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "errorOK"
 				"text": "OK"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "errorOKActionPerformed", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "errorOKActionPerformed", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "errorOKActionPerformed", true ) )
 			} )
@@ -147,6 +175,37 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 630, 0 )
 			"size": new java.awt.Dimension( 270, 200 )
+		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :p:117:p, comp guessDiagOkButton:::p::p, space ::120:x}, seq t {space :0:33:x, par l {seq t {comp line3Text:::p::p, space :p:19:p}, seq t {comp line1Text:::p::p, space :p:52:p}, seq t {comp line2Text:::p::p, space :p:88:p}}}, seq t {space ::130:x, comp guessDiagPlayerNameText:::p::p, space :p:115:p}}"
+			"$verticalGroup": "par l {seq l {space :p:5:p, comp guessDiagPlayerNameText:::p::p, space :::p, comp line1Text:::p::p, space :p:13:p, comp line2Text:::p::p, space :::p, comp line3Text:::p::p, space ::41:x, comp guessDiagOkButton:::p::p, space :::p}}"
+		} ) {
+			name: "guessDialog"
+			"title": "Suggestion"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "line1Text"
+				"text": "Player blah guessed these cards:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "line2Text"
+				"text": "Insert 3 cards here"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "line3Text"
+				"text": "Please click ok and then select one of your cards"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "guessDiagOkButton"
+				"text": "OK"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "guessDiagOkButtonActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "guessDiagPlayerNameText"
+				"text": "Player 1"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 510, 440 )
+			"size": new java.awt.Dimension( 300, 200 )
 		} )
 	}
 }
