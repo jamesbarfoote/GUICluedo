@@ -41,6 +41,7 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 		initComponents();
 		b = new Board();
 		playGame(b, 0);
+		
 		System.out.println("Board created");
 		System.out.println("boardArea.getWidth() = " + boardArea.getWidth());
 		canvas = new BoardCanvas(b, boardArea.getWidth(), boardArea.getHeight());
@@ -256,10 +257,11 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 	 * @param playerNum - the prior players number
 	 */
 	public void playGame(Board b, int playerNum) {
-
 		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
 		System.out.println("Current player is: " + playerNum + " " );
 		currentPlayer = b.getPlayers().get(playerNum - 1);
+		playerTurnText.setText(currentPlayer.getName() + " / " + currentPlayer.getCharacterName());
+
 		System.out.println(currentPlayer.getName());
 		Player eliminatedPlayer = null;
 		keyBindings();
@@ -360,7 +362,6 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 		fileMenu = new JMenu();
 		newGame = new JMenuItem();
 		GameMenu = new JMenu();
-		jSeparator1 = new JSeparator();
 		rollDice = new JButton();
 		endTurn = new JButton();
 		guessButton = new JButton();
@@ -370,11 +371,14 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 		yourhandText = new JLabel();
 		youRolledText = new JLabel();
 		movesLeftLabel = new JLabel();
+		playerTurnText = new JLabel();
+		separator1 = new JSeparator();
 		guessDialoge = new Dialog(this);
 		guessOKButton = new JButton();
 		guessWeapon = new JComboBox();
 		guessCharacter = new JComboBox();
 		guessRoom = new JComboBox();
+		
 		label2 = new JLabel();
 		label1 = new JLabel();
 		label3 = new JLabel();
@@ -383,7 +387,6 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 		label5 = new JLabel();
 		errorOK = new JButton();
 		errorText2 = new JLabel();
-		
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
 		guessWeapon.addItem("Pipe");
@@ -407,7 +410,6 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 		guessRoom.addItem("Library");
 		guessRoom.addItem("Lounge");
 		guessRoom.addItem("Study");
-
 
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -488,9 +490,15 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 			}
 		});
 
+		//======== boardArea ========
+		{
+			boardArea.setDoubleBuffered(true);
+		}
+
 		//======== handArea ========
 		{
 			handArea.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
+			handArea.setDoubleBuffered(true);
 			handArea.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -508,57 +516,70 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 		//---- movesLeftLabel ----
 		movesLeftLabel.setText("You have 0 moves left");
 
+		//---- playerTurnText ----
+		playerTurnText.setText("Hello it is your turn");
+		playerTurnText.setFont(new Font("Tahoma", Font.BOLD, 12));
+
 		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
 		contentPane.setLayout(contentPaneLayout);
 		contentPaneLayout.setHorizontalGroup(
 			contentPaneLayout.createParallelGroup()
+				.addComponent(boardArea)
 				.addGroup(contentPaneLayout.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(contentPaneLayout.createParallelGroup()
-						.addComponent(rollDice)
-						.addComponent(youRolledText)
-						.addComponent(movesLeftLabel))
-					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addComponent(accusButton)
-						.addComponent(guessButton)
-						.addComponent(endTurn, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
-					.addGap(32, 32, 32)
-					.addComponent(yourhandText)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-					.addComponent(handArea, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-					.addContainerGap())
-				.addComponent(jSeparator1, GroupLayout.Alignment.TRAILING)
-				.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+						.addGroup(contentPaneLayout.createSequentialGroup()
+							.addGroup(contentPaneLayout.createParallelGroup()
+								.addComponent(youRolledText)
+								.addComponent(movesLeftLabel)
+								.addComponent(rollDice, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+								.addComponent(playerTurnText, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(contentPaneLayout.createParallelGroup()
+								.addComponent(endTurn, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+								.addComponent(accusButton)
+								.addGroup(contentPaneLayout.createSequentialGroup()
+									.addComponent(guessButton)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+									.addComponent(yourhandText)))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(handArea))
+						.addGroup(contentPaneLayout.createSequentialGroup()
+							.addComponent(separator1, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
+							.addGap(0, 0, Short.MAX_VALUE)))
+					.addGap(10, 10, 10))
 		);
 		contentPaneLayout.setVerticalGroup(
 			contentPaneLayout.createParallelGroup()
 				.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
 					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-					.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addComponent(handArea, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-							.addGap(16, 16, 16))
-						.addGroup(contentPaneLayout.createSequentialGroup()
-							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(rollDice)
-								.addComponent(endTurn))
-							.addGroup(contentPaneLayout.createParallelGroup()
-								.addGroup(contentPaneLayout.createSequentialGroup()
-									.addGap(18, 18, 18)
-									.addComponent(youRolledText)
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(movesLeftLabel))
-								.addGroup(contentPaneLayout.createSequentialGroup()
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(guessButton)
-										.addComponent(yourhandText))
-									.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-									.addComponent(accusButton))))))
+					.addComponent(separator1, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
+					.addGroup(contentPaneLayout.createParallelGroup()
+						.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+							.addGap(10, 10, 10)
+							.addComponent(endTurn)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(guessButton)
+								.addComponent(yourhandText))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(accusButton)
+							.addContainerGap())
+						.addGroup(contentPaneLayout.createParallelGroup()
+							.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+								.addGap(6, 6, 6)
+								.addComponent(playerTurnText, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(youRolledText)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(movesLeftLabel)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(rollDice, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+								.addGap(6, 6, 6))
+							.addGroup(contentPaneLayout.createSequentialGroup()
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(handArea, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()))))
 		);
 		pack();
 		setLocationRelativeTo(getOwner());
@@ -813,7 +834,6 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 	private JMenu fileMenu;
 	private JMenuItem newGame;
 	private JMenu GameMenu;
-	private JSeparator jSeparator1;
 	private JButton rollDice;
 	private JButton endTurn;
 	private JButton guessButton;
@@ -823,6 +843,8 @@ public class UI extends javax.swing.JFrame implements MouseListener {
 	private JLabel yourhandText;
 	private JLabel youRolledText;
 	private JLabel movesLeftLabel;
+	private JLabel playerTurnText;
+	private JSeparator separator1;
 	private Dialog guessDialoge;
 	private JButton guessOKButton;
 	private JComboBox guessWeapon;

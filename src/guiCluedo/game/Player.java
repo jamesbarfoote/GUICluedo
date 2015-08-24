@@ -111,4 +111,9 @@ public class Player {
 	public void setRoom(Room r){
 		this.currentRoom = r;
 	}
+	
+	public String getCharacterName()
+	{
+		return character;
+	}
 }
