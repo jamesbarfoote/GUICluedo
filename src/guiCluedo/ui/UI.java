@@ -33,12 +33,12 @@ public class UI extends javax.swing.JFrame {
 	private Card cardClicked;
 
 	static JLabel obj1 = new JLabel();
+	
 
 	/**
 	 * Creates new form UI
 	 */
-	public UI() {
-		
+	public UI() {	
 		initComponents();
 		b = new Board();
 		
@@ -139,6 +139,10 @@ public class UI extends javax.swing.JFrame {
 			//Call method that iterates over all the players and finds the first
 			//one with a matching card from the guess hand
 			//Then displays the popup asking for them to click on a card in their hand that matches
+			guessDiagPlayerNameText.setText(currentPlayer.getName());
+			line1Text.setText("Player blah guessed these three cards");
+			line2Text.setText("name of the 3 cards");
+			line3Text.setText("Please select one of these cards from your hand and click ok");
 			guessDialog.setVisible(true);
 			guessDialog.setAlwaysOnTop(true);
 		}
