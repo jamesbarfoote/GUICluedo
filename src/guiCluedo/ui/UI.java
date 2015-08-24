@@ -121,6 +121,7 @@ public class UI extends javax.swing.JFrame {
 	private void guessOKButtonActionPerformed(ActionEvent e) {
 		if(isGuess)
 		{
+			//Suggestion logic
 			String room = findContainingRoom(b);
 			String character = guessCharacter.getSelectedItem().toString();
 			String weapon = guessWeapon.getSelectedItem().toString();
@@ -137,6 +138,7 @@ public class UI extends javax.swing.JFrame {
 		}
 		else
 		{
+			//Accusation logic
 			String room = guessRoom.getSelectedItem().toString();;
 			String character = guessCharacter.getSelectedItem().toString();
 			String weapon = guessWeapon.getSelectedItem().toString();
@@ -150,6 +152,15 @@ public class UI extends javax.swing.JFrame {
 			//Pass Arraylist to the guess class
 			Guess g = new Guess(false, guessHand, currentPlayer, b);
 			guessDialoge.setVisible(false);
+			if(g.getEliminatedPlayer()!=null){
+				b.players.remove(g.getEliminatedPlayer());
+				canvas.repaint();
+				playGame(b, currentPlayer.getNum());
+				rollDice.setEnabled(true);
+				hCanvas.setHand(currentPlayer);
+				this.hCanvas.repaint();
+				//Need to display pop-up box telling player they have been eliminated here
+			}
 		}
 
 

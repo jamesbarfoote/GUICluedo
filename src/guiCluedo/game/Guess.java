@@ -104,6 +104,7 @@ public class Guess {
 						playerNum = (playerNum % b.players.size()) + 1;
 					}
 				}
+				System.out.println("Eliminated player was: " + player.getName());
 				eliminatedPlayer = player;
 				
 			}
