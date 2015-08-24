@@ -33,12 +33,12 @@ public class UI extends javax.swing.JFrame {
 	private Card cardClicked;
 
 	static JLabel obj1 = new JLabel();
+	
 
 	/**
 	 * Creates new form UI
 	 */
-	public UI() {
-		
+	public UI() {	
 		initComponents();
 		b = new Board();
 		
@@ -135,6 +135,16 @@ public class UI extends javax.swing.JFrame {
 			//Pass Arraylist to the guess class
 			Guess g = new Guess(true, guessHand, currentPlayer, b);
 			guessDialoge.setVisible(false);
+			
+			//Call method that iterates over all the players and finds the first
+			//one with a matching card from the guess hand
+			//Then displays the popup asking for them to click on a card in their hand that matches
+			guessDiagPlayerNameText.setText(currentPlayer.getName());
+			line1Text.setText("Player blah guessed these three cards");
+			line2Text.setText("name of the 3 cards");
+			line3Text.setText("Please select one of these cards from your hand and click ok");
+			guessDialog.setVisible(true);
+			guessDialog.setAlwaysOnTop(true);
 		}
 		else
 		{
@@ -159,7 +169,32 @@ public class UI extends javax.swing.JFrame {
 				rollDice.setEnabled(true);
 				hCanvas.setHand(currentPlayer);
 				this.hCanvas.repaint();
-				//Need to display pop-up box telling player they have been eliminated here
+
+				//Show message that you have been eliminated
+				errorDialog.setTitle("YOU HAVE BEEN ELIMINATED!!");
+				errorText1.setText(currentPlayer.getName() + " you have been eliminated!");
+				errorText2.setText("");
+				errorDialog.setVisible(true);
+				
+				
+				
+				if(b.getPlayers().size() == 1){
+					
+					try {
+						Thread.sleep(4000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
+					
+					//Show message that you have been eliminated
+					errorDialog.setTitle("YOU HAVE WON!!");
+					errorText1.setText(currentPlayer.getName() + " you have won the game!");
+					errorText2.setText("Congratulations!");
+					errorDialog.setVisible(true);
+					}
 			}
 		}
 
@@ -219,47 +254,37 @@ public class UI extends javax.swing.JFrame {
 	}
 
 	private void newGameActionPerformed(ActionEvent e) {
+		b.players.clear();
 		startScreen sc = new startScreen();
 		sc.startScreenForm.setVisible(true);
 		this.setVisible(false);
 	}
 
 	private void handAreaMouseClicked(MouseEvent e) {
-		System.out.println("Clicked");
-		// Get the clicked location
-		int x = e.getX();
-		int y = e.getY();
-		System.out.println("X = " + x + " Y = " + y);
-		
-		//Get the starting x and y location of the hand area
-		int handX = handArea.getX();
-		int handY = handArea.getY();
-		int maxY = handY + handArea.getHeight();
-		
-		//Get the width of each card
-		ArrayList<Card> hand = currentPlayer.getHand();
-		int numCards = hand.size();
-		int cardSize = numCards / handArea.getWidth();
-		
-		//Figure out which card was clicked
-			//for each card in the hand
-		for(int i = 0; i < hand.size(); i++)
-		{
-			int currentX = (cardSize * i) + handX;
-			
-			//x = (width * i) + startLoc
-			//y = start y + (handArea + height)
-				if(x >= currentX && x <= currentX + cardSize)
-				{
-					if(y >= handY && y <= maxY)
-					{
-						cardClicked = hand.get(i);
-						System.out.println("Clicked card = " + cardClicked);
-					}
-				}
-		}
+		// TODO add your code here
 	}
 
+	private void showShortcutsActionPerformed(ActionEvent e) {
+		// TODO add your code here
+	}
+
+	private void discoveredCardsmenuItemActionPerformed(ActionEvent e) {
+		// TODO add your code here
+	}
+
+	private void checkBoxMenuItem1ItemStateChanged(ItemEvent e) {
+		// TODO add your code here
+	}
+
+	private void cheatAnswerItemStateChanged(ItemEvent e) {
+		// TODO add your code here
+	}
+
+	private void guessDiagOkButtonActionPerformed(ActionEvent e) {
+		
+	}
+
+	
 	/**
 	 * Loop through all the players while the game hasn't been won. If a player
 	 * gets eliminated, break the loop then remove the player and start the loop
@@ -270,6 +295,7 @@ public class UI extends javax.swing.JFrame {
 	 * @param playerNum - the prior players number
 	 */
 	public void playGame(Board b, int playerNum) {
+		
 		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
 		System.out.println("Current player is: " + playerNum + " " );
 		currentPlayer = b.getPlayers().get(playerNum - 1);
@@ -374,7 +400,12 @@ public class UI extends javax.swing.JFrame {
 		jMenuBar = new JMenuBar();
 		fileMenu = new JMenu();
 		newGame = new JMenuItem();
+		showShortcuts = new JMenuItem();
 		GameMenu = new JMenu();
+		discoveredCardsmenuItem = new JMenuItem();
+		menu1 = new JMenu();
+		checkBoxMenuItem1 = new JCheckBoxMenuItem();
+		cheatAnswer = new JCheckBoxMenuItem();
 		rollDice = new JButton();
 		endTurn = new JButton();
 		guessButton = new JButton();
@@ -391,18 +422,24 @@ public class UI extends javax.swing.JFrame {
 		guessWeapon = new JComboBox();
 		guessCharacter = new JComboBox();
 		guessRoom = new JComboBox();
-		
 		label2 = new JLabel();
 		label1 = new JLabel();
 		label3 = new JLabel();
 		label4 = new JLabel();
 		errorDialog = new JDialog();
-		label5 = new JLabel();
+		errorText1 = new JLabel();
 		errorOK = new JButton();
 		errorText2 = new JLabel();
+		guessDialog = new JDialog();
+		line1Text = new JLabel();
+		line2Text = new JLabel();
+		line3Text = new JLabel();
+		guessDiagOkButton = new JButton();
+		guessDiagPlayerNameText = new JLabel();
+		
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
-		guessWeapon.addItem("Lead Pipe");
+		guessWeapon.addItem("Pipe");
 		guessWeapon.addItem("Rope");
 		guessWeapon.addItem("Candle Stick");
 		guessWeapon.addItem("Wrench");
@@ -423,6 +460,7 @@ public class UI extends javax.swing.JFrame {
 		guessRoom.addItem("Library");
 		guessRoom.addItem("Lounge");
 		guessRoom.addItem("Study");
+
 
 		//======== this ========
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -445,6 +483,16 @@ public class UI extends javax.swing.JFrame {
 					}
 				});
 				fileMenu.add(newGame);
+
+				//---- showShortcuts ----
+				showShortcuts.setText("Show shortcuts");
+				showShortcuts.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						showShortcutsActionPerformed(e);
+					}
+				});
+				fileMenu.add(showShortcuts);
 			}
 			jMenuBar.add(fileMenu);
 
@@ -461,8 +509,44 @@ public class UI extends javax.swing.JFrame {
 						GameMenuMenuSelected(e);
 					}
 				});
+
+				//---- discoveredCardsmenuItem ----
+				discoveredCardsmenuItem.setText("Show discovered cards");
+				discoveredCardsmenuItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						discoveredCardsmenuItemActionPerformed(e);
+					}
+				});
+				GameMenu.add(discoveredCardsmenuItem);
 			}
 			jMenuBar.add(GameMenu);
+
+			//======== menu1 ========
+			{
+				menu1.setText("Cheats");
+
+				//---- checkBoxMenuItem1 ----
+				checkBoxMenuItem1.setText("Infinite move");
+				checkBoxMenuItem1.addItemListener(new ItemListener() {
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						checkBoxMenuItem1ItemStateChanged(e);
+					}
+				});
+				menu1.add(checkBoxMenuItem1);
+
+				//---- cheatAnswer ----
+				cheatAnswer.setText("Show answer");
+				cheatAnswer.addItemListener(new ItemListener() {
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						cheatAnswerItemStateChanged(e);
+					}
+				});
+				menu1.add(cheatAnswer);
+			}
+			jMenuBar.add(menu1);
 		}
 		setJMenuBar(jMenuBar);
 
@@ -478,6 +562,7 @@ public class UI extends javax.swing.JFrame {
 
 		//---- endTurn ----
 		endTurn.setText("End Turn");
+		endTurn.setToolTipText("End your turn so that the next player can go");
 		endTurn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -487,6 +572,7 @@ public class UI extends javax.swing.JFrame {
 
 		//---- guessButton ----
 		guessButton.setText("Suggestion");
+		guessButton.setToolTipText("Make a guess as to what cards you think are the answer");
 		guessButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -496,6 +582,7 @@ public class UI extends javax.swing.JFrame {
 
 		//---- accusButton ----
 		accusButton.setText("Accusation");
+		accusButton.setToolTipText("If you are sure what the answer if click me the make your accusation");
 		accusButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -680,15 +767,16 @@ public class UI extends javax.swing.JFrame {
 			errorDialog.setTitle("ERROR!");
 			Container errorDialogContentPane = errorDialog.getContentPane();
 
-			//---- label5 ----
-			label5.setText("You have tried to perform a suggestion ");
-			label5.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			//---- errorText1 ----
+			errorText1.setText("You have tried to perform a suggestion ");
+			errorText1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 			//---- errorOK ----
 			errorOK.setText("OK");
 			errorOK.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					errorOKActionPerformed(e);
 					errorOKActionPerformed(e);
 					errorOKActionPerformed(e);
 				}
@@ -705,7 +793,7 @@ public class UI extends javax.swing.JFrame {
 					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(errorDialogContentPaneLayout.createParallelGroup()
-							.addComponent(label5)
+							.addComponent(errorText1)
 							.addGroup(errorDialogContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
 								.addComponent(errorOK)
 								.addComponent(errorText2)))
@@ -715,7 +803,7 @@ public class UI extends javax.swing.JFrame {
 				errorDialogContentPaneLayout.createParallelGroup()
 					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
 						.addGap(22, 22, 22)
-						.addComponent(label5)
+						.addComponent(errorText1)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(errorText2)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
@@ -724,6 +812,76 @@ public class UI extends javax.swing.JFrame {
 			);
 			errorDialog.pack();
 			errorDialog.setLocationRelativeTo(errorDialog.getOwner());
+		}
+
+		//======== guessDialog ========
+		{
+			guessDialog.setTitle("Suggestion");
+			Container guessDialogContentPane = guessDialog.getContentPane();
+
+			//---- line1Text ----
+			line1Text.setText("Player blah guessed these cards:");
+
+			//---- line2Text ----
+			line2Text.setText("Insert 3 cards here");
+
+			//---- line3Text ----
+			line3Text.setText("Please click ok and then select one of your cards");
+
+			//---- guessDiagOkButton ----
+			guessDiagOkButton.setText("OK");
+			guessDiagOkButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					guessDiagOkButtonActionPerformed(e);
+				}
+			});
+
+			//---- guessDiagPlayerNameText ----
+			guessDiagPlayerNameText.setText("Player 1");
+
+			GroupLayout guessDialogContentPaneLayout = new GroupLayout(guessDialogContentPane);
+			guessDialogContentPane.setLayout(guessDialogContentPaneLayout);
+			guessDialogContentPaneLayout.setHorizontalGroup(
+				guessDialogContentPaneLayout.createParallelGroup()
+					.addGroup(guessDialogContentPaneLayout.createSequentialGroup()
+						.addGap(117, 117, 117)
+						.addComponent(guessDiagOkButton)
+						.addContainerGap(120, Short.MAX_VALUE))
+					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogContentPaneLayout.createSequentialGroup()
+						.addGap(0, 33, Short.MAX_VALUE)
+						.addGroup(guessDialogContentPaneLayout.createParallelGroup()
+							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogContentPaneLayout.createSequentialGroup()
+								.addComponent(line3Text)
+								.addGap(19, 19, 19))
+							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogContentPaneLayout.createSequentialGroup()
+								.addComponent(line1Text)
+								.addGap(52, 52, 52))
+							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogContentPaneLayout.createSequentialGroup()
+								.addComponent(line2Text)
+								.addGap(88, 88, 88))))
+					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogContentPaneLayout.createSequentialGroup()
+						.addContainerGap(130, Short.MAX_VALUE)
+						.addComponent(guessDiagPlayerNameText)
+						.addGap(115, 115, 115))
+			);
+			guessDialogContentPaneLayout.setVerticalGroup(
+				guessDialogContentPaneLayout.createParallelGroup()
+					.addGroup(guessDialogContentPaneLayout.createSequentialGroup()
+						.addGap(5, 5, 5)
+						.addComponent(guessDiagPlayerNameText)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(line1Text)
+						.addGap(13, 13, 13)
+						.addComponent(line2Text)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(line3Text)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+						.addComponent(guessDiagOkButton)
+						.addContainerGap())
+			);
+			guessDialog.pack();
+			guessDialog.setLocationRelativeTo(guessDialog.getOwner());
 		}
 	}// </editor-fold>//GEN-END:initComponents
 
@@ -802,7 +960,12 @@ public class UI extends javax.swing.JFrame {
 	private JMenuBar jMenuBar;
 	private JMenu fileMenu;
 	private JMenuItem newGame;
+	private JMenuItem showShortcuts;
 	private JMenu GameMenu;
+	private JMenuItem discoveredCardsmenuItem;
+	private JMenu menu1;
+	private JCheckBoxMenuItem checkBoxMenuItem1;
+	private JCheckBoxMenuItem cheatAnswer;
 	private JButton rollDice;
 	private JButton endTurn;
 	private JButton guessButton;
@@ -824,9 +987,15 @@ public class UI extends javax.swing.JFrame {
 	private JLabel label3;
 	private JLabel label4;
 	private JDialog errorDialog;
-	private JLabel label5;
+	private JLabel errorText1;
 	private JButton errorOK;
 	private JLabel errorText2;
+	private JDialog guessDialog;
+	private JLabel line1Text;
+	private JLabel line2Text;
+	private JLabel line3Text;
+	private JButton guessDiagOkButton;
+	private JLabel guessDiagPlayerNameText;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 
 	
