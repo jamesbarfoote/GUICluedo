@@ -186,7 +186,7 @@ new FormModel {
 			"$horizontalGroup": "par l {seq {space :p:117:p, comp guessDiagOkButton:::p::p, space ::120:x}, seq t {space :0:33:x, par l {seq t {comp line3Text:::p::p, space :p:19:p}, seq t {comp line1Text:::p::p, space :p:52:p}, seq t {comp line2Text:::p::p, space :p:88:p}}}, seq t {space ::130:x, comp guessDiagPlayerNameText:::p::p, space :p:115:p}}"
 			"$verticalGroup": "par l {seq l {space :p:5:p, comp guessDiagPlayerNameText:::p::p, space :::p, comp line1Text:::p::p, space :p:13:p, comp line2Text:::p::p, space :::p, comp line3Text:::p::p, space ::41:x, comp guessDiagOkButton:::p::p, space :::p}}"
 		} ) {
-			name: "guessDialog"
+			name: "suggestionDialog"
 			"title": "Suggestion"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "line1Text"
