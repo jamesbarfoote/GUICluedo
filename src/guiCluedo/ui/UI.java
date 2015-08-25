@@ -162,10 +162,16 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			Player previousPlayer = currentPlayer;
 			if(checkHasCard(guessHand) == null)
 			{
+				System.out.println("No one has any of these cards");
+				guessDialog.setVisible(false);
 				//Display Box saying that no one has any cards
+				errorDialog.setTitle("Suggestion");
 				errorDialog.setVisible(true);
+				errorText1.setText("No one has any of the guessed cards");
+				errorText2.setText("");
+				
 			}
-			else//If someone has a card that matches
+			else if(checkHasCard(guessHand) != null)//If someone has a card that matches
 			{
 				currentPlayer = checkHasCard(guessHand);
 				canvas.repaint();
@@ -309,6 +315,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 
 	private void errorOKActionPerformed(ActionEvent e) {
 		errorDialog.setVisible(false);
+		guessDialog.setVisible(false);
 	}
 
 	public void newGameActionPerformed(ActionEvent e) {
@@ -565,9 +572,9 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
-		guessWeapon.addItem("Pipe");
+		guessWeapon.addItem("Lead Pipe");
 		guessWeapon.addItem("Rope");
-		guessWeapon.addItem("Candle Stick");
+		guessWeapon.addItem("Candlestick");
 		guessWeapon.addItem("Wrench");
 
 		guessCharacter.addItem("Colonel Mustard");
