@@ -493,11 +493,10 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		guessButton.setEnabled(true);
 		accusButton.setEnabled(true);
 		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
-		System.out.println("Current player is: " + playerNum + " " );
+
 		currentPlayer = b.getPlayers().get(playerNum - 1);
 		playerTurnText.setText(currentPlayer.getName() + " / " + currentPlayer.getCharacterName());
 
-		System.out.println(currentPlayer.getName());
 		keyBindings();
 	}
 
@@ -1158,7 +1157,6 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			roll = ((int) Math.ceil(Math.random()*11)) + 1; // generate a random number between 2 and 12 inclusive
 		}
 		currentPlayer.setRoll(roll);
-		System.out.println(roll);
 		youRolledText.setText("You rolled " + roll);
 		rollDice.setEnabled(false);
 	}
@@ -1233,13 +1231,11 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println("Released");
 
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		System.out.println("Typed");
 		if(e.equals(KeyEvent.VK_P))
 		{
 			this.setFocusable(true);

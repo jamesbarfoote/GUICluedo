@@ -46,8 +46,7 @@ public class Guess {
 		for(Player player : b.getPlayers()){
 			if(player.getCharacterName().equals(character.getName())){
 				suggestedPlayer = player;
-				System.out.println("Suggested player is: " + suggestedPlayer.getCharacterName());
-			}
+				}
 		}
 		for(int i = 0; i < 22; i++){
 			for(int j = 0; j < 23; j++){
@@ -97,7 +96,6 @@ public class Guess {
 		}
 		Room room = null;
 		for (Card card : guess) {
-			System.out.println("reached");
 			if (card instanceof Room) {	//Grab the room from the 3 suggested cards
 				room = (Room) card;
 			}
@@ -107,7 +105,6 @@ public class Guess {
 			return;
 		}
 		else{
-			System.out.println("Must be in the room to suggest it");
 			this.failed= true;
 			return;
 		}
@@ -141,7 +138,6 @@ public class Guess {
 						playerNum = (playerNum % b.players.size()) + 1;
 					}
 				}
-				System.out.println("Eliminated player was: " + player.getName());
 				eliminatedPlayer = player;
 
 			}

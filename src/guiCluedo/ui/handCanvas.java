@@ -39,8 +39,6 @@ public class HandCanvas extends Canvas implements MouseListener{
 		setBackground (Color.BLUE);
 		setSize(width, height);
 		hand = player.getHand();
-		System.out.println("Card 1 = " + hand.get(0).getName());
-		System.out.println("Card 2 = " + hand.get(1).getName());
 		repaint();
 	}
 	
@@ -133,8 +131,7 @@ public class HandCanvas extends Canvas implements MouseListener{
 					if(y >= handY && y <= maxY)
 					{
 						cardClicked = hand.get(i);
-						System.out.println("Clicked card = " + cardClicked.getName());
-					}
+						}
 				}
 		}
 		

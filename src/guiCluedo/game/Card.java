@@ -31,7 +31,6 @@ public abstract class Card {
 			Character character = (Character) this;
 			return character.getName();
 		}
-		System.out.println("Returned name is null");
 		return null;
 	}
 }
