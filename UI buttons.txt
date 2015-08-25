@@ -1,8 +1,8 @@
 guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
-		guessWeapon.addItem("Pipe");
+		guessWeapon.addItem("Lead Pipe");
 		guessWeapon.addItem("Rope");
-		guessWeapon.addItem("Candle Stick");
+		guessWeapon.addItem("Candlestick");
 		guessWeapon.addItem("Wrench");
 
 		guessCharacter.addItem("Colonel Mustard");
