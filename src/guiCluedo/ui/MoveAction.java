@@ -60,7 +60,7 @@ class MoveAction extends AbstractAction {
 					board.getUsedSquares().remove(location);
 					board.getUsedSquares().add(newLocation);
 					board.getPlayerSquares().remove(location);
-					board.getPlayerSquares().remove(newLocation);
+					board.getPlayerSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -75,7 +75,7 @@ class MoveAction extends AbstractAction {
 					board.getUsedSquares().remove(location);
 					board.getUsedSquares().add(newLocation);
 					board.getPlayerSquares().remove(location);
-					board.getPlayerSquares().remove(newLocation);
+					board.getPlayerSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -90,7 +90,7 @@ class MoveAction extends AbstractAction {
 					board.getUsedSquares().remove(location);
 					board.getUsedSquares().add(newLocation);
 					board.getPlayerSquares().remove(location);
-					board.getPlayerSquares().remove(newLocation);
+					board.getPlayerSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);
@@ -105,7 +105,7 @@ class MoveAction extends AbstractAction {
 					board.getUsedSquares().remove(location);
 					board.getUsedSquares().add(newLocation);
 					board.getPlayerSquares().remove(location);
-					board.getPlayerSquares().remove(newLocation);
+					board.getPlayerSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
 					//player.setRoll(player.getRoll()-1);

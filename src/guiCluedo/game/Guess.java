@@ -21,6 +21,12 @@ public class Guess {
 		}
 	}
 
+	/**
+	 * When a guess is made the weapon and player guessed must be moved to the
+	 * suggested room.
+	 * @param guess
+	 * @param b
+	 */
 	public void moveIcons(List<Card> guess, Board b){
 		Room currentRoom = player.getRoom();
 		Weapon weapon = null;
