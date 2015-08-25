@@ -117,6 +117,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		isGuess = false;
 		guessRoom.setEnabled(true);
 		guessDialoge.setVisible(true);
+		accusButton.setEnabled(false);
 	}
 
 	/**
@@ -131,6 +132,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			return;
 		}
 		guessDialoge.setVisible(true);
+		guessButton.setEnabled(false);
 	}
 
 	/**
@@ -139,6 +141,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	 */
 	public void endTurnActionPerformed(ActionEvent e) {
 		playGame(b, currentPlayer.getNum());
+		youRolledText.setText("You rolled 0");
 		//HandCanvas h = new HandCanvas(b, handArea.getWidth(), handArea.getHeight(), currentPlayer);
 		rollDice.setEnabled(true);
 		hCanvas.setHand(currentPlayer);
@@ -484,7 +487,8 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	 * @param playerNum - the prior players number
 	 */
 	public void playGame(Board b, int playerNum) {
-
+guessButton.setEnabled(true);
+accusButton.setEnabled(true);
 		playerNum = (playerNum % b.getPlayers().size()) + 1; //go to the next player number
 		System.out.println("Current player is: " + playerNum + " " );
 		currentPlayer = b.getPlayers().get(playerNum - 1);
@@ -566,7 +570,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		guessCharacter.addItem("Professor Plum");
 
 		guessRoom.addItem("Ballroom");
-		guessRoom.addItem("Billiard Room");
+		guessRoom.addItem("Billard Room");
 		guessRoom.addItem("Conservatory");
 		guessRoom.addItem("Dining Room");
 		guessRoom.addItem("Hall");
@@ -661,12 +665,6 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 						cheatAnswerItemStateChanged(e);
 						cheatAnswerItemStateChanged(e);
 						cheatAnswerItemStateChanged(e);
-					}
-				});
-				cheatAnswer.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						cheatAnswerActionPerformed(e);
 					}
 				});
 				menu1.add(cheatAnswer);
@@ -937,16 +935,21 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		//======== suggestionDialog ========
 		{
 			suggestionDialog.setTitle("Suggestion");
+			suggestionDialog.setLocationByPlatform(true);
+			suggestionDialog.setMinimumSize(new Dimension(310, 210));
 			Container suggestionDialogContentPane = suggestionDialog.getContentPane();
 
 			//---- line1Text ----
 			line1Text.setText("Player blah guessed these cards:");
+			line1Text.setHorizontalAlignment(SwingConstants.CENTER);
 
 			//---- line2Text ----
 			line2Text.setText("Insert 3 cards here");
+			line2Text.setHorizontalAlignment(SwingConstants.CENTER);
 
 			//---- line3Text ----
 			line3Text.setText("Please click ok and then select one of your cards");
+			line3Text.setHorizontalAlignment(SwingConstants.CENTER);
 
 			//---- guessDiagOkButton ----
 			guessDiagOkButton.setText("OK");
@@ -965,7 +968,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			suggestionDialogContentPaneLayout.setHorizontalGroup(
 				suggestionDialogContentPaneLayout.createParallelGroup()
 					.addGroup(GroupLayout.Alignment.TRAILING, suggestionDialogContentPaneLayout.createSequentialGroup()
-						.addGap(0, 33, Short.MAX_VALUE)
+						.addGap(0, 38, Short.MAX_VALUE)
 						.addComponent(line3Text)
 						.addGap(19, 19, 19))
 					.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
@@ -982,7 +985,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 							.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
 								.addGap(114, 114, 114)
 								.addComponent(guessDiagOkButton)))
-						.addContainerGap(69, Short.MAX_VALUE))
+						.addContainerGap(74, Short.MAX_VALUE))
 			);
 			suggestionDialogContentPaneLayout.setVerticalGroup(
 				suggestionDialogContentPaneLayout.createParallelGroup()

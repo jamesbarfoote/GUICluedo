@@ -528,7 +528,7 @@ public class startScreen {
 		}
 		else if(colourBlue.isSelected())
 		{
-			colourGreen.setEnabled(false);
+			colourBlue.setEnabled(false);
 			if(iColours.contains("Blue")){
 				return Color.BLUE;
 			}	
