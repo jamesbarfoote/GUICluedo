@@ -94,6 +94,7 @@ public class Guess {
 			}
 		}
 		if (player.getRoom().equals(room)) {	//If player is in the suggested room
+			this.failed= false;
 			return;
 		}
 		else{
