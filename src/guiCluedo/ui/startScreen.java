@@ -22,7 +22,7 @@ import guiCluedo.game.Player;
  */
 public class startScreen {
 	public int numberOPlayers = 2;
-	private int counter;
+	private int counter = 1;
 	public static ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<String> chars = new ArrayList<>(Arrays.asList("Miss Scarlet", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
 	private ArrayList<String> iColours = new ArrayList<>(Arrays.asList("Red", "Green", "Blue", "White", "Yellow", "Purple"));
@@ -445,79 +445,60 @@ public class startScreen {
 	}
 
 	private void donePlayerSetupActionPerformed(java.awt.event.ActionEvent evt) {                                                
-//		String pName = "";
-//		if(playerName.getText() != "")
-//		{
-//			pName = playerName.getText();
-//		}
-//		else
-//		{
-//			warning.setVisible(true);
-//		}
-//		String cCharacter = "";
-//		System.out.println(pName);
-//		
-//		cCharacter = getCharacter();
-//		if(!cCharacter.equals("")){
-//		 System.out.println("Character was: " + cCharacter);
-//		}
-//		else
-//		{
-//			System.out.println("Please select a character");
-//			warning.setVisible(true);
-//			cCharacter = getCharacter();
-//			return;
-//		}
-//		Color cColour = getColour();
-//		if(!cColour.equals(null))
-//		{
-//			System.err.println("Colour was: " + cColour);
-//		}
-//		else
-//		{
-//			System.out.println("Please select a colour");
-//			warning.setVisible(true);
-//			cColour = getColour();
-//			return;
-//		}
-//		Player p = new Player(pName, cCharacter, cColour, counter);
-//		iColours.remove(cColour);
-//		chars.remove(cCharacter);
-//		System.out.println("Player created!");
-//		players.add(p);
-//		System.out.println("PlayerF added");
-//		colourRadios.clearSelection();
-//		characterRadios.clearSelection();
-//		playerName.setText("");
+		String pName = "";
+		if(playerName.getText() != "")
+		{
+			pName = playerName.getText();
+		}
+		else
+		{
+			warning.setVisible(true);
+		}
+		String cCharacter = "";
+		System.out.println(pName);
 		
-		Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
+		cCharacter = getCharacter();
+		if(!cCharacter.equals("")){
+		 System.out.println("Character was: " + cCharacter);
+		}
+		else
+		{
+			System.out.println("Please select a character");
+			warning.setVisible(true);
+			cCharacter = getCharacter();
+			return;
+		}
+		Color cColour = getColour();
+		if(!cColour.equals(null))
+		{
+			System.err.println("Colour was: " + cColour);
+		}
+		else
+		{
+			System.out.println("Please select a colour");
+			warning.setVisible(true);
+			cColour = getColour();
+			return;
+		}
+		Player p = new Player(pName, cCharacter, cColour, counter);
+		iColours.remove(cColour);
+		chars.remove(cCharacter);
 		players.add(p);
-		Player p1 = new Player("James", "Miss Scarlet", Color.BLUE, 2);
-		players.add(p1);
-		
-		System.out.println("Go to main game screen");
-		//Launch UI
-		UI u = new UI(players);
-		System.out.println("UI created");
-		u.setVisible(true);
-		startScreenForm.setVisible(false);//Hide the player setup screen
+		colourRadios.clearSelection();
+		characterRadios.clearSelection();
+		playerName.setText("");
+//		startScreenForm.setVisible(false);//Hide the player setup screen
 
-//		counter++;
-//		if(counter >= numberOPlayers )
-//		{
-//			Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
-//			players.add(p);
-//			Player p1 = new Player("James", "Miss Scarlett", Color.BLUE, 2);
-//			players.add(p1);
-//			
-//			System.out.println("Go to main game screen");
-//			//Launch UI
-//			UI u = new UI();
-//			u.setVisible(true);
-//			this.setVisible(false);//Hide the player setup screen
-//			return;
-//
-//		}
+		counter++;
+		if(counter > numberOPlayers )
+		{
+			//Launch UI
+			UI ui = new UI(players);
+			ui.setVisible(true);
+			startScreenForm.setVisible(false);//Hide the player setup screen
+			return;
+
+		}
 	}
 
 	private Color getColour() {
