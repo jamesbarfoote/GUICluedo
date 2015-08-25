@@ -1153,7 +1153,15 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void rollDiceActionPerformed(java.awt.event.ActionEvent evt) {
-		int roll = ((int) Math.ceil(Math.random()*11)) + 1; // generate a random number between 2 and 12 inclusive
+		int roll = 0;
+		if(infiniteMove)
+		{
+		roll = (int) Double.POSITIVE_INFINITY;
+		}
+		else
+		{
+			roll = ((int) Math.ceil(Math.random()*11)) + 1; // generate a random number between 2 and 12 inclusive
+		}
 		currentPlayer.setRoll(roll);
 		System.out.println(roll);
 		youRolledText.setText("You rolled " + roll);
