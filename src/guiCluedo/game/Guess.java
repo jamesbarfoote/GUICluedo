@@ -53,20 +53,24 @@ public class Guess {
 			for(int j = 0; j < 23; j++){
 				if(currentRoom.getBoundingBox().contains(i, j)){
 					Point p = new Point(i, j);
+					//Move the weapon to the room
 					if(!b.getUsedSquares().contains(p) && (count == 0) && (!currentRoom.getBoundingBox().contains(weapon.getLocation()))){
 						b.getUsedSquares().remove(weapon.getLocation());
 						weapon.setLocation(p);
 						b.getUsedSquares().add(weapon.getLocation());
 						count++;
 					}
+					//If weapon was already in there, increment counter
 					else if(currentRoom.getBoundingBox().contains(weapon.getLocation()) && count == 0){
 						count++;
 					}
+					//Move player
 					else if(suggestedPlayer!=null){
 						if(!b.getUsedSquares().contains(p) && (count == 1) && (!currentRoom.getBoundingBox().contains(suggestedPlayer.getLocation()))){
 							b.getUsedSquares().remove(suggestedPlayer.getLocation());
 							b.getPlayerSquares().remove(suggestedPlayer.getLocation());
 							suggestedPlayer.setLocation(p);
+							suggestedPlayer.setRoom(currentRoom);
 							b.getUsedSquares().add(suggestedPlayer.getLocation());
 							b.getPlayerSquares().remove(suggestedPlayer.getLocation());
 							count++;

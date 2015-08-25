@@ -261,7 +261,7 @@ public class tests {
 		Board board = createBoard();
 		ArrayList<Card> ans = board.getAnswer();
 		ans.remove(1);
-		ans.add(new Character("The Reverend Green"));
+		ans.add(new Character("Mr. Green"));
 		Player p = board.getPlayers().get(0);
 		Player suggestedPlayer = null;
 		Character character = null;
@@ -291,7 +291,7 @@ public class tests {
 		Board board = createBoard();
 		ArrayList<Card> ans = board.getAnswer();
 		ans.remove(1);
-		ans.add(new Character("The Reverend Green"));
+		ans.add(new Character("Mr. Green"));
 		Player p = board.getPlayers().get(0);
 		Weapon weapon = null;
 		Room room = null;
@@ -358,7 +358,7 @@ public class tests {
 	 */
 		private Board createBoard(){
 			players.add(new Player("Bob", "Colonel Mustard", Color.YELLOW, 1));
-			players.add(new Player("Jeremy", "The Reverend Green", Color.GREEN, 2));
+			players.add(new Player("Jeremy", "Mr. Green", Color.GREEN, 2));
 			UI ui = new UI(players);
 			return ui.b;
 		}

@@ -33,7 +33,7 @@ public class Player {
 		if(character.equals("Mrs. White")){
 			this.location = new Point(0, 12);
 		}
-		if(character.equals("The Reverend Green")){
+		if(character.equals("Mr. Green")){
 			this.location = new Point(0, 8);
 		}
 		if(character.equals("Mrs. Peacock")){

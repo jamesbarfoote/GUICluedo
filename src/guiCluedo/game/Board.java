@@ -14,7 +14,7 @@ public class Board {
 	public ArrayList<Player> players;
 	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Knife", "Revolver", "Rope", "Lead Pipe", 
 			"Wrench"));
-	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlet", "Colonel Mustard","Mrs. White", "The Reverend Green", 
+	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlet", "Colonel Mustard","Mrs. White", "Mr. Green", 
 			"Mrs. Peacock", "Professor Plum"));
 	private ArrayList<String> roomNames = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory","Billiard Room", "Library", 
 			"Study", "Hall", "Lounge", "Dining Room"));
