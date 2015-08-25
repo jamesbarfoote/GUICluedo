@@ -65,6 +65,13 @@ class MoveAction extends AbstractAction {
 					board.getPlayerSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
+					Room room = null;
+					for(Room r : board.getRooms()){
+						if(r.getBoundingBox().contains(newLocation)){
+							room = r;
+						}
+					}
+					player.setRoom(room);
 					player.setRoll(player.getRoll()-1);
 				}
 			}
@@ -80,6 +87,13 @@ class MoveAction extends AbstractAction {
 					board.getPlayerSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
+					Room room = null;
+					for(Room r : board.getRooms()){
+						if(r.getBoundingBox().contains(newLocation)){
+							room = r;
+						}
+					}
+					player.setRoom(room);
 					player.setRoll(player.getRoll()-1);
 				}
 			}
@@ -95,6 +109,13 @@ class MoveAction extends AbstractAction {
 					board.getPlayerSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
+					Room room = null;
+					for(Room r : board.getRooms()){
+						if(r.getBoundingBox().contains(newLocation)){
+							room = r;
+						}
+					}
+					player.setRoom(room);
 					player.setRoll(player.getRoll()-1);
 				}
 			}
@@ -110,6 +131,13 @@ class MoveAction extends AbstractAction {
 					board.getPlayerSquares().add(newLocation);
 					location.setLocation(newLocation);
 					player.setLocation(location);
+					Room room = null;
+					for(Room r : board.getRooms()){
+						if(r.getBoundingBox().contains(newLocation)){
+							room = r;
+						}
+					}
+					player.setRoom(room);
 					player.setRoll(player.getRoll()-1);
 				}
 			}

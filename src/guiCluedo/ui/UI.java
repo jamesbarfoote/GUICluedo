@@ -557,7 +557,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		dis2 = new JLabel();
 		dis3 = new JLabel();
 		disOKButton = new JButton();
-
+		
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
 		guessWeapon.addItem("Lead Pipe");
@@ -670,6 +670,12 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 						cheatAnswerItemStateChanged(e);
 					}
 				});
+				cheatAnswer.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						cheatAnswerActionPerformed(e);
+					}
+				});
 				menu1.add(cheatAnswer);
 			}
 			jMenuBar.add(menu1);
@@ -747,61 +753,61 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
 		contentPane.setLayout(contentPaneLayout);
 		contentPaneLayout.setHorizontalGroup(
-				contentPaneLayout.createParallelGroup()
+			contentPaneLayout.createParallelGroup()
 				.addComponent(boardArea)
 				.addGroup(contentPaneLayout.createSequentialGroup()
-						.addGroup(contentPaneLayout.createParallelGroup()
+					.addGroup(contentPaneLayout.createParallelGroup()
+						.addGroup(contentPaneLayout.createSequentialGroup()
+							.addGroup(contentPaneLayout.createParallelGroup()
+								.addComponent(youRolledText)
+								.addComponent(rollDice, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+								.addComponent(playerTurnText, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(contentPaneLayout.createParallelGroup()
+								.addComponent(endTurn, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+								.addComponent(accusButton)
 								.addGroup(contentPaneLayout.createSequentialGroup()
-										.addGroup(contentPaneLayout.createParallelGroup()
-												.addComponent(youRolledText)
-												.addComponent(rollDice, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-												.addComponent(playerTurnText, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(contentPaneLayout.createParallelGroup()
-												.addComponent(endTurn, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-												.addComponent(accusButton)
-												.addGroup(contentPaneLayout.createSequentialGroup()
-														.addComponent(guessButton)
-														.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-														.addComponent(yourhandText)))
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(handArea))
-								.addGroup(contentPaneLayout.createSequentialGroup()
-										.addComponent(separator1, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
-										.addGap(0, 0, Short.MAX_VALUE)))
-						.addGap(10, 10, 10))
-				);
+									.addComponent(guessButton)
+									.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+									.addComponent(yourhandText)))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(handArea))
+						.addGroup(contentPaneLayout.createSequentialGroup()
+							.addComponent(separator1, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
+							.addGap(0, 0, Short.MAX_VALUE)))
+					.addGap(10, 10, 10))
+		);
 		contentPaneLayout.setVerticalGroup(
-				contentPaneLayout.createParallelGroup()
+			contentPaneLayout.createParallelGroup()
 				.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-						.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(separator1, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
+					.addComponent(boardArea, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+					.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(separator1, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
+					.addGroup(contentPaneLayout.createParallelGroup()
+						.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+							.addGap(10, 10, 10)
+							.addComponent(endTurn)
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(guessButton)
+								.addComponent(yourhandText))
+							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+							.addComponent(accusButton)
+							.addContainerGap())
 						.addGroup(contentPaneLayout.createParallelGroup()
-								.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-										.addGap(10, 10, 10)
-										.addComponent(endTurn)
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-												.addComponent(guessButton)
-												.addComponent(yourhandText))
-										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(accusButton)
-										.addContainerGap())
-								.addGroup(contentPaneLayout.createParallelGroup()
-										.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-												.addGap(6, 6, 6)
-												.addComponent(playerTurnText, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(youRolledText)
-												.addGap(26, 26, 26)
-												.addComponent(rollDice, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-												.addGap(6, 6, 6))
-										.addGroup(contentPaneLayout.createSequentialGroup()
-												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(handArea, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-												.addContainerGap()))))
-				);
+							.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+								.addGap(6, 6, 6)
+								.addComponent(playerTurnText, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(youRolledText)
+								.addGap(26, 26, 26)
+								.addComponent(rollDice, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+								.addGap(6, 6, 6))
+							.addGroup(contentPaneLayout.createSequentialGroup()
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(handArea, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()))))
+		);
 		pack();
 		setLocationRelativeTo(getOwner());
 
@@ -833,52 +839,52 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			GroupLayout guessDialogeLayout = new GroupLayout(guessDialoge);
 			guessDialoge.setLayout(guessDialogeLayout);
 			guessDialogeLayout.setHorizontalGroup(
-					guessDialogeLayout.createParallelGroup()
+				guessDialogeLayout.createParallelGroup()
 					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-							.addContainerGap(70, Short.MAX_VALUE)
-							.addGroup(guessDialogeLayout.createParallelGroup()
-									.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-											.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-											.addGap(143, 143, 143))
-									.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-											.addComponent(label2)
-											.addGap(43, 43, 43))))
+						.addContainerGap(70, Short.MAX_VALUE)
+						.addGroup(guessDialogeLayout.createParallelGroup()
+							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+								.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+								.addGap(143, 143, 143))
+							.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
+								.addComponent(label2)
+								.addGap(43, 43, 43))))
 					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-							.addGap(27, 27, 27)
-							.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-							.addGap(18, 18, 18)
-							.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-							.addGap(21, 21, 21))
+						.addContainerGap()
+						.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+						.addGap(27, 27, 27)
+						.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+						.addGap(18, 18, 18)
+						.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+						.addGap(21, 21, 21))
 					.addGroup(guessDialogeLayout.createSequentialGroup()
-							.addGap(45, 45, 45)
-							.addComponent(label1)
-							.addGap(96, 96, 96)
-							.addComponent(label3)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-							.addComponent(label4)
-							.addGap(70, 70, 70))
-					);
+						.addGap(45, 45, 45)
+						.addComponent(label1)
+						.addGap(96, 96, 96)
+						.addComponent(label3)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+						.addComponent(label4)
+						.addGap(70, 70, 70))
+			);
 			guessDialogeLayout.setVerticalGroup(
-					guessDialogeLayout.createParallelGroup()
+				guessDialogeLayout.createParallelGroup()
 					.addGroup(GroupLayout.Alignment.TRAILING, guessDialogeLayout.createSequentialGroup()
-							.addGap(12, 12, 12)
-							.addComponent(label2)
-							.addGap(8, 8, 8)
-							.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-									.addComponent(label1)
-									.addComponent(label3)
-									.addComponent(label4))
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-									.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-									.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-									.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-							.addGap(18, 18, 18)
-							.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-					);
+						.addGap(12, 12, 12)
+						.addComponent(label2)
+						.addGap(8, 8, 8)
+						.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(label1)
+							.addComponent(label3)
+							.addComponent(label4))
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(guessDialogeLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(guessRoom, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+							.addComponent(guessWeapon, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+							.addComponent(guessCharacter, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+						.addGap(18, 18, 18)
+						.addComponent(guessOKButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+			);
 			guessDialoge.pack();
 			guessDialoge.setLocationRelativeTo(guessDialoge.getOwner());
 		}
@@ -910,27 +916,27 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			GroupLayout errorDialogContentPaneLayout = new GroupLayout(errorDialogContentPane);
 			errorDialogContentPane.setLayout(errorDialogContentPaneLayout);
 			errorDialogContentPaneLayout.setHorizontalGroup(
-					errorDialogContentPaneLayout.createParallelGroup()
+				errorDialogContentPaneLayout.createParallelGroup()
 					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(errorDialogContentPaneLayout.createParallelGroup()
-									.addComponent(errorText1)
-									.addGroup(errorDialogContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-											.addComponent(errorOK)
-											.addComponent(errorText2)))
-							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					);
-			errorDialogContentPaneLayout.setVerticalGroup(
-					errorDialogContentPaneLayout.createParallelGroup()
-					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
-							.addGap(22, 22, 22)
+						.addContainerGap()
+						.addGroup(errorDialogContentPaneLayout.createParallelGroup()
 							.addComponent(errorText1)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(errorText2)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-							.addComponent(errorOK)
-							.addContainerGap())
-					);
+							.addGroup(errorDialogContentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+								.addComponent(errorOK)
+								.addComponent(errorText2)))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+			);
+			errorDialogContentPaneLayout.setVerticalGroup(
+				errorDialogContentPaneLayout.createParallelGroup()
+					.addGroup(errorDialogContentPaneLayout.createSequentialGroup()
+						.addGap(22, 22, 22)
+						.addComponent(errorText1)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(errorText2)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+						.addComponent(errorOK)
+						.addContainerGap())
+			);
 			errorDialog.pack();
 			errorDialog.setLocationRelativeTo(errorDialog.getOwner());
 		}
@@ -969,42 +975,42 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			GroupLayout suggestionDialogContentPaneLayout = new GroupLayout(suggestionDialogContentPane);
 			suggestionDialogContentPane.setLayout(suggestionDialogContentPaneLayout);
 			suggestionDialogContentPaneLayout.setHorizontalGroup(
-					suggestionDialogContentPaneLayout.createParallelGroup()
+				suggestionDialogContentPaneLayout.createParallelGroup()
 					.addGroup(GroupLayout.Alignment.TRAILING, suggestionDialogContentPaneLayout.createSequentialGroup()
-							.addGap(0, 38, Short.MAX_VALUE)
-							.addComponent(line3Text)
-							.addGap(19, 19, 19))
+						.addGap(0, 38, Short.MAX_VALUE)
+						.addComponent(line3Text)
+						.addGap(19, 19, 19))
 					.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
-							.addGroup(suggestionDialogContentPaneLayout.createParallelGroup()
-									.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
-											.addGap(56, 56, 56)
-											.addComponent(line1Text))
-									.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
-											.addGap(105, 105, 105)
-											.addComponent(guessDiagPlayerNameText))
-									.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
-											.addGap(84, 84, 84)
-											.addComponent(line2Text))
-									.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
-											.addGap(114, 114, 114)
-											.addComponent(guessDiagOkButton)))
-							.addContainerGap(74, Short.MAX_VALUE))
-					);
+						.addGroup(suggestionDialogContentPaneLayout.createParallelGroup()
+							.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
+								.addGap(56, 56, 56)
+								.addComponent(line1Text))
+							.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
+								.addGap(105, 105, 105)
+								.addComponent(guessDiagPlayerNameText))
+							.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
+								.addGap(84, 84, 84)
+								.addComponent(line2Text))
+							.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
+								.addGap(114, 114, 114)
+								.addComponent(guessDiagOkButton)))
+						.addContainerGap(74, Short.MAX_VALUE))
+			);
 			suggestionDialogContentPaneLayout.setVerticalGroup(
-					suggestionDialogContentPaneLayout.createParallelGroup()
+				suggestionDialogContentPaneLayout.createParallelGroup()
 					.addGroup(suggestionDialogContentPaneLayout.createSequentialGroup()
-							.addGap(7, 7, 7)
-							.addComponent(guessDiagPlayerNameText)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(line1Text)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(line2Text)
-							.addGap(11, 11, 11)
-							.addComponent(line3Text)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-							.addComponent(guessDiagOkButton)
-							.addContainerGap())
-					);
+						.addGap(7, 7, 7)
+						.addComponent(guessDiagPlayerNameText)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(line1Text)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(line2Text)
+						.addGap(11, 11, 11)
+						.addComponent(line3Text)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+						.addComponent(guessDiagOkButton)
+						.addContainerGap())
+			);
 			suggestionDialog.pack();
 			suggestionDialog.setLocationRelativeTo(suggestionDialog.getOwner());
 		}
@@ -1041,39 +1047,39 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			GroupLayout shortcutsContentPaneLayout = new GroupLayout(shortcutsContentPane);
 			shortcutsContentPane.setLayout(shortcutsContentPaneLayout);
 			shortcutsContentPaneLayout.setHorizontalGroup(
-					shortcutsContentPaneLayout.createParallelGroup()
+				shortcutsContentPaneLayout.createParallelGroup()
 					.addGroup(shortcutsContentPaneLayout.createSequentialGroup()
-							.addGroup(shortcutsContentPaneLayout.createParallelGroup()
-									.addGroup(shortcutsContentPaneLayout.createSequentialGroup()
-											.addContainerGap()
-											.addGroup(shortcutsContentPaneLayout.createParallelGroup()
-													.addComponent(label8)
-													.addComponent(label9)
-													.addComponent(label10)
-													.addComponent(label11)
-													.addComponent(label12)))
-									.addGroup(shortcutsContentPaneLayout.createSequentialGroup()
-											.addGap(111, 111, 111)
-											.addComponent(shortcutOK, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)))
-							.addContainerGap(7, Short.MAX_VALUE))
-					);
+						.addGroup(shortcutsContentPaneLayout.createParallelGroup()
+							.addGroup(shortcutsContentPaneLayout.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(shortcutsContentPaneLayout.createParallelGroup()
+									.addComponent(label8)
+									.addComponent(label9)
+									.addComponent(label10)
+									.addComponent(label11)
+									.addComponent(label12)))
+							.addGroup(shortcutsContentPaneLayout.createSequentialGroup()
+								.addGap(111, 111, 111)
+								.addComponent(shortcutOK, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap(7, Short.MAX_VALUE))
+			);
 			shortcutsContentPaneLayout.setVerticalGroup(
-					shortcutsContentPaneLayout.createParallelGroup()
+				shortcutsContentPaneLayout.createParallelGroup()
 					.addGroup(shortcutsContentPaneLayout.createSequentialGroup()
-							.addGap(19, 19, 19)
-							.addComponent(label8)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(label9)
-							.addGap(18, 18, 18)
-							.addComponent(label10)
-							.addGap(18, 18, 18)
-							.addComponent(label11)
-							.addGap(18, 18, 18)
-							.addComponent(label12)
-							.addGap(18, 18, 18)
-							.addComponent(shortcutOK, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-							.addContainerGap())
-					);
+						.addGap(19, 19, 19)
+						.addComponent(label8)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(label9)
+						.addGap(18, 18, 18)
+						.addComponent(label10)
+						.addGap(18, 18, 18)
+						.addComponent(label11)
+						.addGap(18, 18, 18)
+						.addComponent(label12)
+						.addGap(18, 18, 18)
+						.addComponent(shortcutOK, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+						.addContainerGap())
+			);
 			shortcuts.pack();
 			shortcuts.setLocationRelativeTo(shortcuts.getOwner());
 		}
@@ -1105,33 +1111,33 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			GroupLayout discoveredCardsDiagContentPaneLayout = new GroupLayout(discoveredCardsDiagContentPane);
 			discoveredCardsDiagContentPane.setLayout(discoveredCardsDiagContentPaneLayout);
 			discoveredCardsDiagContentPaneLayout.setHorizontalGroup(
-					discoveredCardsDiagContentPaneLayout.createParallelGroup()
+				discoveredCardsDiagContentPaneLayout.createParallelGroup()
 					.addGroup(discoveredCardsDiagContentPaneLayout.createSequentialGroup()
-							.addGroup(discoveredCardsDiagContentPaneLayout.createParallelGroup()
-									.addGroup(discoveredCardsDiagContentPaneLayout.createSequentialGroup()
-											.addGap(28, 28, 28)
-											.addGroup(discoveredCardsDiagContentPaneLayout.createParallelGroup()
-													.addComponent(dis3)
-													.addComponent(dis2)
-													.addComponent(dis1)))
-									.addGroup(discoveredCardsDiagContentPaneLayout.createSequentialGroup()
-											.addGap(91, 91, 91)
-											.addComponent(disOKButton)))
-							.addGap(28, 28, 28))
-					);
+						.addGroup(discoveredCardsDiagContentPaneLayout.createParallelGroup()
+							.addGroup(discoveredCardsDiagContentPaneLayout.createSequentialGroup()
+								.addGap(28, 28, 28)
+								.addGroup(discoveredCardsDiagContentPaneLayout.createParallelGroup()
+									.addComponent(dis3)
+									.addComponent(dis2)
+									.addComponent(dis1)))
+							.addGroup(discoveredCardsDiagContentPaneLayout.createSequentialGroup()
+								.addGap(91, 91, 91)
+								.addComponent(disOKButton)))
+						.addGap(28, 28, 28))
+			);
 			discoveredCardsDiagContentPaneLayout.setVerticalGroup(
-					discoveredCardsDiagContentPaneLayout.createParallelGroup()
+				discoveredCardsDiagContentPaneLayout.createParallelGroup()
 					.addGroup(discoveredCardsDiagContentPaneLayout.createSequentialGroup()
-							.addGap(26, 26, 26)
-							.addComponent(dis1)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(dis2)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addComponent(dis3)
-							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-							.addComponent(disOKButton)
-							.addContainerGap())
-					);
+						.addGap(26, 26, 26)
+						.addComponent(dis1)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(dis2)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(dis3)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+						.addComponent(disOKButton)
+						.addContainerGap())
+			);
 			discoveredCardsDiag.pack();
 			discoveredCardsDiag.setLocationRelativeTo(discoveredCardsDiag.getOwner());
 		}
@@ -1222,7 +1228,6 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println("Pressed");
 
 	}
 
