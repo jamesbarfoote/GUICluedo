@@ -36,7 +36,8 @@ public class BoardCanvas extends Canvas{
 		this.players = b.getPlayers();
 		this.width = width;
 		this.height = height;
-		setBackground (Color.YELLOW);
+		Color color = new Color(0xEBE891);
+		setBackground (color);
 		setSize(width, height);
 		readFile();
 	}
@@ -114,7 +115,7 @@ public class BoardCanvas extends Canvas{
 		for(int i = 0; i < board.length; i++){
 			for(int j = 0; j < board[i].length; j++){
 				if(board[i][j].equals("C")){
-					g.setColor(Color.RED);
+					g.setColor(new Color(0xDB2121));
 					g.fillRect(j*(width/23), i*(height/22), width/23, height/22);
 				}
 			}

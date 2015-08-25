@@ -27,7 +27,7 @@ public class Player {
 			this.location = new Point(22, 14);
 		}
 		if(character.equals("Colonel Mustard")){
-			this.location = new Point(15,22);
+			this.location = new Point(15,21);
 		}
 		if(character.equals("Mrs. White")){
 			this.location = new Point(0, 12);
