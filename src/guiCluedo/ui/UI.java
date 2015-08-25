@@ -238,11 +238,27 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 
 
 
-					//Show message that you have been eliminated
+					//Show message that you have Won
 					errorDialog.setTitle("YOU HAVE WON!!");
 					errorText1.setText(currentPlayer.getName() + " you have won the game!");
 					errorText2.setText("Congratulations!");
 					errorDialog.setVisible(true);
+					this.setVisible(false);
+				}
+			}
+			else{
+				boolean won = true;
+				for(Card card : guessHand){
+					if(!b.getAnswer().contains(card)){
+						won = false;
+					}
+				}
+				if(won == true){
+					errorDialog.setTitle("YOU HAVE WON!!");
+					errorText1.setText(currentPlayer.getName() + " you have won the game!");
+					errorText2.setText("Congratulations!");
+					errorDialog.setVisible(true);
+					this.setVisible(false);
 				}
 			}
 		}
@@ -588,7 +604,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		guessCharacter.addItem("Professor Plum");
 
 		guessRoom.addItem("Ballroom");
-		guessRoom.addItem("Billard Room");
+		guessRoom.addItem("Billiard Room");
 		guessRoom.addItem("Conservatory");
 		guessRoom.addItem("Dining Room");
 		guessRoom.addItem("Hall");
