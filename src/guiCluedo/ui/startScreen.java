@@ -357,6 +357,10 @@ public class startScreen {
 
 		//======== warning ========
 		{
+			warning.setAlwaysOnTop(true);
+			warning.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			warning.setTitle("WARNING!!");
+			warning.setMinimumSize(new Dimension(465, 183));
 			Container warningContentPane = warning.getContentPane();
 
 			//---- warningTextHead ----
@@ -376,7 +380,7 @@ public class startScreen {
 			warningLine1.setText("Make sure that you have selected one from character and one from colour and only one");
 
 			//---- warningLine2 ----
-			warningLine2.setText("Make sure that you have alos entered your name");
+			warningLine2.setText("Make sure that you have also entered your name");
 
 			GroupLayout warningContentPaneLayout = new GroupLayout(warningContentPane);
 			warningContentPane.setLayout(warningContentPaneLayout);
@@ -454,9 +458,8 @@ public class startScreen {
 		{
 			warning.setVisible(true);
 		}
-		String cCharacter = "";
-		System.out.println(pName);
 		
+		String cCharacter = "";		
 		cCharacter = getCharacter();
 		if(!cCharacter.equals("")){
 		 System.out.println("Character was: " + cCharacter);
@@ -504,6 +507,7 @@ public class startScreen {
 	private Color getColour() {
 		if(colourRed.isSelected())
 		{
+			colourRed.setEnabled(false);
 			if(iColours.contains("Red")){
 				return Color.RED;
 			}
@@ -511,6 +515,7 @@ public class startScreen {
 		}
 		else if(colourGreen.isSelected())
 		{
+			colourGreen.setEnabled(false);
 			if(iColours.contains("Green")){;
 				return Color.GREEN;
 			}
@@ -518,6 +523,7 @@ public class startScreen {
 		}
 		else if(colourBlue.isSelected())
 		{
+			colourGreen.setEnabled(false);
 			if(iColours.contains("Blue")){
 				return Color.BLUE;
 			}
@@ -525,6 +531,7 @@ public class startScreen {
 		}
 		else if(colourYellow.isSelected())
 		{
+			colourYellow.setEnabled(false);
 			if(iColours.contains("Yellow")){
 				return Color.YELLOW;
 			}
@@ -532,6 +539,7 @@ public class startScreen {
 		}
 		else if(colourWhite.isSelected())
 		{
+			colourWhite.setEnabled(false);
 			if(iColours.contains("White")){
 				return Color.WHITE;
 			}
@@ -539,6 +547,7 @@ public class startScreen {
 		}
 		else if(colourPurple.isSelected())
 		{
+			colourPurple.setEnabled(false);
 			if(iColours.contains("Purple")){
 				return Color.PINK;
 			}
@@ -550,6 +559,7 @@ public class startScreen {
 	private String getCharacter() {
 		if(colonelMustard.isSelected())
 		{
+			colonelMustard.setEnabled(false);
 			String character = "Colonel Mustard";
 			if(chars.contains(character)){
 				return character;
@@ -558,6 +568,7 @@ public class startScreen {
 		}
 		else if(missScarlet.isSelected())
 		{
+			missScarlet.setEnabled(false);
 			String character = "Miss Scarlet";
 			if(chars.contains(character)){
 				return character;
@@ -566,6 +577,7 @@ public class startScreen {
 		}
 		else if(mrsPeacock.isSelected())
 		{
+			mrsPeacock.setEnabled(false);
 			String character = "Mrs. Peacock";
 			if(chars.contains(character)){
 				return character;
@@ -574,6 +586,7 @@ public class startScreen {
 		}
 		else if(mrsWhite.isSelected())
 		{
+			mrsWhite.setEnabled(false);
 			String character = "Mrs. White";
 			if(chars.contains(character)){
 				return character;
@@ -582,6 +595,7 @@ public class startScreen {
 		}
 		else if(profPlum.isSelected())
 		{
+			profPlum.setEnabled(false);
 			String character = "Professor Plum";
 			if(chars.contains(character)){
 				return character;
@@ -590,6 +604,7 @@ public class startScreen {
 		}
 		else if(revGreen.isSelected())
 		{
+			revGreen.setEnabled(false);
 			String character = "The Reverend Green";
 			if(chars.contains(character)){
 				return character;
