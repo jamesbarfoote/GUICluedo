@@ -72,6 +72,7 @@ public class Guess {
 							suggestedPlayer.setRoom(currentRoom);
 							b.getUsedSquares().add(suggestedPlayer.getLocation());
 							b.getPlayerSquares().remove(suggestedPlayer.getLocation());
+							b.getPlayerSquares().add(p);
 							count++;
 						}
 					}

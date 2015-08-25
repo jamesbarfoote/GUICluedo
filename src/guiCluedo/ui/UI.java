@@ -180,7 +180,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 				//Display Box saying that no one has any cards
 				errorDialog.setTitle("Suggestion");
 				errorDialog.setVisible(true);
-				errorText1.setText("No one has any of the guessed cards");
+				errorText1.setText("No other players have any of the suggested cards");
 				errorText2.setText("");
 				return;
 
