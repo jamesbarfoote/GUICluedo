@@ -14,7 +14,7 @@ public class Board {
 	public ArrayList<Player> players;
 	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Knife", "Revolver", "Rope", "Lead Pipe", 
 			"Wrench"));
-	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlet", "Colonel Mustard","Mrs. White", "Mr. Green", 
+	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlet", "Colonel Mustard","Mrs. White", "The Reverend Green", 
 			"Mrs. Peacock", "Professor Plum"));
 	private ArrayList<String> roomNames = new ArrayList<>(Arrays.asList("Kitchen", "Ballroom", "Conservatory","Billiard Room", "Library", 
 			"Study", "Hall", "Lounge", "Dining Room"));
@@ -71,7 +71,7 @@ public class Board {
 			if(room.equals("Kitchen")){
 				int[] xCords = {0, 4, 4, 5, 5, 4, 4, 0};
 				int[] yCords = {0, 0, 1, 1, 4, 4, 5, 5};
-				Polygon p = new Polygon(xCords, yCords, 8);
+				Polygon p = new Polygon(xCords, yCords, 8);	//The polygon used as the bounding box
 				rooms.add(new Room(room, p, new Point(1, 2)));
 			}
 			if(room.equals("Ballroom")){
@@ -179,11 +179,7 @@ public class Board {
 	 */
 	private void delegateCards() {
 		//Delegate the cards out to the players.
-		System.out.println("Generating cards");
-
 		Collections.shuffle(allCards);
-		System.out.println(allCards.size());
-		System.out.println("Players = " + players.size());
 		int numCards = allCards.size();
 		for(Player p: players){
 			int i = 0;
@@ -197,7 +193,6 @@ public class Board {
 				j++;
 			}
 		}
-		System.out.println("Player 0 hand size = " + players.get(0).getHand().size());
 		//if any cards still need to be delegated, do the rest.
 		if(allCards.size()>0){
 			for(Player p : players){

@@ -46,6 +46,7 @@ public class Guess {
 		for(Player player : b.getPlayers()){
 			if(player.getCharacterName().equals(character.getName())){
 				suggestedPlayer = player;
+				System.out.println("Suggested player is: " + suggestedPlayer.getCharacterName());
 			}
 		}
 		for(int i = 0; i < 22; i++){

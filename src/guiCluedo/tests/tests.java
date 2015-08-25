@@ -3,6 +3,7 @@ package guiCluedo.tests;
 import static org.junit.Assert.*;
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.util.ArrayList;
 import org.junit.Test;
 import guiCluedo.game.Board;
@@ -254,14 +255,164 @@ public class tests {
 		assertTrue(g.getFailed());
 		players.clear();
 	} 
-
-	//--------Helper Method----------------//
 	
+	@Test 
+	public void checkPlayersMove(){
+		Board board = createBoard();
+		ArrayList<Card> ans = board.getAnswer();
+		ans.remove(1);
+		ans.add(new Character("The Reverend Green"));
+		Player p = board.getPlayers().get(0);
+		Player suggestedPlayer = null;
+		Character character = null;
+		Room room = null;
+		for(Card card : ans){
+			if (card instanceof Character){
+				character = (Character) card;
+			}
+			if (card instanceof Room){
+				room = (Room) card;
+				p.setRoom(room);
+			}
+		}
+		for(Player player : board.getPlayers()){
+			if(player.getCharacterName().equals(character.getName())){
+				suggestedPlayer = player;
+				break;
+			}
+		}
+		Guess guess = new Guess(true, ans, p, board);
+		guess.moveIcons(ans, board);
+		assertTrue(room.getBoundingBox().contains(suggestedPlayer.getLocation()));
+	}
+	
+	@Test 
+	public void checkWeaponsMove(){
+		Board board = createBoard();
+		ArrayList<Card> ans = board.getAnswer();
+		ans.remove(1);
+		ans.add(new Character("The Reverend Green"));
+		Player p = board.getPlayers().get(0);
+		Weapon weapon = null;
+		Room room = null;
+		for(Card card : ans){
+			if(card instanceof Weapon){
+				weapon = (Weapon) card;
+			}
+			if (card instanceof Room){
+				room = (Room) card;
+				p.setRoom(room);
+			}
+		}
+		Guess guess = new Guess(true, ans, p, board);
+		guess.moveIcons(ans, board);
+		assertTrue(room.getBoundingBox().contains(weapon.getLocation()));
+	}
+	
+	/**
+	 * Trying to enter room through wall
+	 */
+	@Test
+	public void checkInvalidMove(){
+		Board board = createBoard();
+		Player player = board.getPlayers().get(0);
+		assertFalse(isValidMove(new Point(0,0), player, board));
+	}
+	
+	/**
+	 * Trying to enter square already occupied by another player
+	 */
+	@Test
+	public void checkInvalidMove2(){
+		Board board = createBoard();
+		Player player = board.getPlayers().get(0);
+		assertFalse(isValidMove(new Point(0,8), player, board));
+	}
+	
+	/**
+	 * If trying to enter centre zone
+	 */
+	@Test
+	public void checkInvalidMove3(){
+		Board board = createBoard();
+		Player player = board.getPlayers().get(0);
+		assertFalse(isValidMove(new Point(11,11), player, board));
+	}
+	
+	/**
+	 * If in room and trying to exit through wall
+	 */
+	@Test
+	public void checkInvalidMove4(){
+		Board board = createBoard();
+		Player player = board.getPlayers().get(0);
+		player.setLocation(new Point(0,0));
+		assertFalse(isValidMove(new Point(0,7), player, board));
+	}
+
+	//--------Helper Methods----------------//
+	
+	/**
+	 * Creates a new UI and board to test
+	 * @return
+	 */
 		private Board createBoard(){
 			players.add(new Player("Bob", "Colonel Mustard", Color.YELLOW, 1));
-			players.add(new Player("Jeremy", "Mr. Green", Color.GREEN, 2));
+			players.add(new Player("Jeremy", "The Reverend Green", Color.GREEN, 2));
 			UI ui = new UI(players);
 			return ui.b;
+		}
+		
+		/**
+		 * Checks if
+		 * @param newLocation
+		 * @return
+		 */
+		private boolean isValidMove(Point newLocation, Player player, Board board){
+			//If trying to enter centre piece
+			if(board.getCentre().contains(newLocation)){
+				return false;
+			}
+			//If Trying to enter square occupied by another player
+			for(Point point : board.getPlayerSquares()){
+				if(newLocation.equals(point)){
+					return false;
+				}
+			}
+			//If in room and trying to exit
+			for(Room room : board.getRooms()){
+				Polygon boundingBox = room.getBoundingBox();
+				if(boundingBox.contains(player.getLocation())){
+					if(!boundingBox.contains(newLocation)){
+						if(board.getDoors().contains(player.getLocation())){
+							//Exiting room
+							player.setRoom(null);
+							return true;
+						}
+						else{
+							return false;
+						}
+					}
+					//In room and staying in there
+					return true;
+				}
+			}
+			//Not in room and trying to enter one
+			for(Room room : board.getRooms()){
+				Polygon boundingBox = room.getBoundingBox();
+				if(boundingBox.contains(newLocation)){
+					if(!board.getDoors().contains(newLocation)){
+						return false;
+					}
+					else{
+						//Entering a room
+						player.setRoom(room);
+						return true;
+					}
+				}
+			}
+			//Not in room and staying that way
+			return true;
 		}
 
 	}
