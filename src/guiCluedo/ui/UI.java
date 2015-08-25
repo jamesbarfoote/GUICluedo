@@ -37,6 +37,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	private Card selectedCard;
 	private Player previousPlayer;
 	private ArrayList<Card> guessHand;
+	private boolean infiniteMove = false;
 
 	static JLabel obj1 = new JLabel();
 	static JLabel shortCuts = new JLabel();
@@ -318,15 +319,34 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	}
 
 	private void discoveredCardsmenuItemActionPerformed(ActionEvent e) {
-		// TODO add your code here
+		//Display Discovered cards dialog
+		discoveredCardsDiag.setVisible(true);
+		//Put the cards in the hand
+		hCanvas.setHandCards(currentPlayer.getDiscoveredCards());
+		for(Card c: currentPlayer.getDiscoveredCards())
+		{
+			System.out.println(c.getName());
+		}
+		hCanvas.repaint();
+		
 	}
 
-	private void checkBoxMenuItem1ItemStateChanged(ItemEvent e) {
-		// TODO add your code here
-	}
+	
 
 	private void cheatAnswerItemStateChanged(ItemEvent e) {
-		// TODO add your code here
+		if(e.getStateChange() == 1)
+		{
+			//Display answer popup box
+			errorDialog.setTitle("ANSWER");
+			errorText1.setText("The 3 answer cards are:");
+			errorText2.setText(b.getAnswer().get(0).getName() + ", " + b.getAnswer().get(1).getName() + " and " + b.getAnswer().get(2).getName());
+			errorDialog.setVisible(true);
+			errorDialog.setAlwaysOnTop(true);
+		}
+		else
+		{
+			errorDialog.setVisible(false);
+		}
 	}
 
 	private void guessDiagOkButtonActionPerformed(ActionEvent e) {
@@ -347,6 +367,27 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 
 	private void shortcutOKActionPerformed(ActionEvent e) {
 		shortcuts.setVisible(false);
+	}
+
+	private void disOKButtonActionPerformed(ActionEvent e) {
+		discoveredCardsDiag.setVisible(false);
+		hCanvas.setHandCards(currentPlayer.getHand());
+		hCanvas.repaint();
+	}
+
+	private void cheatInfiniteMoveItemStateChanged(ItemEvent e) {
+		if(e.getStateChange() == 1)
+		{
+			infiniteMove = true;
+		}
+		else
+		{
+			infiniteMove = false;
+		}
+	}
+
+	private void checkBoxMenuItem1ItemStateChanged(ItemEvent e) {
+		// TODO add your code here
 	}
 
 
@@ -469,7 +510,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		GameMenu = new JMenu();
 		discoveredCardsmenuItem = new JMenuItem();
 		menu1 = new JMenu();
-		checkBoxMenuItem1 = new JCheckBoxMenuItem();
+		cheatInfiniteMove = new JCheckBoxMenuItem();
 		cheatAnswer = new JCheckBoxMenuItem();
 		rollDice = new JButton();
 		endTurn = new JButton();
@@ -508,6 +549,11 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		label11 = new JLabel();
 		label12 = new JLabel();
 		shortcutOK = new JButton();
+		discoveredCardsDiag = new JDialog();
+		dis1 = new JLabel();
+		dis2 = new JLabel();
+		dis3 = new JLabel();
+		disOKButton = new JButton();
 		
 		guessWeapon.addItem("Knife");
 		guessWeapon.addItem("Revolver");
@@ -588,6 +634,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						discoveredCardsmenuItemActionPerformed(e);
+						discoveredCardsmenuItemActionPerformed(e);
 					}
 				});
 				GameMenu.add(discoveredCardsmenuItem);
@@ -598,21 +645,25 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			{
 				menu1.setText("Cheats");
 
-				//---- checkBoxMenuItem1 ----
-				checkBoxMenuItem1.setText("Infinite move");
-				checkBoxMenuItem1.addItemListener(new ItemListener() {
+				//---- cheatInfiniteMove ----
+				cheatInfiniteMove.setText("Infinite move");
+				cheatInfiniteMove.addItemListener(new ItemListener() {
 					@Override
 					public void itemStateChanged(ItemEvent e) {
 						checkBoxMenuItem1ItemStateChanged(e);
+						cheatInfiniteMoveItemStateChanged(e);
+						cheatInfiniteMoveItemStateChanged(e);
 					}
 				});
-				menu1.add(checkBoxMenuItem1);
+				menu1.add(cheatInfiniteMove);
 
 				//---- cheatAnswer ----
 				cheatAnswer.setText("Show answer");
 				cheatAnswer.addItemListener(new ItemListener() {
 					@Override
 					public void itemStateChanged(ItemEvent e) {
+						cheatAnswerItemStateChanged(e);
+						cheatAnswerItemStateChanged(e);
 						cheatAnswerItemStateChanged(e);
 					}
 				});
@@ -1025,6 +1076,64 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 			shortcuts.pack();
 			shortcuts.setLocationRelativeTo(shortcuts.getOwner());
 		}
+
+		//======== discoveredCardsDiag ========
+		{
+			discoveredCardsDiag.setTitle("Discovered Cards");
+			Container discoveredCardsDiagContentPane = discoveredCardsDiag.getContentPane();
+
+			//---- dis1 ----
+			dis1.setText("The cards that you have discovered");
+
+			//---- dis2 ----
+			dis2.setText("will display where your hand normally");
+
+			//---- dis3 ----
+			dis3.setText("displays until you press OK");
+
+			//---- disOKButton ----
+			disOKButton.setText("OK");
+			disOKButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					disOKButtonActionPerformed(e);
+					disOKButtonActionPerformed(e);
+				}
+			});
+
+			GroupLayout discoveredCardsDiagContentPaneLayout = new GroupLayout(discoveredCardsDiagContentPane);
+			discoveredCardsDiagContentPane.setLayout(discoveredCardsDiagContentPaneLayout);
+			discoveredCardsDiagContentPaneLayout.setHorizontalGroup(
+				discoveredCardsDiagContentPaneLayout.createParallelGroup()
+					.addGroup(discoveredCardsDiagContentPaneLayout.createSequentialGroup()
+						.addGroup(discoveredCardsDiagContentPaneLayout.createParallelGroup()
+							.addGroup(discoveredCardsDiagContentPaneLayout.createSequentialGroup()
+								.addGap(28, 28, 28)
+								.addGroup(discoveredCardsDiagContentPaneLayout.createParallelGroup()
+									.addComponent(dis3)
+									.addComponent(dis2)
+									.addComponent(dis1)))
+							.addGroup(discoveredCardsDiagContentPaneLayout.createSequentialGroup()
+								.addGap(91, 91, 91)
+								.addComponent(disOKButton)))
+						.addGap(28, 28, 28))
+			);
+			discoveredCardsDiagContentPaneLayout.setVerticalGroup(
+				discoveredCardsDiagContentPaneLayout.createParallelGroup()
+					.addGroup(discoveredCardsDiagContentPaneLayout.createSequentialGroup()
+						.addGap(26, 26, 26)
+						.addComponent(dis1)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(dis2)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(dis3)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+						.addComponent(disOKButton)
+						.addContainerGap())
+			);
+			discoveredCardsDiag.pack();
+			discoveredCardsDiag.setLocationRelativeTo(discoveredCardsDiag.getOwner());
+		}
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void rollDiceActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1106,7 +1215,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	private JMenu GameMenu;
 	private JMenuItem discoveredCardsmenuItem;
 	private JMenu menu1;
-	private JCheckBoxMenuItem checkBoxMenuItem1;
+	private JCheckBoxMenuItem cheatInfiniteMove;
 	private JCheckBoxMenuItem cheatAnswer;
 	private JButton rollDice;
 	private JButton endTurn;
@@ -1145,6 +1254,11 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	private JLabel label11;
 	private JLabel label12;
 	private JButton shortcutOK;
+	private JDialog discoveredCardsDiag;
+	private JLabel dis1;
+	private JLabel dis2;
+	private JLabel dis3;
+	private JButton disOKButton;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 
 

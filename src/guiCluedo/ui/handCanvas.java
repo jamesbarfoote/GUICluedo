@@ -138,4 +138,9 @@ public class HandCanvas extends Canvas implements MouseListener{
 		return cardClicked;
 	}
 	
+	public void setHandCards(ArrayList<Card> hand)
+	{
+		this.hand = hand;
+	}
+	
 }

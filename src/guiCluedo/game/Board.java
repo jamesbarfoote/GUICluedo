@@ -311,4 +311,9 @@ public class Board {
 	public ArrayList<Point> getPlayerSquares(){
 		return playerSquares;
 	}
+	
+	public ArrayList<Card> getAnswer()
+	{
+		return answer;
+	}
 }

@@ -89,19 +89,24 @@ new FormModel {
 						name: "discoveredCardsmenuItem"
 						"text": "Show discovered cards"
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "discoveredCardsmenuItemActionPerformed", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "discoveredCardsmenuItemActionPerformed", true ) )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "menu1"
 					"text": "Cheats"
 					add( new FormComponent( "javax.swing.JCheckBoxMenuItem" ) {
-						name: "checkBoxMenuItem1"
+						name: "cheatInfiniteMove"
 						"text": "Infinite move"
 						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "checkBoxMenuItem1ItemStateChanged", true ) )
+						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "cheatInfiniteMoveItemStateChanged", true ) )
+						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "cheatInfiniteMoveItemStateChanged", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JCheckBoxMenuItem" ) {
 						name: "cheatAnswer"
 						"text": "Show answer"
+						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "cheatAnswerItemStateChanged", true ) )
+						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "cheatAnswerItemStateChanged", true ) )
 						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "cheatAnswerItemStateChanged", true ) )
 					} )
 				} )
@@ -242,6 +247,34 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 45, 500 )
 			"size": new java.awt.Dimension( 330, 255 )
+		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:28:p, par l {comp dis3:::p::p, comp dis2:::p::p, comp dis1:::p::p}}, seq l {space :p:91:p, comp disOKButton:::p::p}}, space :p:28:p}}"
+			"$verticalGroup": "par l {seq l {space :p:26:p, comp dis1:::p::p, space :::p, comp dis2:::p::p, space :::p, comp dis3:::p::p, space ::47:x, comp disOKButton:::p::p, space :::p}}"
+		} ) {
+			name: "discoveredCardsDiag"
+			"title": "Discovered Cards"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "dis1"
+				"text": "The cards that you have discovered"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "dis2"
+				"text": "will display where your hand normally"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "dis3"
+				"text": "displays until you press OK"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "disOKButton"
+				"text": "OK"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "disOKButtonActionPerformed", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "disOKButtonActionPerformed", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 550, 720 )
+			"size": new java.awt.Dimension( 250, 200 )
 		} )
 	}
 }
