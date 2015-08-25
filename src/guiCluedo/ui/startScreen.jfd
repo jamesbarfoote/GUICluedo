@@ -141,6 +141,10 @@ new FormModel {
 			"$verticalGroup": "par l {seq l {comp warningTextHead:::p::p, space :::p, comp warningLine1:::p::p, space u:::p, comp warningLine2:::p::p, space ::21:x, comp warningOk:::p::p, space :::p}}"
 		} ) {
 			name: "warning"
+			"alwaysOnTop": true
+			"defaultCloseOperation": 2
+			"title": "WARNING!!"
+			"minimumSize": new java.awt.Dimension( 465, 183 )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "warningTextHead"
 				"font": new java.awt.Font( "Tahoma", 1, 36 )
@@ -157,10 +161,11 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "warningLine2"
-				"text": "Make sure that you have alos entered your name"
+				"text": "Make sure that you have also entered your name"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 549 )
+			"size": new java.awt.Dimension( 470, 183 )
 		} )
 	}
 }

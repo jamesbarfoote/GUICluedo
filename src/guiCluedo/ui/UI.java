@@ -47,6 +47,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	 * Creates new form UI
 	 */
 	public UI(ArrayList<Player> players) {	
+		System.out.println("Number of players in UI = " + players.size());
 		initComponents();
 		b = new Board(players);
 
@@ -134,6 +135,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	}
 
 	public void endTurnActionPerformed(ActionEvent e) {
+		System.out.println("End turn num of players = " + b.getPlayers().size());
 		playGame(b, currentPlayer.getNum());
 		//HandCanvas h = new HandCanvas(b, handArea.getWidth(), handArea.getHeight(), currentPlayer);
 		rollDice.setEnabled(true);

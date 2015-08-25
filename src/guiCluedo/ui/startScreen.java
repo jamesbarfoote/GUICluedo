@@ -22,7 +22,7 @@ import guiCluedo.game.Player;
  */
 public class startScreen {
 	public int numberOPlayers = 2;
-	private int counter;
+	private int counter = 1;
 	public static ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<String> chars = new ArrayList<>(Arrays.asList("Miss Scarlet", "Colonel Mustard","Mrs. White", "The Reverend Green", "Mrs. Peacock", "Professor Plum"));
 	private ArrayList<String> iColours = new ArrayList<>(Arrays.asList("Red", "Green", "Blue", "White", "Yellow", "Purple"));
@@ -357,6 +357,10 @@ public class startScreen {
 
 		//======== warning ========
 		{
+			warning.setAlwaysOnTop(true);
+			warning.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			warning.setTitle("WARNING!!");
+			warning.setMinimumSize(new Dimension(465, 183));
 			Container warningContentPane = warning.getContentPane();
 
 			//---- warningTextHead ----
@@ -376,7 +380,7 @@ public class startScreen {
 			warningLine1.setText("Make sure that you have selected one from character and one from colour and only one");
 
 			//---- warningLine2 ----
-			warningLine2.setText("Make sure that you have alos entered your name");
+			warningLine2.setText("Make sure that you have also entered your name");
 
 			GroupLayout warningContentPaneLayout = new GroupLayout(warningContentPane);
 			warningContentPane.setLayout(warningContentPaneLayout);
@@ -445,84 +449,65 @@ public class startScreen {
 	}
 
 	private void donePlayerSetupActionPerformed(java.awt.event.ActionEvent evt) {                                                
-//		String pName = "";
-//		if(playerName.getText() != "")
-//		{
-//			pName = playerName.getText();
-//		}
-//		else
-//		{
-//			warning.setVisible(true);
-//		}
-//		String cCharacter = "";
-//		System.out.println(pName);
-//		
-//		cCharacter = getCharacter();
-//		if(!cCharacter.equals("")){
-//		 System.out.println("Character was: " + cCharacter);
-//		}
-//		else
-//		{
-//			System.out.println("Please select a character");
-//			warning.setVisible(true);
-//			cCharacter = getCharacter();
-//			return;
-//		}
-//		Color cColour = getColour();
-//		if(!cColour.equals(null))
-//		{
-//			System.err.println("Colour was: " + cColour);
-//		}
-//		else
-//		{
-//			System.out.println("Please select a colour");
-//			warning.setVisible(true);
-//			cColour = getColour();
-//			return;
-//		}
-//		Player p = new Player(pName, cCharacter, cColour, counter);
-//		iColours.remove(cColour);
-//		chars.remove(cCharacter);
-//		System.out.println("Player created!");
-//		players.add(p);
-//		System.out.println("PlayerF added");
-//		colourRadios.clearSelection();
-//		characterRadios.clearSelection();
-//		playerName.setText("");
+		String pName = "";
+		if(playerName.getText() != "")
+		{
+			pName = playerName.getText();
+		}
+		else
+		{
+			warning.setVisible(true);
+		}
 		
-		Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
+		String cCharacter = "";		
+		cCharacter = getCharacter();
+		if(!cCharacter.equals("")){
+		 System.out.println("Character was: " + cCharacter);
+		}
+		else
+		{
+			System.out.println("Please select a character");
+			warning.setVisible(true);
+			cCharacter = getCharacter();
+			return;
+		}
+		Color cColour = getColour();
+		if(!cColour.equals(null))
+		{
+			System.err.println("Colour was: " + cColour);
+		}
+		else
+		{
+			System.out.println("Please select a colour");
+			warning.setVisible(true);
+			cColour = getColour();
+			return;
+		}
+		Player p = new Player(pName, cCharacter, cColour, counter);
+		iColours.remove(cColour);
+		chars.remove(cCharacter);
 		players.add(p);
-		Player p1 = new Player("James", "Miss Scarlet", Color.BLUE, 2);
-		players.add(p1);
-		
-		System.out.println("Go to main game screen");
-		//Launch UI
-		UI u = new UI(players);
-		System.out.println("UI created");
-		u.setVisible(true);
-		startScreenForm.setVisible(false);//Hide the player setup screen
+		colourRadios.clearSelection();
+		characterRadios.clearSelection();
+		playerName.setText("");
+//		startScreenForm.setVisible(false);//Hide the player setup screen
 
-//		counter++;
-//		if(counter >= numberOPlayers )
-//		{
-//			Player p = new Player("Cam", "Mrs. White", Color.RED, 1);
-//			players.add(p);
-//			Player p1 = new Player("James", "Miss Scarlett", Color.BLUE, 2);
-//			players.add(p1);
-//			
-//			System.out.println("Go to main game screen");
-//			//Launch UI
-//			UI u = new UI();
-//			u.setVisible(true);
-//			this.setVisible(false);//Hide the player setup screen
-//			return;
-//
-//		}
+		counter++;
+		if(counter > numberOPlayers )
+		{
+			//Launch UI
+			UI ui = new UI(players);
+			ui.setVisible(true);
+			startScreenForm.setVisible(false);//Hide the player setup screen
+			return;
+
+		}
 	}
 
 	private Color getColour() {
 		if(colourRed.isSelected())
 		{
+			colourRed.setEnabled(false);
 			if(iColours.contains("Red")){
 				return Color.RED;
 			}
@@ -530,6 +515,7 @@ public class startScreen {
 		}
 		else if(colourGreen.isSelected())
 		{
+			colourGreen.setEnabled(false);
 			if(iColours.contains("Green")){;
 				return Color.GREEN;
 			}
@@ -537,6 +523,7 @@ public class startScreen {
 		}
 		else if(colourBlue.isSelected())
 		{
+			colourGreen.setEnabled(false);
 			if(iColours.contains("Blue")){
 				return Color.BLUE;
 			}
@@ -544,6 +531,7 @@ public class startScreen {
 		}
 		else if(colourYellow.isSelected())
 		{
+			colourYellow.setEnabled(false);
 			if(iColours.contains("Yellow")){
 				return Color.YELLOW;
 			}
@@ -551,6 +539,7 @@ public class startScreen {
 		}
 		else if(colourWhite.isSelected())
 		{
+			colourWhite.setEnabled(false);
 			if(iColours.contains("White")){
 				return Color.WHITE;
 			}
@@ -558,6 +547,7 @@ public class startScreen {
 		}
 		else if(colourPurple.isSelected())
 		{
+			colourPurple.setEnabled(false);
 			if(iColours.contains("Purple")){
 				return Color.PINK;
 			}
@@ -569,6 +559,7 @@ public class startScreen {
 	private String getCharacter() {
 		if(colonelMustard.isSelected())
 		{
+			colonelMustard.setEnabled(false);
 			String character = "Colonel Mustard";
 			if(chars.contains(character)){
 				return character;
@@ -577,6 +568,7 @@ public class startScreen {
 		}
 		else if(missScarlet.isSelected())
 		{
+			missScarlet.setEnabled(false);
 			String character = "Miss Scarlet";
 			if(chars.contains(character)){
 				return character;
@@ -585,6 +577,7 @@ public class startScreen {
 		}
 		else if(mrsPeacock.isSelected())
 		{
+			mrsPeacock.setEnabled(false);
 			String character = "Mrs. Peacock";
 			if(chars.contains(character)){
 				return character;
@@ -593,6 +586,7 @@ public class startScreen {
 		}
 		else if(mrsWhite.isSelected())
 		{
+			mrsWhite.setEnabled(false);
 			String character = "Mrs. White";
 			if(chars.contains(character)){
 				return character;
@@ -601,6 +595,7 @@ public class startScreen {
 		}
 		else if(profPlum.isSelected())
 		{
+			profPlum.setEnabled(false);
 			String character = "Professor Plum";
 			if(chars.contains(character)){
 				return character;
@@ -609,6 +604,7 @@ public class startScreen {
 		}
 		else if(revGreen.isSelected())
 		{
+			revGreen.setEnabled(false);
 			String character = "The Reverend Green";
 			if(chars.contains(character)){
 				return character;
