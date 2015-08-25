@@ -444,7 +444,6 @@ public class startScreen {
 			numberOPlayers = 2;
 		}
 
-		System.out.println(numberOPlayers);
 		setPlayers.setVisible(false);
 	}
 
@@ -463,11 +462,9 @@ public class startScreen {
 		String cCharacter = "";		
 		cCharacter = getCharacter();
 		if(!cCharacter.equals("")){
-			System.out.println("Character was: " + cCharacter);
 		}
 		else
 		{
-			System.out.println("Please select a character");
 			warning.setVisible(true);
 			cCharacter = getCharacter();
 			return;
@@ -475,11 +472,9 @@ public class startScreen {
 		Color cColour = getColour();
 		if(cColour != null)
 		{
-			System.out.println("Colour was: " + cColour);
 		}
 		else
 		{
-			System.out.println("Please select a colour");
 			warning.setVisible(true);
 			cColour = getColour();
 			return;

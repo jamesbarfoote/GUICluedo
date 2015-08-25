@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp boardArea::l:::x, seq {par l {seq {par l {comp youRolledText::l:p::p, comp movesLeftLabel::l:p::p, comp rollDice::l:p:93:p, comp playerTurnText:::p:130:p}, space :::p, par l {comp endTurn::l:p:85:p, comp accusButton::l:p::p, seq l {comp guessButton:::p::p, space u:::p, comp yourhandText:::p::p}}, space :p::p, comp handArea:::::x}, seq l {comp separator1:::p:444:p, space :0:0:x}}, space :10:10:p}}"
-			"$verticalGroup": "par l {seq t {comp boardArea::::270:x, space :::p, comp separator1:::p:2:p, par l {seq t {space :p:10:p, comp endTurn:::p::p, space :::p, par t {comp guessButton:::p::p, comp yourhandText:::p::p}, space :::p, comp accusButton:::p::p, space :::p}, par l {seq t {space :p:6:p, comp playerTurnText:::p:16:p, space :::p, comp youRolledText:::p::p, space :::p, comp movesLeftLabel:::p::p, space :::p, comp rollDice:::p:28:p, space :p:6:p}, seq l {space :::p, comp handArea:::p:81:p, space :::p}}}}}"
+			"$horizontalGroup": "par l {comp boardArea::l:::x, seq {par l {seq {par l {comp youRolledText::l:p::p, comp rollDice::l:p:93:p, comp playerTurnText:::p:130:p}, space :::p, par l {comp endTurn::l:p:85:p, comp accusButton::l:p::p, seq l {comp guessButton:::p::p, space u:::p, comp yourhandText:::p::p}}, space :p::p, comp handArea:::::x}, seq l {comp separator1:::p:444:p, space :0:0:x}}, space :10:10:p}}"
+			"$verticalGroup": "par l {seq t {comp boardArea::::270:x, space :::p, comp separator1:::p:2:p, par l {seq t {space :p:10:p, comp endTurn:::p::p, space :::p, par t {comp guessButton:::p::p, comp yourhandText:::p::p}, space :::p, comp accusButton:::p::p, space :::p}, par l {seq t {space :p:6:p, comp playerTurnText:::p:16:p, space :::p, comp youRolledText:::p::p, space :p:26:p, comp rollDice:::p:28:p, space :p:6:p}, seq l {space :::p, comp handArea:::p:81:p, space :::p}}}}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
@@ -54,10 +54,6 @@ new FormModel {
 				"text": "You rolled a "
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "movesLeftLabel"
-				"text": "You have 0 moves left"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "playerTurnText"
 				"text": "Hello it is your turn"
 				"font": new java.awt.Font( "Tahoma", 1, 12 )
@@ -102,7 +98,7 @@ new FormModel {
 						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "cheatInfiniteMoveItemStateChanged", true ) )
 						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "cheatInfiniteMoveItemStateChanged", true ) )
 					} )
-					add( new FormComponent( "javax.swing.JCheckBoxMenuItem" ) {
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "cheatAnswer"
 						"text": "Show answer"
 						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "cheatAnswerItemStateChanged", true ) )
@@ -183,8 +179,8 @@ new FormModel {
 			"size": new java.awt.Dimension( 270, 200 )
 		} )
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :p:117:p, comp guessDiagOkButton:::p::p, space ::120:x}, seq t {space :0:33:x, par l {seq t {comp line3Text:::p::p, space :p:19:p}, seq t {comp line1Text:::p::p, space :p:52:p}, seq t {comp line2Text:::p::p, space :p:88:p}}}, seq t {space ::130:x, comp guessDiagPlayerNameText:::p::p, space :p:115:p}}"
-			"$verticalGroup": "par l {seq l {space :p:5:p, comp guessDiagPlayerNameText:::p::p, space :::p, comp line1Text:::p::p, space :p:13:p, comp line2Text:::p::p, space :::p, comp line3Text:::p::p, space ::41:x, comp guessDiagOkButton:::p::p, space :::p}}"
+			"$horizontalGroup": "par l {seq t {space :0:33:x, comp line3Text:::p::p, space :p:19:p}, seq {par l {seq l {space :p:56:p, comp line1Text:::p::p}, seq l {space :p:105:p, comp guessDiagPlayerNameText:::p::p}, seq l {space :p:84:p, comp line2Text:::p::p}, seq l {space :p:114:p, comp guessDiagOkButton:::p::p}}, space ::69:x}}"
+			"$verticalGroup": "par l {seq l {space :p:7:p, comp guessDiagPlayerNameText:::p::p, space :::p, comp line1Text:::p::p, space :::p, comp line2Text:::p::p, space :p:11:p, comp line3Text:::p::p, space ::41:x, comp guessDiagOkButton:::p::p, space :::p}}"
 		} ) {
 			name: "suggestionDialog"
 			"title": "Suggestion"
