@@ -55,7 +55,13 @@ public class HandCanvas extends Canvas implements MouseListener{
 		for(int i = 0; i < hand.size(); i++){
 			try {
 				BufferedImage myPicture = ImageIO.read(new File(IMG_PATH + hand.get(i).getName() + ".jpg"));
-				int cWidth = width / hand.size();
+				int cWidth = 0;
+				if(hand.size() > 0){
+					cWidth = width / hand.size();
+				}
+				else{
+					return;
+				}
 				BufferedImage scaled = getScaledImage(myPicture, cWidth, height);
 				g.drawImage(scaled, cWidth * i,0, getParent());
 			} catch (IOException e) {
