@@ -86,6 +86,10 @@ public class Guess {
 	 * @param b - The board to make a suggestion on.
 	 */
 	private void Suggestion(List<Card> guess, Board b) {
+		if(player.getRoom() == null){
+			this.failed = true;
+			return;
+		}
 		Room room = null;
 		for (Card card : guess) {
 			System.out.println("reached");
@@ -94,7 +98,7 @@ public class Guess {
 			}
 		}
 		if (player.getRoom().equals(room)) {	//If player is in the suggested room
-			this.failed= false;
+			this.failed = false;
 			return;
 		}
 		else{

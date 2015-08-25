@@ -1,12 +1,10 @@
 package guiCluedo.tests;
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.*;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
-
 import org.junit.Test;
-
 import guiCluedo.game.Board;
 import guiCluedo.game.Card;
 import guiCluedo.game.Character;
@@ -158,16 +156,12 @@ public class tests {
 			i++;
 		}
 
-
-
 		ArrayList<Card> cards = new ArrayList<Card>();
 		cards.add(r);
 		cards.add(w);
 		cards.add(c);
 		Player player = b.getPlayers().get(0);
-		int playersB = b.getPlayers().size();
 		Guess g = new Guess(false, cards, player, b);
-		int playersA = b.getPlayers().size();
 		assertTrue(g.getEliminatedPlayer() == player);
 		players.clear();
 	}
@@ -227,6 +221,7 @@ public class tests {
 			}
 		}
 		assertTrue(dup == 0);
+		this.players.clear();
 	}
 
 
@@ -243,24 +238,25 @@ public class tests {
 		p.setRoom(ar);;
 		Guess guess = new Guess(true, ans, p, b);
 		assertTrue(guess.getFailed() == false);
+		players.clear();
 	}
 
-		//	@Test 
-		//	public void InvalidSuggestion()
-		//	{
-		//		Board b = new Board();
-		//		ArrayList<Card> ans = b.answer;
-		//		Player p = b.getPlayers().get(0);
-		//		Room ar = (Room) ans.get(2);
-		//		p.getLocation().setX(12);
-		//		p.getLocation().setY(12);
-		//
-		//		int sizeB = p.getDiscoveredCards().size();
-		//		Guess g = new Guess(true, ans, p, b);
-		//
-		//		assertTrue(g.getFailed());
-		//	}
-		//
+	@Test 
+	public void InvalidSuggestion()
+	{
+		Board b = createBoard();
+		ArrayList<Card> ans = b.getAnswer();
+		Player p = b.getPlayers().get(0);
+		p.getLocation().setLocation(new Point(12,12));
+		p.setRoom(null);
+		Guess g = new Guess(true, ans, p, b);
+
+		assertTrue(g.getFailed());
+		players.clear();
+	} 
+
+	//--------Helper Method----------------//
+	
 		private Board createBoard(){
 			players.add(new Player("Bob", "Colonel Mustard", Color.YELLOW, 1));
 			players.add(new Player("Jeremy", "Mr. Green", Color.GREEN, 2));
