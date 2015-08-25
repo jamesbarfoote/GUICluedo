@@ -20,10 +20,18 @@ public class Weapon extends Card{
 		return name;
 	}
 	
+	/**
+	 * The location the weapon sits on the board
+	 * @return Point
+	 */
 	public Point getLocation(){
 		return location;
 	}
 	
+	/**
+	 * Sets the location the weapons sits on the board
+	 * @param location
+	 */
 	public void setLocation(Point location){
 		this.location = location;
 	}

@@ -42,6 +42,9 @@ public class BoardCanvas extends Canvas{
 		readFile();
 	}
 
+	/**
+	 * Paints the board on the canvas.
+	 */
 	public void paint(Graphics g) {
 		Graphics2D g2;
 		g2 = (Graphics2D) g;
@@ -50,6 +53,9 @@ public class BoardCanvas extends Canvas{
 		drawIcons(g2);
 	}
 
+	/**
+	 * read the board layout file for drawing the board.
+	 */
 	@SuppressWarnings("resource")
 	private void readFile(){
 		File boardFile = new File("CluedoBoard.txt");
@@ -162,6 +168,13 @@ public class BoardCanvas extends Canvas{
 		}
 	}
 	
+	/**
+	 * Used for resizing the weapons so they fit on the board.
+	 * @param img
+	 * @param w
+	 * @param h
+	 * @return
+	 */
 	private BufferedImage getScaledImage(Image img, int w, int h){
 	    BufferedImage resized = new BufferedImage(w, h, BufferedImage.TRANSLUCENT);
 	    Graphics2D g2 = resized.createGraphics();
@@ -171,10 +184,18 @@ public class BoardCanvas extends Canvas{
 	    return resized;
 	}
 
+	/**
+	 * Sets the width of the canvas
+	 * @param width
+	 */
 	public void setWidth(int width){
 		this.width = width;
 	}
 
+	/**
+	 * Sets the height of the canvas
+	 * @param height
+	 */
 	public void setHeight(int height){
 		this.height = height;
 	}

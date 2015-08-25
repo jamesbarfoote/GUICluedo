@@ -44,6 +44,10 @@ public class HandCanvas extends Canvas implements MouseListener{
 		repaint();
 	}
 	
+	/**
+	 * Sets the hand of the player who's hand is currently being drawn
+	 * @param p
+	 */
 	public void setHand(Player p)
 	{
 		this.hand = p.getHand();
@@ -51,6 +55,9 @@ public class HandCanvas extends Canvas implements MouseListener{
 	
 	private static final String IMG_PATH = "src/guiCluedo/images/";
 
+	/**
+	 * paint the hand on the canvas
+	 */
 	public void paint(Graphics g) {
 		for(int i = 0; i < hand.size(); i++){
 			try {
@@ -81,15 +88,26 @@ public class HandCanvas extends Canvas implements MouseListener{
 	    return resized;
 	}
 	
+	/**
+	 * Sets the width of the canvas
+	 * @param width
+	 */
 	public void setWidth(int width){
 		this.width = width;
 		setSize(this.width, this.height);
 	}
 	
+	/**
+	 * Sets the height of the canvas
+	 * @param height
+	 */
 	public void setHeight(int height){
 		this.height = height;
 	}
 
+	/**
+	 * Calculates the clicked card
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// Get the clicked location
@@ -144,6 +162,10 @@ public class HandCanvas extends Canvas implements MouseListener{
 		return cardClicked;
 	}
 	
+	/**
+	 * Sets the hand for this instance of hand canvas
+	 * @param hand
+	 */
 	public void setHandCards(ArrayList<Card> hand)
 	{
 		this.hand = hand;

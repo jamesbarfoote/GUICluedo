@@ -23,6 +23,7 @@ public class Player {
 		this.colour = colour;
 		this.playerNum = playerNum;	
 		
+		//Set location based on what character they chose (each character has a specified starting location)
 		if(character.equals("Miss Scarlet")){
 			this.location = new Point(22, 14);
 		}
@@ -41,9 +42,6 @@ public class Player {
 		if(character.equals("Professor Plum")){
 			this.location = new Point(18, 0);
 		}
-		
-		System.out.println(character);
-		//Set location based on what character they chose (each character has a specified starting location)
 	}
 
 	/**

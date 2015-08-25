@@ -75,7 +75,12 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		});
 	}
 
+	/**
+	 * Binds the given keyboard inputs to actions so pressing the key calls
+	 * a new move action.
+	 */
 	private void keyBindings() {
+		//Arrow keys
 		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("UP"), MOVE_UP);
 		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("RIGHT"), MOVE_RIGHT);
 		obj1.getInputMap(IFW).put(KeyStroke.getKeyStroke("DOWN"), MOVE_DOWN);
@@ -104,17 +109,20 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		add(obj1);
 	}
 
-	//	void keyPressed(KeyEvent e)
-	//	{
-	//		movesLeftLabel.setText("You have " + currentPlayer.getRoll() + " moves left");
-	//	}
-
+	/**
+	 * Executes when accusation button is pressed
+	 * @param e
+	 */
 	public void accusButtonActionPerformed(ActionEvent e) {
 		isGuess = false;
 		guessRoom.setEnabled(true);
 		guessDialoge.setVisible(true);
 	}
 
+	/**
+	 * Executes when suggestion button is pressed
+	 * @param e
+	 */
 	public void guessButtonActionPerformed(ActionEvent e) {
 		isGuess = true;
 		guessRoom.setEnabled(false);
@@ -125,6 +133,10 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		guessDialoge.setVisible(true);
 	}
 
+	/**
+	 * Executes when end turn button is pressed
+	 * @param e
+	 */
 	public void endTurnActionPerformed(ActionEvent e) {
 		playGame(b, currentPlayer.getNum());
 		//HandCanvas h = new HandCanvas(b, handArea.getWidth(), handArea.getHeight(), currentPlayer);
@@ -134,6 +146,13 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 
 	}
 
+	/**
+	 * Executes when the ok button is pressed within a suggestion or accusation
+	 * Creates a new guess will end the game if accusation is correct.
+	 * If accusation is wrong, will eliminate the player who made the accusation.
+	 * If player is eliminated and only one player remains, that player wins.
+	 * @param e
+	 */
 	private void guessOKButtonActionPerformed(ActionEvent e) {
 		if(isGuess)
 		{
@@ -255,6 +274,11 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 
 	}
 
+	/**
+	 * Iterate clockwise from the current player trying to find a player who has one of the suggested cards
+	 * @param guess
+	 * @return
+	 */
 	private Player checkHasCard(ArrayList<Card> guess){
 		for (Card card : guess) {
 			int playerNum = currentPlayer.getNum();
@@ -273,6 +297,11 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		return null;
 	}
 
+	/**
+	 * Find the room the current player is in if any
+	 * @param b
+	 * @return
+	 */
 	public String findContainingRoom(Board b)
 	{
 		double x = currentPlayer.getLocation().getX();
@@ -290,6 +319,12 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		return null;
 	}
 
+	/**
+	 * creates a new guess given the 3 cards the player selected
+	 * @param cards
+	 * @param b
+	 * @return
+	 */
 	private static ArrayList<Card> createGuess(ArrayList<String> cards, Board b) {
 		ArrayList<Card> guessHand = new ArrayList<Card>();
 		for(int i = 0; i < 3; i++)
@@ -318,11 +353,20 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 
 	}
 
+	/**
+	 * Executes when player hits ok on an error dialog
+	 * (Closes the error dialog)
+	 * @param e
+	 */
 	private void errorOKActionPerformed(ActionEvent e) {
 		errorDialog.setVisible(false);
 		guessDialoge.setVisible(false);
 	}
 
+	/**
+	 * Executes when the new game button is pressed.
+	 * @param e
+	 */
 	public void newGameActionPerformed(ActionEvent e) {
 		b.players.clear();
 		startScreen sc = new startScreen();
@@ -334,10 +378,18 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		// TODO add your code here
 	}
 
+	/**
+	 * Diplays the shortcuts when the button is pressed
+	 * @param e
+	 */
 	private void showShortcutsActionPerformed(ActionEvent e) {
 		shortcuts.setVisible(true);
 	}
 
+	/**
+	 * Executes when show discovered cards is pressed.
+	 * @param e
+	 */
 	private void discoveredCardsmenuItemActionPerformed(ActionEvent e) {
 		//Display Discovered cards dialog
 		discoveredCardsDiag.setVisible(true);
@@ -346,9 +398,11 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		hCanvas.repaint();
 
 	}
-
-
-
+	
+	/**
+	 * Toggle answer cheat
+	 * @param e
+	 */
 	private void cheatAnswerItemStateChanged(ItemEvent e) {
 		if(e.getStateChange() == 1)
 		{
@@ -391,6 +445,10 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		hCanvas.repaint();
 	}
 
+	/**
+	 * toggle infinite movement
+	 * @param e
+	 */
 	private void cheatInfiniteMoveItemStateChanged(ItemEvent e) {
 		if(e.getStateChange() == 1)
 		{
@@ -406,6 +464,10 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		// TODO add your code here
 	}
 
+	/**
+	 * Display the answer
+	 * @param e
+	 */
 	private void cheatAnswerActionPerformed(ActionEvent e) {
 			//Display answer popup box
 			errorDialog.setTitle("ANSWER");
@@ -417,11 +479,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 
 
 	/**
-	 * Loop through all the players while the game hasn't been won. If a player
-	 * gets eliminated, break the loop then remove the player and start the loop
-	 * again from where it left off.
-	 * 
-	 * @param scan - the scanner used for accessing user input
+	 * Sets current player to the next player
 	 * @param b - The current board
 	 * @param playerNum - the prior players number
 	 */
@@ -433,97 +491,11 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		playerTurnText.setText(currentPlayer.getName() + " / " + currentPlayer.getCharacterName());
 
 		System.out.println(currentPlayer.getName());
-		Player eliminatedPlayer = null;
 		keyBindings();
-
-		//		while (finished == false) {	//While the game has not been won (or lost)
-		//			Room room = null;
-		//			for(Room r : b.getRooms()){
-		//				if(r.getBoundingBox().contains(currentPlayer.getLocation())){
-		//					room = r; 
-		//				}
-		//			}
-		//			if (room == null) {	//If the player is not within a room.
-		//
-		//				if (true) {	//If player chose to make an accusation				
-		//					ArrayList<Card> guessHand = createGuess(scan, b);//Create the guess hand
-		//					while (guessHand == null) {
-		//						guessHand = createGuess(scan, b);
-		//					}
-		//					boolean opt = false;//Accusation
-		//
-		//					Guess guess = new Guess(opt, guessHand, currentPlayer, b);
-		//
-		//					if (guess.getEliminatedPlayer() != null) {
-		//						eliminatedPlayer = guess.getEliminatedPlayer(); //Set the player to be eliminated 
-		//						System.out.println("You guessed wrong");
-		//						System.out.println("You have been eliminated!");
-		//						
-		//						if(b.getPlayers().size() == 2)//If there is no one left in the game then exit
-		//						{
-		//							System.out.println("");
-		//							System.out.println("Game over! No one guessed correctly");
-		//						}
-		//						
-		//						break;//Break out
-		//					} else if (guess.hasWon()) {
-		//						finished = true;
-		//						System.out.println("Congratulations " + currentPlayer.getName() + " you have won!");
-		//						return;
-		//					}
-		//
-		//				}
-		//
-		//			} else {	//If the player made it to the room they wanted
-		//
-		//				if () {	//If they chose to make either an accusation of a suggestion
-		//
-		//					Guess guess = null;
-		//					do{	//Select the 3 cards that make up the guess					
-		//						ArrayList<Card> guessHand = createGuess(scan, b);
-		//						while (guessHand == null) {
-		//							guessHand = createGuess(scan, b);
-		//						}
-		//
-		//						// create a guess hand
-		//						boolean opt = false;
-		//						if () {	//if accusation
-		//							opt = true;
-		//						}
-		//
-		//						guess = new Guess(opt, guessHand, currentPlayer, b);
-		//					}while(guess.getFailed() == true);	//if not all 3 were selected
-		//
-		//					if (guess.getEliminatedPlayer() != null) {
-		//						eliminatedPlayer = guess.getEliminatedPlayer();
-		//						System.out.println("You guessed wrong");
-		//						System.out.println("You have been eliminated!");
-		//						
-		//						if(b.getPlayers().size() == 2)//If there is no one left in the game exit
-		//						{
-		//							System.out.println("Game over! No one guessed correctly");
-		//						}
-		//						
-		//						break;
-		//					} else if (guess.hasWon()) {
-		//						finished = true;
-		//						System.out.println("Congratulations " + currentPlayer.getName() + " you have won!");
-		//						return;
-		//					}
-		//
-		//				}
-		//			}
-		//		}
-
-		//		playerNum = (playerNum % b.players.size()) - 1;
-		//		b.players.remove(eliminatedPlayer);
-		//		while (b.getPlayers().size() > 1) {	//While there is more than 1 player left keep playing
-		//			playGame(scan, b, playerNum);
-		//		}
 	}
 
 	/**
-	 * 
+	 * Initialises the buttons, frame, labels and pane
 	 */
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	// Generated using JFormDesigner Evaluation license - James Barfoote
@@ -1159,6 +1131,10 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 		}
 	}// </editor-fold>//GEN-END:initComponents
 
+	/**
+	 * Executes when roll dice button is pressed
+	 * @param evt
+	 */
 	private void rollDiceActionPerformed(java.awt.event.ActionEvent evt) {
 		int roll = 0;
 		if(infiniteMove)
@@ -1182,60 +1158,6 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	private void GameMenuMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_GameMenuMenuSelected
 		// TODO add your handling code here:
 	}//GEN-LAST:event_GameMenuMenuSelected
-
-
-	//    private javax.swing.JMenu GameMenu;
-	//    private javax.swing.JLabel diceRolled;
-	//    private javax.swing.JMenu fileMenu;
-	//    private static javax.swing.JFrame jFrame1;
-	//    private javax.swing.JMenuBar jMenuBar;
-	//    private javax.swing.JSeparator jSeparator1;
-	//    private javax.swing.JLabel yourHandText;
-	//    private javax.swing.JMenuItem newGame;
-	//    private javax.swing.JButton rollDice; 
-	// private javax.swing.JLayeredPane boardArea;
-	//private javax.swing.JLayeredPane handArea;
-
-
-
-
-	/**
-	 * Checks if the given string can be parsed to an integer.
-	 * @param s - The string to be parsed
-	 * @return boolean of whether it is or not
-	 */
-	private static boolean isInteger(String s) {
-		try { 
-			Integer.parseInt(s); 
-		} catch(NumberFormatException e) { 
-			return false; 
-		}
-		// only got here if we didn't return false
-		return true;
-	}
-	/**
-	 * Returns a number the user specifies given it's valid.
-	 * 
-	 * @param scan - The scanner used for accessing user input
-	 * @param minNum - The minimum possible value
-	 * @param maxNum - The maximum possible number
-	 * @param num - The number to be checked.
-	 * @return the integer the player gave
-	 */
-	private static int isCorrectNumber(Scanner scan, int minNum, int maxNum, String num){
-		int numPlayers = 0;
-		while(true){
-			if(isInteger(num)){
-				numPlayers = Integer.parseInt(num); 
-				if((numPlayers >= minNum) && (numPlayers<=maxNum)){
-					break;
-				}
-			}
-			System.out.println("Input must be between " +  minNum + " and " + maxNum);
-			num = scan.next();
-		}
-		return numPlayers;
-	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - James Barfoote

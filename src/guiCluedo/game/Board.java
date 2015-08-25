@@ -36,7 +36,7 @@ public class Board {
 		this.players = players;
 		createCards();
 		this.answer = genAns();
-		genCards();
+		delegateCards();
 		createDoors();
 		addToStairwells();
 		for(Player player : players){
@@ -47,6 +47,7 @@ public class Board {
 
 	/**
 	 * Create the cards from the names provided in the Board class.
+	 * Adds the weapons to the board
 	 * @param cards
 	 */
 	private void createCards(){
@@ -132,6 +133,9 @@ public class Board {
 		allCards.addAll(rooms);
 	}
 
+	/**
+	 * Add stairwells to the board
+	 */
 	private void addToStairwells(){
 		Point p = new Point(0,0);
 		stairwells.add(p);
@@ -170,46 +174,11 @@ public class Board {
 	}
 
 	/**
-	 * Creates the players and delegates cards to their hand
+	 * delegates the cards out to the players hands
 	 * @param numPlayers - The number of player in the game
 	 */
-	private void genCards() {
-		//		Random rand = new Random();
-		//		int characterNum = rand.nextInt(characters.size());
-		//		int count = 0;
-		//		ArrayList<Integer> usedCharacters = new ArrayList<Integer>();
-		//		while(count < numPlayers){
-		//			usedCharacters.add(characterNum);
-		//			if(characterNames.get(characterNum) == "Miss Scarlett"){
-		//				players.add(new Player("Miss Scarlett", new Location(9,0), count+1));
-		//			}
-		//			if(characterNames.get(characterNum) == "Colonel Mustard"){
-		//				players.add(new Player("Colonel Mustard", new Location(17,0), count+1));
-		//			}
-		//			if(characterNames.get(characterNum) == "Mrs. White"){
-		//				players.add(new Player("Mrs. White", new Location(24,4), count+1));
-		//			}
-		//			if(characterNames.get(characterNum) == "The Reverend Green"){
-		//				players.add(new Player("The Reverend Green", new Location(15,24), count+1));
-		//			}
-		//			if(characterNames.get(characterNum) == "Mrs. Peacock"){
-		//				players.add(new Player("Mrs. Peacock", new Location(6,24), count+1));
-		//			}
-		//			if(characterNames.get(characterNum) == "Professor Plum"){
-		//				players.add(new Player("Professor Plum", new Location(0,15), count+1));
-		//			}
-		//			count++;
-		//			//Make sure there are no duplicate player characters
-		//			while(true){
-		//				int newCharacterNum = rand.nextInt(characters.size());
-		//				if(usedCharacters.contains(newCharacterNum) == false || count == 6){
-		//					characterNum = newCharacterNum;
-		//					break;
-		//				}
-		//			}
-		//		}
+	private void delegateCards() {
 		//Delegate the cards out to the players.
-
 		System.out.println("Generating cards");
 
 		Collections.shuffle(allCards);

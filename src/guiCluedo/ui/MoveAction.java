@@ -3,8 +3,6 @@ package guiCluedo.ui;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.ActionEvent;
-import java.io.FileNotFoundException;
-
 import javax.swing.AbstractAction;
 import guiCluedo.game.Board;
 import guiCluedo.game.Player;
@@ -29,6 +27,10 @@ class MoveAction extends AbstractAction {
 		this.ui = ui;
 	}
 
+	/**
+	 * Calls whenever a key is pressed, updates the location of the player
+	 * and handles executing the shortcuts
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(direction.equals("N"))

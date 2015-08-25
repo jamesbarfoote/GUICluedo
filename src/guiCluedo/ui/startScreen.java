@@ -16,10 +16,6 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 import guiCluedo.game.Player;
 
-/**
- *
- * @author James
- */
 public class startScreen {
 	public int numberOPlayers = 2;
 	private int counter = 1;
@@ -417,6 +413,10 @@ public class startScreen {
 		}
 	}// </editor-fold>//GEN-END:initComponents
 
+	/**
+	 * Executes when ok button is pressed upon setting number of players
+	 * @param evt
+	 */
 	private void okNumPlayersActionPerformed(java.awt.event.ActionEvent evt) {                                             
 		String p = (String)numPLayers.getSelectedItem();
 		if(p.equals("2"))
@@ -447,6 +447,12 @@ public class startScreen {
 		setPlayers.setVisible(false);
 	}
 
+	/**
+	 * Executes when done button is pressed.
+	 * Checks that all the information has been entered
+	 * and if all players have been set, creates a new UI with these players
+	 * @param evt
+	 */
 	private void donePlayerSetupActionPerformed(java.awt.event.ActionEvent evt) {                                                
 		String pName = "";
 		if(!playerName.getText().equals(""))
@@ -501,6 +507,10 @@ public class startScreen {
 		}
 	}
 
+	/**
+	 * Get the colour chosen
+	 * @return
+	 */
 	private Color getColour() {
 		if(colourRed.isSelected())
 		{
@@ -547,6 +557,10 @@ public class startScreen {
 		return null;
 	}
 
+	/**
+	 * Get the character name chosen
+	 * @return
+	 */
 	private String getCharacter() {
 		if(colonelMustard.isSelected())
 		{

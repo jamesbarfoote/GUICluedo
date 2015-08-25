@@ -81,7 +81,7 @@ public class Guess {
 	/**
 	 * Makes a suggestion based on the 3 cards given,
 	 * if suggestion is valid and not the answer then a
-	 * card is discovered for every player.
+	 * card is discovered and given to the suggested player.
 	 * @param guess - The 3 cards to be suggested
 	 * @param b - The board to make a suggestion on.
 	 */
