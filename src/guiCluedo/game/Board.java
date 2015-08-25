@@ -10,7 +10,7 @@ import guiCluedo.ui.startScreen;
 
 public class Board {
 
-	public ArrayList<Card> answer;
+	private ArrayList<Card> answer;
 	public ArrayList<Player> players;
 	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Knife", "Revolver", "Rope", "Lead Pipe", 
 			"Wrench"));

@@ -141,7 +141,9 @@ public class BoardCanvas extends Canvas{
 		//Draw the players
 		for(Player p : players){
 			g.setColor(p.getColor());
-			g.fillOval((int) p.getLocation().getX()*(width/23), (int) p.getLocation().getY()*(height/22), width/23, height/22);
+			if(p.getLocation()!=null){
+				g.fillOval((int) p.getLocation().getX()*(width/23), (int) p.getLocation().getY()*(height/22), width/23, height/22);
+			}
 		}
 		//Draw weapons
 		for(int i = 0; i < gameBoard.getWeapons().size(); i++){
