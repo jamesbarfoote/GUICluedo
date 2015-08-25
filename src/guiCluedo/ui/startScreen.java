@@ -497,7 +497,7 @@ public class startScreen {
 		
 		System.out.println("Go to main game screen");
 		//Launch UI
-		UI u = new UI();
+		UI u = new UI(players);
 		System.out.println("UI created");
 		u.setVisible(true);
 		startScreenForm.setVisible(false);//Hide the player setup screen

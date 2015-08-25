@@ -11,7 +11,7 @@ import guiCluedo.ui.startScreen;
 public class Board {
 
 	public ArrayList<Card> answer;
-	public ArrayList<Player> players = startScreen.players;
+	public ArrayList<Player> players;
 	private ArrayList<String> weaponNames = new ArrayList<>(Arrays.asList("Candlestick", "Knife", "Revolver", "Rope", "Lead Pipe", 
 			"Wrench"));
 	private ArrayList<String> characterNames = new ArrayList<>(Arrays.asList("Miss Scarlet", "Colonel Mustard","Mrs. White", "Mr. Green", 
@@ -32,7 +32,8 @@ public class Board {
 
 	private String[][] board = new String[22][23];
 
-	public Board() {
+	public Board(ArrayList<Player> players) {
+		this.players = players;
 		createCards();
 		this.answer = genAns();
 		genCards();
@@ -315,5 +316,9 @@ public class Board {
 	public ArrayList<Card> getAnswer()
 	{
 		return answer;
+	}
+	
+	public void setPlayers(ArrayList<Player> players){
+		this.players = players;
 	}
 }

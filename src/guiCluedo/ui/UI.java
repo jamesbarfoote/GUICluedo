@@ -22,7 +22,7 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	private static final long serialVersionUID = 1L;
 	private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 	private Player currentPlayer;
-	private Board b;
+	public Board b;
 	private BoardCanvas canvas;
 	private HandCanvas hCanvas;
 	private static final String MOVE_UP = "move up";
@@ -46,9 +46,9 @@ public class UI extends javax.swing.JFrame implements KeyListener{
 	/**
 	 * Creates new form UI
 	 */
-	public UI() {	
+	public UI(ArrayList<Player> players) {	
 		initComponents();
-		b = new Board();
+		b = new Board(players);
 
 		playGame(b, 0);
 		this.addKeyListener(this);
